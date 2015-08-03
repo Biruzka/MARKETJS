@@ -21,18 +21,21 @@ describe("InMemoryStorage", function () {
 
     it('update data by id on new data', function () { //по id и data заменяет data - возвращает true, если все верно
         var storage = InMemoryStorage.createStorage();
-        var data = {name: "Уюттера"}
+        var data = {name: "Уюттера"};
         storage.addData(data);
         var id = 1;
-        var data = {name: "СпортМастер"}
+        data = {name: "СпортМастер"};
         expect(storage.updateData(id, data)).toEqual(true);
     });
 
     it('delete data by id', function () { //по id удаляет запись (data) - возвращает true, если все верно
         var storage = InMemoryStorage.createStorage();
+        var data = {name: "Уюттера"};
+        storage.addData(data);
         var id = 1;
         expect(storage.deleteDataInSt(id)).toEqual(true);
-        expect(deleted in storage.getData[id]).toEqual(true);
+        data = storage.getData(id);
+        expect(data.deleted).toEqual(true);
     });
-    //как проверяют getNewID
 });
+

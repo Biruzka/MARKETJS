@@ -7,15 +7,15 @@ function InMemoryStorage() {
   };
 
   this.getData = function (id) {
-    if (id in this.ListOfData) {
+    if ( id in this.ListOfData) {
       return this.ListOfData[id];
     }
     else return false;
   }
 
   this.updateData = function (id, data) {
-    if (id in this.ListOfData) {
-      this.ListOfData[String(id)] = Data;
+    if ( id in this.ListOfData) {
+      this.ListOfData[String(id)] = data;
       return true;
     }
     else return false;
@@ -24,8 +24,8 @@ function InMemoryStorage() {
   this.deleteDataInSt = function (id) { //добавляем элементу свойство удалено, но не удаляем, лишь помечаем
     //что делать если правда удаляем? отдельный метод для смены id у следующих и уменьшение счетчика id
     //но пока просто помечаем
-    if (id in this.ListOfData) {
-      this.ListOfData[String(id)].deleted;
+    if ( id in this.ListOfData) {
+      this.ListOfData[String(id)].deleted = true;
       return true;
     }
     else return false; //такого оъекта нет
