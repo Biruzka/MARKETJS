@@ -1,53 +1,37 @@
 function InMemoryStorage() {
 
-  this.getName = function () {
-    return (this.name);
+  this.addData = function (Data) {
+    var id = this.idCounter();
+    this.ListOfData[String(id)] = Data;
+    return id;
   };
 
-  this.addShop = function (shop) {
-    var id = this.IdShops();
-    shop.id = id;
-    this.shops[String(id)] = shop; //то есть в объект shops добавили counterShops:value(value - объект shop)
-    return shop;
-  };
-  // InMemoryStorage.setProduct = function (value) {
-  //   this.products[String(IdProducts())] = value;
-  // };
-
-  this.getShopByName = function (name) {
-    var item;
-    for (item in this.shops) {
-      if (item.name === name) {
-        return item;
-      }
+  this.getData = function (id) {
+    if (id in this.ListOfData) {
+      return this.ListOfData[id];
     }
-    return null;
-  };
-
-  this.getShopById = function (id) {
-    return this.shops[id]; //(value - объект shop);
-  };
-
-  this.setProduct = function (value) {
-    this.products[String(this.IdProducts())] = value; //то есть в объект shops добавили counterShops:value(value - объект shop)
-  };
-
-  this.GetAllProducts = function (name) { //name - shop
-    var item;
-    var collectionProduct = [];
-    for (item in this.products) {
-        console.log("Здесь! " + item);
-        console.log(name + " ИМЯ");
-      if (item.ownerShop === name) {
-        collectionProduct.push(item);
-      }
-    }
-    console.log(collectionProduct);
-    return collectionProduct;
+    else return false;
   }
-}
 
-//СОЗДАНИЕ
+  this.updateData = function (id, data) {
+    if (id in this.ListOfData) {
+      this.ListOfData[String(id)] = Data;
+      return true;
+    }
+    else return false;
+  }
+
+  this.deleteDataInSt = function (id) { //добавляем элементу свойство удалено, но не удаляем, лишь помечаем
+    //что делать если правда удаляем? отдельный метод для смены id у следующих и уменьшение счетчика id
+    //но пока просто помечаем
+    if (id in this.ListOfData) {
+      this.ListOfData[String(id)].deleted;
+      return true;
+    }
+    else return false; //такого оъекта нет
+  }
+
+};
 
 function makeId() {
   var currentCount = 1;
@@ -56,14 +40,21 @@ function makeId() {
   function counter() {
     return currentCount++;
   }
+
+  function counterReduce() { //??
+    currentCount--;
+  }
+
   return counter;
 }
 
 InMemoryStorage.createStorage = function () {
   var stor = new InMemoryStorage();
-  stor.shops = {};
-  stor.products = {};
-  stor.IdShops = makeId();
-  stor.IdProducts = makeId();
+  stor.ListOfData = {}; //в нем таблицы сущностей // внутри свойства: имя - id, а под ними data
+  stor.idCounter = makeId();
   return stor;
 };
+
+
+
+

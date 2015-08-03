@@ -1,19 +1,19 @@
 //Check types
 
 describe("InMemoryStorage", function() {
-    it('should create storage object', function() {
+    xit('should create storage object', function() {
         var storage = InMemoryStorage.createStorage();
         expect(typeof storage).toEqual("object");
     });
 
-    it('should have shops collection', function() {
+    xit('should have shops collection', function() {
         var storage = InMemoryStorage.createStorage();
         expect(typeof storage.shops).toEqual("object");
     });
 
 
 
-    it('should add shop', function() {
+    xit('should add shop', function() {
         var storage = InMemoryStorage.createStorage();
         // expect(storage.shops.count).toEqual(0);
         shop = storage.addShop({ name: 'Уюттера'});
@@ -22,7 +22,7 @@ describe("InMemoryStorage", function() {
         expect(storage.getShopById(shop.id).name).toEqual(shop.name);
     });
 
-    it('should get shop by id', function() {
+    xit('should get shop by id', function() {
         var storage = InMemoryStorage.createStorage();
         shop = storage.addShop({ name: 'Уюттера'});
         expect(storage.getShopById(shop.id).name).toEqual("Уюттера");

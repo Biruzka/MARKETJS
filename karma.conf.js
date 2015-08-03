@@ -15,7 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-    "tests/*.js", "app/InMemoryStorage.js"
+    "tests/Storage.js", "app/InMemoryStorage.js"
     ],
 
 
