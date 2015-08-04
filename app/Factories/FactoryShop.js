@@ -26,8 +26,8 @@ ShopsFactory.prototype =
 
 //тест
 
-var factory = new ShopsFactory({name: "Уюттера", owner: "Somebody"})
-var shop = factory.makeSimpleShop();
+// var factory = new ShopsFactory({name: "Уюттера", owner: "Somebody"})
+// var shop = factory.makeSimpleShop();
 
 //----------------------
 

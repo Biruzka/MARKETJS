@@ -31,25 +31,6 @@ Storage2.prototype.getDataWithThatValueByKey = function(key, value) {
   return arr;
 }
 
-List = {};
-List["1"] = {"1": 1};
-List["2"] = {"2": 2};
-name = "1";
-value = 1;
-
-arr = new Array;
-  var item;
-
-  for (item in List){
-
-    var obj = List[item];//берем объект через id
-     console.log(obj.name +" "+ obj[name]);
-
-    if (obj.name === value) {
-      arr.push(obj);
-    }
-
-  }
 
 
 Storage2.prototype.updateData = function(id, data) {
@@ -89,6 +70,26 @@ function makeId() {
   return counter;
 }
 
+
+// List = {};
+// List["1"] = {"1": 1};
+// List["2"] = {"2": 2};
+// name = "1";
+// value = 1;
+
+// arr = new Array;
+//   var item;
+
+//   for (item in List){
+
+//     var obj = List[item];//берем объект через id
+//      console.log(obj.name +" "+ obj[name]);
+
+//     if (obj.name === value) {
+//       arr.push(obj);
+//     }
+
+//   }
 
 
 
