@@ -1,3 +1,5 @@
+//надо подумать кому отдать методы, прототипу или конкретным. какие куда.
+
 var Shops =
 {
     Simple: function ()
@@ -8,7 +10,9 @@ var Shops =
 
 function ShopsFactory(Data){
     this._name = Data.name;
-    this._owner = Data.owner;
+    this._owner = null;//пока не знаем. начнем закидывать, тогда да (в репозитории где-нибудь)
+    this._id = null;
+    //возможно тут нужны get и set, но сойдет и напрямую, пока
 }
 
 ShopsFactory.prototype =
@@ -18,7 +22,6 @@ ShopsFactory.prototype =
     makeSimpleShop: function () {
         return new Shops.Simple();
     }
-
 }
 
 //тест

@@ -11,6 +11,7 @@ function ProductsFactory(Data){
     this._name = Data.name;
     this._count = Data.ownerShop;
     this._ownerShop = Data.ownerShop;
+    this._id = null;
 }
 
 ProductsFactory.prototype =

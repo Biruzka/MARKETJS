@@ -11,6 +11,7 @@ function OrdersFactory(Data){
     this._customer = Data.customer;
     this._count = Data.count;
     this._paid = false;
+    this._id = null;
 }
 
 OrdersFactory.prototype =

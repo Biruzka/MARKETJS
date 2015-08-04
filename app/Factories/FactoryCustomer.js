@@ -12,6 +12,7 @@ var Customers =
 
 function CustomersFactory(Data){
     this._name = Data.name;
+    this._id = null;
 }
 
 CustomersFactory.prototype =

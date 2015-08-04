@@ -2,40 +2,47 @@
 //репозиторий для каждой сущности свой. этот для shop
 
 function ShopRepository() {
+    this._shops = new Storage2();
+};
 
-    //var shops = InMemoryStorage.createStorage();
-    var shops = new InMemoryStorage();
-
-
-    this.ShopCreate = function () {
+    ShopRepository.prototype.ShopCreate = function (Data) {
         //здесь какая-то обработка//запросы
-        var shop = new Shop();
+        var factory = new ShopsFactory(Data)
+        //{name: "Уюттера", owner: "Somebody"} - вид Data
+        var shop = factory.makeSimpleShop();
         return shop;
     }
-
-    this.ShopSave = function (shop){
+    //вот здесь уже запись в бд (или storage или registr) ... это синонимы? или нет - почему так много названий?
+    ShopRepository.prototype.ShopSave = function (shop){
         //здесь какая-то обработка
-        return this.shops.addData(shop); // вернет id куда-то там
+        var id = this._shops.addData(shop); // вернет id
+        shop._id = id;
+        return shop; //но уже с id
     }
 
-    this.ShopGetById = function (id){
+    ShopRepository.prototype.ShopGetById = function (id){
         //здесь какая-то обработка
-        return shops.getData(id);
+        return this._shops.getData(id);
     }
 
-    function ShopUpdate(id, data){
-        //здесь какая-то обработка data для бд
-        return shops.updateData(id);
+    ShopRepository.prototype.ShopUpdate = function (id, data){
+        //здесь в storage находится нужная строка
+        //потом обрабатывается тут же, заменяется
+        return this._shops.updateData(id);   //и просто добавляется в storage в уже измененном виде
+        //но пока тупо заменяется объект
     }
 
-    function ShopDelete(id){
-        return shops.deleteDataInSt();
+    ShopRepository.prototype.ShopDelete = function (id){
 
+        return this._shops.deleteDataFantomly(id);
     }
-    function ShopGetAllProducts(idShops){ // как? внутри id или объект?
-
-
-        return products;
+    //прям конкретное удалить, таки безвозвратно
+    ShopRepository.prototype.ShopDestroy = function (id){
+        return this._shops.deleteData(id);
     }
 
-}
+    //лучше сделать привязать продукт магазину, чем здесь добавить в магазин продукт.
+    //ну даже по бд. поэтому эти методы в репозитории продуктов
+
+
+
