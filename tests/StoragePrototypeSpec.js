@@ -1,18 +1,18 @@
-describe("Storage", function () {
+describe("Storage2", function () {
 
-    it('should create storage', function () {
-        var storage = new Storage();
+    it('should create Storage2', function () {
+        var storage = new Storage2();
         expect(typeof storage).toEqual("object");
     });
 
-    it('should add data to storage', function () { //добавляет Data возвращает просто id???
-        var storage = new Storage();
+    it('should add data to Storage2', function () { //добавляет Data возвращает просто id???
+        var storage = new Storage2();
         var data = {name: "Уюттера"}
         expect(storage.addData(data)).toEqual(1);
     });
 
     it('should get data by id', function () { //возвращает data
-        var storage = new Storage();
+        var storage = new Storage2();
         var id = 1;
         var data = {name: "Уюттера"}
         storage.addData(data);
@@ -20,7 +20,7 @@ describe("Storage", function () {
     });
 
     it('update data by id on new data', function () { //по id и data заменяет data - возвращает true, если все верно
-        var storage = new Storage();
+        var storage = new Storage2();
         var data = {name: "Уюттера"};
         storage.addData(data);
         var id = 1;
@@ -29,7 +29,7 @@ describe("Storage", function () {
     });
 
     it('delete data by id fantomly', function () { //по id удаляет запись (data) - возвращает true, если все верно
-        var storage = new Storage();
+        var storage = new Storage2();
         var data = {name: "Уюттера"};
         storage.addData(data);
         var id = 1;
@@ -38,7 +38,7 @@ describe("Storage", function () {
     });
 
      it('delete data by id', function () { //по id удаляет запись (data) - возвращает true, если все верно
-        var storage = new Storage();
+        var storage = new Storage2();
         var data = {name: "Уюттера"};
         storage.addData(data);
         var id = 1;
