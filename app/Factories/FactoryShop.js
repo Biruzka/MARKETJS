@@ -5,6 +5,7 @@ var Shops =
     Simple: function ()
     {
         console.log("I'm simple");
+
     }
 }
 
@@ -12,11 +13,12 @@ function ShopsFactory(Data){
     this._name = Data.name;
     this._owner = null;//пока не знаем. начнем закидывать, тогда да (в репозитории где-нибудь)
     this._id = null;
-    //возможно тут нужны get и set, но сойдет и напрямую, пока
+    //возможно тут нужны get и set, но сойдет и напрямую, пока. куда их сюда же?? или в прототайп?
 }
 
 ShopsFactory.prototype =
 {
+    //общие методы фигачить сюда? или выше?
     constructor: ShopsFactory,
 
     makeSimpleShop: function () {

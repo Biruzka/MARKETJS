@@ -30,4 +30,3 @@ CustomersFactory.prototype =
 
 // var factory = new CustomersFactory({name: "Максимилиан"})
 // var customer = factory.makeSimpleCustomer();
-

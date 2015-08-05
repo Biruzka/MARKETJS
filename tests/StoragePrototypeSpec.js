@@ -37,12 +37,14 @@ describe("Storage2", function () {
         expect(data.deleted).toEqual(true);
     });
 
-     it('delete data by id', function () { //по id удаляет запись (data) - возвращает true, если все верно
+     xit('delete data by id', function () { //по id удаляет запись (data) - возвращает true, если все верно
         var storage = new Storage2();
         var data = {name: "Уюттера"};
-        storage.addData(data);
-        var id = 1;
-        expect(storage.deleteData(id)).toEqual(undefined);
+        var res = storage.addData(data);
+        var id = res._id;
+        storage.deleteData(id);
+        expect(storage.getById(id)).toEqual(undefined);
+
     });
 
 });
