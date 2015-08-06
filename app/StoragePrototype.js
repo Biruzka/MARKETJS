@@ -20,14 +20,14 @@ Storage2.prototype.getData = function(id) {
 
 Storage2.prototype.search = function(key, value) {
   //парсим наш лист
-  arr = new Array();
+  var arr = new Array();
   var item;
 
   for (item in this._ListOfData){
    // if (this._ListOfData.hasOwnProperty)
 
     if (this._ListOfData[item][key] === value) {
-      arr.push(this._ListOfData[item]);}
+      arr.push(item);}                                    //возвращает массив id-шников
 
     }
   return arr;

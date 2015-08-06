@@ -1,3 +1,4 @@
+
 var shop = shopRep.create({name:"MEGA"});
 var product = productRep.create({name: 'Teddy', owner: 'someShop', count: '3'});
 var cust = custRep.create('Customer', {name: 'Боря'});

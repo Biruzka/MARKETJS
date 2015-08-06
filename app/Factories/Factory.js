@@ -58,8 +58,8 @@ EntityMaker.Customer = function (data) {
 };
 
 EntityMaker.Order = function (data) {
-    this._product = data.product;
-    this._customer = data.customer;
+    this._productId = data.product;
+    this._customerId = data.customer;
     this._count = data.count;
     this._paid = false;
     this._id;

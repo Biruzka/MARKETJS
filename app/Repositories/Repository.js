@@ -1,7 +1,7 @@
-var Repository = function (EntityName) {
+function Repository(EntityName) {
     this.storage = new Storage2();
     this.entity = EntityName; //Shop, Order, Product, Customer
-}
+};
 
 Repository.prototype.create = function (data) {
     //здесь какая-то обработка//запросы
@@ -38,13 +38,17 @@ Repository.prototype.destroy = function (id){
 }
 
 Repository.prototype.search = function (key, value){
-    return this.storage.deleteData(id);
+    var arr = this.storage.search(key, value);
+    return arr;
 }
 
-var shopRep = new Repository('Shop');
-var productRep = new Repository('Product');
-var customerRep = new Repository('Customer');
-var orderRep = new Repository('Order');
+shopRep = new Repository('Shop');
+productRep = new Repository('Product');
+customerRep = new Repository('Customer');
+orderRep = new Repository('Order');
+
+
+//Продукты
 
 productRep.putProductToShop = function (idProduct, idShop) {
     var product = this._products.getData(idProduct); //по id достали объект
@@ -57,6 +61,17 @@ productRep.getAllProductsOfShop = function (idShop) {
     var arr = new Array;
     arr = this.storage.search("owner", idShop);
     return arr;
+}
+
+//Заказы
+
+orderRep.Buy = function (id){
+    var order = this.storage.getById(id);
+
+    //оплачено
+    order._paid = true;
+    this.storage.update(id, order);
+
 }
 
 
