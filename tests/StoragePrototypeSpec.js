@@ -13,9 +13,8 @@ describe("Storage2", function () {
 
     it('should get data by id', function () { //возвращает data
         var storage = new Storage2();
-        var id = 1;
         var data = {name: "Уюттера"}
-        storage.addData(data);
+        var id = storage.addData(data);
         expect(typeof storage.getData(id)).toEqual("object");
     });
 
@@ -31,19 +30,21 @@ describe("Storage2", function () {
     it('delete data by id fantomly', function () { //по id удаляет запись (data) - возвращает true, если все верно
         var storage = new Storage2();
         var data = {name: "Уюттера"};
-        storage.addData(data);
-        var id = 1;
-        data = storage.deleteDataFantomly(id);
-        expect(data.deleted).toEqual(true);
+        var res = storage.addData(data);
+        var id = res._id;
+        storage.deleteDataFantomly(id);
+        expect(storage.getData(id)).toEqual(undefined);
     });
 
-     xit('delete data by id', function () { //по id удаляет запись (data) - возвращает true, если все верно
+    it('delete data by id', function () { //по id удаляет запись (data) - возвращает true, если все верно
         var storage = new Storage2();
         var data = {name: "Уюттера"};
         var res = storage.addData(data);
         var id = res._id;
         storage.deleteData(id);
-        expect(storage.getById(id)).toEqual(undefined);
+        console.log(storage.getData(id) === undefined);
+
+        expect(storage.getData(id)).toBe(undefined);
 
     });
 

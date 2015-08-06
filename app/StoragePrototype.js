@@ -4,20 +4,21 @@
   this._idCounter = makeId();
 };
 
-Storage2.prototype.addData = function(Data) {
+Storage2.prototype.addData = function(data) {
+  var data = data;
   var id = this._idCounter();
-  this._ListOfData[id] = Data;
+  this._ListOfData[id] = data;
   return id;
 }
 
 Storage2.prototype.getData = function(id) {
+  var deleted = this._ListOfData[id] && this._ListOfData[id].deleted;
+  if (deleted === undefined)
   return this._ListOfData[id];
 }
-
 //штука, которая позволит доставать объекты с определенными свойствами
 
-
-Storage2.prototype.getDataWithThatValueByKey = function(key, value) {
+Storage2.prototype.search = function(key, value) {
   //парсим наш лист
   arr = new Array();
   var item;
@@ -48,8 +49,6 @@ Storage2.prototype.deleteDataFantomly = function(id) {//добавляем эл�
   if ( id in this._ListOfData) {
     this._ListOfData[id].deleted = true;
   }
-
-  return this._ListOfData[id]; //такого оъекта нет // возвращать гет бай ид не можем   TODO
 }
 //Как вынести в модуль этот счетчик, который может еще где-нибудь понадобиться???
 
