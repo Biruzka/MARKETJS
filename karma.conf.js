@@ -15,7 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        "app/StoragePrototype.js", "tests/StoragePrototypeSpec.js"
+     "app/*.js", "tests/*.js", "app/Repositories/Repository.js"
     ],
 
 

@@ -46,14 +46,14 @@ var productRep = new Repository('Product');
 var customerRep = new Repository('Customer');
 var orderRep = new Repository('Order');
 
-productRep.PutProductToShop = function (idProduct, idShop) {
+productRep.putProductToShop = function (idProduct, idShop) {
     var product = this._products.getData(idProduct); //по id достали объект
     product._owner = idShop; //инициализировали свойство - владелец - его id-шником
     this.storage.updateData(idProduct, product); //и запихнули измененнный продукт
     return product; //return для проверки
 }
 
-productRep.GetAllProductsOfShop = function (idShop) {
+productRep.getAllProductsOfShop = function (idShop) {
     var arr = new Array;
     arr = this.storage.search("owner", idShop);
     return arr;

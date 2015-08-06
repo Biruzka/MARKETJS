@@ -24,11 +24,10 @@ Storage2.prototype.search = function(key, value) {
   var item;
 
   for (item in this._ListOfData){
-
    // if (this._ListOfData.hasOwnProperty)
 
     if (this._ListOfData[item][key] === value) {
-      arr.push(item);}
+      arr.push(this._ListOfData[item]);}
 
     }
   return arr;

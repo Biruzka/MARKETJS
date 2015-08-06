@@ -42,9 +42,17 @@ describe("Storage2", function () {
         var res = storage.addData(data);
         var id = res._id;
         storage.deleteData(id);
-        console.log(storage.getData(id) === undefined);
-
         expect(storage.getData(id)).toBe(undefined);
+
+    });
+
+    it('search key/value', function () {
+        var storage = new Storage2();
+        var data = {name: "Уюттера"};
+        storage.addData(data);
+        var arr = storage.search('name','Уюттера');
+        console.log(arr + " массив");
+        expect(arr[0]).toEqual({name: "Уюттера"});
 
     });
 
