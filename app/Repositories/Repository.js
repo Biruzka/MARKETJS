@@ -66,11 +66,11 @@ productRep.getAllProductsOfShop = function (idShop) {
 
 //Заказы
 
-orderRep.pay = function (id){
+orderRep.payMarker = function (id){
 
-    var order = this.storage.getById(id);
+    var order = orderRep.getById(id);
     order._paid = true;
-    this.storage.update(id, order);
+    orderRep.update(id, order);
 }
 
 
@@ -91,7 +91,7 @@ customerRep.buy = function (orderId){
         //уменьшаяем количество экземпляров товара на складе
         product._count = product._count - order._count;
         //отметили, что куплен в order
-        orderRep.pay(orderId);
+        orderRep.payMarker(orderId);
         return ("Вы успешно оформили заказ");
         }
         else return successful; //вернет описание ошибки

@@ -9,7 +9,7 @@ describe("Market", function () {
 
     //Первый продукт
 
-    var product = EntityMaker.factory('Product', {name: 'Teddy', owner: 1, count: 1});
+    var product = EntityMaker.factory('Product', {name: 'Teddy', owner: 1, count: 0});
     var prod1_id = productRep.save(product);
     productRep.putProductToShop(prod1_id, shop1_id); //связываем продукт с магазином владельцем
 
@@ -37,7 +37,7 @@ describe("Market", function () {
     // console.log(customerRep.buy(order1_id));
 
     //по идее, купили, и ничего не должно было остаться
-    var arr2 = productRep.getAllProductsOfShop(shop1_id);
+    // var arr2 = productRep.getAllProductsOfShop(shop1_id);
 
     //проверка запускалки
 
@@ -71,10 +71,16 @@ describe("Market", function () {
     });
 
     it('should buy, products must be deleted', function () {
-       console.log(customerRep.buy(order1_id));
-       var orderBuyed = orderRep.getById(order1_id);
-       expect(orderBuyed._paid).toEqual(true);
-       expect(arr2[0]).toEqual(undefined);
+        console.log("forth test:");
+        console.log(arr[0]);
+        console.log(arr[1]);
+        console.log(customerRep.buy(order1_id));
+        var orderBuyed = orderRep.getById(order1_id);
+        var arr2 = productRep.getAllProductsOfShop(shop1_id);
+        expect(orderBuyed._paid).toEqual(true);
+        console.log("У одного из товаров количество должно было уменьшиться!");
+        console.log(arr2[0]);
+        console.log(arr2[1]);
     });
 
 
