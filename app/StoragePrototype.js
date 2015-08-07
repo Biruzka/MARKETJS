@@ -16,6 +16,17 @@ Storage2.prototype.getData = function(id) {
   if (deleted === undefined)
   return this._ListOfData[id];
 }
+
+Storage2.prototype.getAll = function() {
+  var arr = new Array();
+  var item;
+
+  for (item in this._ListOfData) {
+      arr.push(this._ListOfData[item]);                 //возвращает массив с объектами
+    }
+
+  return arr;
+}
 //штука, которая позволит доставать объекты с определенными свойствами
 
 Storage2.prototype.search = function(key, value) {
@@ -27,7 +38,7 @@ Storage2.prototype.search = function(key, value) {
    // if (this._ListOfData.hasOwnProperty)
 
     if (this._ListOfData[item][key] === value) {
-      arr.push(this._ListOfData[item]);}                                    //возвращает массив с объектами
+      arr.push(this._ListOfData[item]);}                //возвращает массив с объектами
 
     }
 

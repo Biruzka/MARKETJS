@@ -43,6 +43,11 @@ Repository.prototype.search = function (key, value){
     return arr;
 }
 
+Repository.prototype.showAll = function (){
+    var arr = this.storage.getAll();
+    return arr;
+}
+
 var shopRep = new Repository('Shop');
 var productRep = new Repository('Product');
 var customerRep = new Repository('Customer');

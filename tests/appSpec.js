@@ -7,9 +7,12 @@ describe("Market", function () {
     var shop = EntityMaker.factory('Shop', {name: "MEGA"}); //создаем сущность
     var shop1_id = shopRep.save(shop); //сохраняем в storage через репозиторий
 
+    var shop2 = EntityMaker.factory('Shop', {name: "MEGA"}); //создаем сущность
+    var shop2_id = shopRep.save(shop2); //сохраняем в storage через репозиторий
+
     //Первый продукт
 
-    var product = EntityMaker.factory('Product', {name: 'Teddy', owner: 1, count: 0});
+    var product = EntityMaker.factory('Product', {name: 'Teddy', owner: 1, count: 1});
     var prod1_id = productRep.save(product);
     productRep.putProductToShop(prod1_id, shop1_id); //связываем продукт с магазином владельцем
 
@@ -18,6 +21,10 @@ describe("Market", function () {
     var product2 = EntityMaker.factory('Product', {name: 'TeddyBear', owner: 1, count: 1});
     var prod2_id = productRep.save(product2);
     productRep.putProductToShop(prod2_id, shop1_id); //связываем продукт с магазином владельцем
+
+    var product3 = EntityMaker.factory('Product', {name: 'Bag', owner: 0, count: 1});
+    var prod3_id = productRep.save(product3);
+    productRep.putProductToShop(prod3_id, shop2_id); //связываем продукт с магазином владельцем
 
 
     //Достаем продукты конкретного магазина
@@ -62,6 +69,7 @@ describe("Market", function () {
         expect(shop1_id).toEqual(productRep.getById(prod2_id)._owner);
     });
 
+
     it('should orders', function () {
         var ord = orderRep.getById(order1_id);
         console.log("third test:");
@@ -71,7 +79,7 @@ describe("Market", function () {
     });
 
     it('should buy, products must be deleted', function () {
-        console.log("forth test:");
+        console.log("fourth test:");
         console.log(arr[0]);
         console.log(arr[1]);
         console.log(customerRep.buy(order1_id));
@@ -82,6 +90,17 @@ describe("Market", function () {
         console.log(arr2[0]);
         console.log(arr2[1]);
     });
+
+    it('should show all storage of smth', function () {
+        console.log("fifth test:");
+        var arrProducts = productRep.showAll();
+        console.log(arrProducts[0]);
+        console.log(arrProducts[1]);
+        console.log(arrProducts[2]);
+        expect(arrProducts).toBeDefined();
+
+    });
+
 
 
 
