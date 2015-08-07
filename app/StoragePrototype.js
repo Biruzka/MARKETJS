@@ -27,15 +27,21 @@ Storage2.prototype.search = function(key, value) {
    // if (this._ListOfData.hasOwnProperty)
 
     if (this._ListOfData[item][key] === value) {
-      arr.push(item);}                                    //возвращает массив id-шников
+      arr.push(this._ListOfData[item]);}                                    //возвращает массив с объектами
 
     }
+
+    // if (this._ListOfData[item][key] === value) {
+    //   arr.push(item);}                                    //возвращает массив id-шников
+
+    // }
   return arr;
 }
 
 Storage2.prototype.updateData = function(id, data) {
   this._ListOfData[id] = data;
-  return this._ListOfData[id];
+  return id;
+
 }
 
 Storage2.prototype.deleteData = function(id) {

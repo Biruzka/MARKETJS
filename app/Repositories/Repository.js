@@ -3,29 +3,30 @@ function Repository(EntityName) {
     this.entity = EntityName; //Shop, Order, Product, Customer
 };
 
-Repository.prototype.create = function (data) {
-    //здесь какая-то обработка//запросы
+// Repository.prototype.create = function (data) {
+//     //здесь какая-то обработка//запросы
 
-    //{name: "Уюттера", owner: "Somebody"} - вид data
-    var entity = EntityMaker.factory(this.entity, data);
-    return entity;
-}
+//     //{name: "Уюттера", owner: "Somebody"} - вид data
+//     var entity = EntityMaker.factory(this.entity, data);
+//     return entity;
+// }
 //вот здесь уже запись в бд (или storage или registr) ... это синонимы? или нет - почему так много названий?
 Repository.prototype.save = function (entity){
     //здесь какая-то обработка
-    var id = this.storage.addData(entity); // вернет id
-    entity._id = id;
-    return entity; //но уже с id
+    var _id = this.storage.addData(entity); // вернет id
+    return _id; //но уже с id
 }
 
 Repository.prototype.getById = function (id){
     return this.storage.getData(id);
 }
 
-Repository.prototype.update = function (id, data){
+Repository.prototype.update = function (id, data){ //возвращает id
     //здесь в storage находится нужная строка
     //достается, потом обрабатывается тут же, заменяется
-    return this.storage.updateData(id);   //и просто добавляется в storage в уже измененном виде
+    var _id = this.storage.updateData(id, data);
+    return  _id; //и просто добавляется в storage в уже измененном виде
+
     //но пока тупо заменяется объект
 }
 
@@ -42,38 +43,66 @@ Repository.prototype.search = function (key, value){
     return arr;
 }
 
-shopRep = new Repository('Shop');
-productRep = new Repository('Product');
-customerRep = new Repository('Customer');
-orderRep = new Repository('Order');
+var shopRep = new Repository('Shop');
+var productRep = new Repository('Product');
+var customerRep = new Repository('Customer');
+var orderRep = new Repository('Order');
 
 
 //Продукты
 
 productRep.putProductToShop = function (idProduct, idShop) {
-    var product = this._products.getData(idProduct); //по id достали объект
+    var product = this.storage.getData(idProduct); //по id достали объект
     product._owner = idShop; //инициализировали свойство - владелец - его id-шником
     this.storage.updateData(idProduct, product); //и запихнули измененнный продукт
-    return product; //return для проверки
+    return idProduct; //return для проверки
 }
 
 productRep.getAllProductsOfShop = function (idShop) {
     var arr = new Array;
-    arr = this.storage.search("owner", idShop);
+    arr = this.storage.search("_owner", idShop);
     return arr;
 }
 
 //Заказы
 
-orderRep.Buy = function (id){
-    var order = this.storage.getById(id);
+orderRep.pay = function (id){
 
-    //оплачено
+    var order = this.storage.getById(id);
     order._paid = true;
     this.storage.update(id, order);
-
 }
 
+
+//Клиенты
+
+customerRep.buy = function (orderId){
+    var order = orderRep.getById(orderId);
+    var idProduct = order._productId;
+
+    var product = productRep.getById(idProduct);
+
+
+    if ((product._count - order._count)>=0){
+
+        successful = transaction(orderId);
+
+        if (successful===true){
+        //уменьшаяем количество экземпляров товара на складе
+        product._count = product._count - order._count;
+        //отметили, что куплен в order
+        orderRep.pay(orderId);
+        return ("Вы успешно оформили заказ");
+        }
+        else return successful; //вернет описание ошибки
+    }
+
+    else return ("Извините, повторите процесс покупки позднее, сейчас такого товара на складе не наблюдается! Воооот...");
+}
+
+function transaction (orderId) {
+    return true;
+}
 
 
 

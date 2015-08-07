@@ -25,6 +25,7 @@ describe("Storage2", function () {
         var id = 1;
         data = {name: "СпортМастер"};
         expect(typeof storage.updateData(id, data)).toEqual("object");
+
     });
 
     it('delete data by id fantomly', function () { //по id удаляет запись (data) - возвращает true, если все верно
