@@ -18,7 +18,8 @@ module.exports = function(config) {
         "app/StoragePrototype.js",
         "app/Factories/Factory.js",
         "app/Repositories/Repository.js",
-        "tests/appSpec.js"
+        "tests/appSpec.js",
+        "app/Events/BUY.js"
     ],
 
 

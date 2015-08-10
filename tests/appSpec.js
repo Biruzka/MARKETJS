@@ -82,7 +82,7 @@ describe("Market", function () {
         console.log("fourth test:");
         console.log(arr[0]);
         console.log(arr[1]);
-        console.log(customerRep.buy(order1_id));
+        console.log(new BuyingService(order1_id).pay());
         var orderBuyed = orderRep.getById(order1_id);
         var arr2 = productRep.getAllProductsOfShop(shop1_id);
         expect(orderBuyed._paid).toEqual(true);
@@ -100,9 +100,6 @@ describe("Market", function () {
         expect(arrProducts).toBeDefined();
 
     });
-
-
-
 
 });
 

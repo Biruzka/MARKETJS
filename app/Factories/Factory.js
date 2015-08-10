@@ -1,17 +1,27 @@
 function EntityMaker () {} //родительский конструктор
 
 //метод предка
-EntityMaker.prototype.introdaction = function (){
+EntityMaker.prototype.introduction = function (){
     return "hey, my name is "+ this.name;
 };
 
+
+EntityMaker.prototype.get = function (key){
+    var keyName = "_"+key;
+    return this[keyName];
+};
+
+EntityMaker.prototype.set = function (key,value){
+    var keyName = "_"+key;
+    this[keyName] = value;
+};
 //статический фабричный метод
 
 EntityMaker.factory = function (type, data){
 
     var constr = type;
     var data = data,
-    newentity;
+        newentity;
 
 
     //ошибка, коль коструктора нема
@@ -25,7 +35,7 @@ EntityMaker.factory = function (type, data){
 
     //определяем отношение наследования с предком
 
-    if (typeof EntityMaker[constr].prototype.introdaction !== "function"){
+    if (typeof EntityMaker[constr].prototype.introduction !== "function"){
         EntityMaker[constr].prototype = new EntityMaker();
     }
 
@@ -44,6 +54,8 @@ EntityMaker.Shop = function (data) {
     this._id;
 
 };
+
+console.log("111: ", EntityMaker.Shop.prototype);
 
 EntityMaker.Product = function (data) {
     this._name = data.name;

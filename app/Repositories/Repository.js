@@ -69,45 +69,45 @@ productRep.getAllProductsOfShop = function (idShop) {
     return arr;
 }
 
-//Заказы
+// //Заказы
 
-orderRep.payMarker = function (id){
+// orderRep.payMarker = function (id){
 
-    var order = orderRep.getById(id);
-    order._paid = true;
-    orderRep.update(id, order);
-}
+//     var order = orderRep.getById(id);
+//     order._paid = true;
+//     orderRep.update(id, order);
+// }
 
 
 //Клиенты
 
-customerRep.buy = function (orderId){
-    var order = orderRep.getById(orderId);
-    var idProduct = order._productId;
+// customerRep.buy = function (orderId){
+//     var order = orderRep.getById(orderId);
+//     var idProduct = order._productId;
 
-    var product = productRep.getById(idProduct);
+//     var product = productRep.getById(idProduct);
 
 
-    if ((product._count - order._count)>=0){
+//     if ((product._count - order._count)>=0){
 
-        successful = transaction(orderId);
+//         successful = transaction(orderId);
 
-        if (successful===true){
-        //уменьшаяем количество экземпляров товара на складе
-        product._count = product._count - order._count;
-        //отметили, что куплен в order
-        orderRep.payMarker(orderId);
-        return ("Вы успешно оформили заказ");
-        }
-        else return successful; //вернет описание ошибки
-    }
+//         if (successful===true){
+//         //уменьшаяем количество экземпляров товара на складе
+//         product._count = product._count - order._count;
+//         //отметили, что куплен в order
+//         orderRep.payMarker(orderId);
+//         return ("Вы успешно оформили заказ");
+//         }
+//         else return successful; //вернет описание ошибки
+//     }
 
-    else return ("Извините, повторите процесс покупки позднее, сейчас такого товара на складе не наблюдается! Воооот...");
-}
+//     else return ("Извините, повторите процесс покупки позднее, сейчас такого товара на складе не наблюдается! Воооот...");
+// }
 
-function transaction (orderId) {
-    return true;
-}
+// function transaction (orderId) {
+//     return true;
+// }
 
 
 
