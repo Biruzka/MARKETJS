@@ -1,0 +1,29 @@
+{
+  "name": "ProjectMarket",
+  "version": "0.0.0",
+  "description": "все нужные файлы в app и tests",
+  "main": "InMemoryStorage.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "karma": "^0.13.3",
+    "jasmine-core": "^2.3.4",
+    "karma-jasmine": "^0.3.6",
+    "phantomjs": "^1.9.17",
+    "karma-phantomjs-launcher": "^0.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Biruzka/MARKETJS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Biruzka/MARKETJS/issues"
+  }
+}
