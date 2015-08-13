@@ -18,9 +18,9 @@ Repository.prototype.save = function (entity){
 }
 
 Repository.prototype.getById = function (id){
-    return this.storage.getData(id);
+    return this.storage.getData(EntityId.id);                                       //репа с сущностями!!!!!!
 }
-
+                                                                                    //domain design
 Repository.prototype.update = function (id, data){ //возвращает id
     //здесь в storage находится нужная строка
     //достается, потом обрабатывается тут же, заменяется
@@ -48,6 +48,15 @@ Repository.prototype.showAll = function (){
     return arr;
 }
 
+//расширение
+//сервис локатор
+
+
+//создание классов ShopRep, ProductRep... сервис локатор - это отдельные классы!
+//расширяю классы методами базового репозитория
+//
+
+
 var shopRep = new Repository('Shop');
 var productRep = new Repository('Product');
 var customerRep = new Repository('Customer');
@@ -56,11 +65,22 @@ var orderRep = new Repository('Order');
 
 //Продукты
 
-productRep.putProductToShop = function (idProduct, idShop) {
+
+//он в сервисе
+//
+productRep.putProductToShop = function (idProduct, idShop) { //данные меняются в entity. изменяю энтити потом в ремпозиторий - сохранить
     var product = this.storage.getData(idProduct); //по id достали объект
     product._owner = idShop; //инициализировали свойство - владелец - его id-шником
     this.storage.updateData(idProduct, product); //и запихнули измененнный продукт
     return idProduct; //return для проверки
+}
+//!!!
+var Service = {
+
+    putProducttoShop: function(prE,shE){
+        //меняю сущность через методы класса сущности
+
+    }
 }
 
 productRep.getAllProductsOfShop = function (idShop) {

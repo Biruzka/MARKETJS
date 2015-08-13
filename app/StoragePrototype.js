@@ -49,24 +49,21 @@ Storage2.prototype.search = function(key, value) {
   return arr;
 }
 
-Storage2.prototype.updateData = function(id, data) {
-  this._ListOfData[id] = data;
-  return id;
-
+Storage2.prototype.updateData = function(data) {
+  this._ListOfData[data.getId()] = data;
 }
 
 Storage2.prototype.deleteData = function(id) {
   delete this._ListOfData[id];
 }
 
-Storage2.prototype.deleteDataFantomly = function(id) {//добавляем элементу свойство удалено, но не удаляем, лишь помечаем
+Storage2.prototype.deleteDataFantomly = function(data) {//добавляем элементу свойство удалено, но не удаляем, лишь помечаем
     //что делать если правда удаляем? отдельный метод для смены id у следующих и уменьшение счетчика id
     //но пока просто помечаем
-  if ( id in this._ListOfData) {
-    this._ListOfData[id].deleted = true;
+  if ( data.getId() in this._ListOfData) {
+    this._ListOfData[data.getId()].set(deleted, true);
   }
 }
-//Как вынести в модуль этот счетчик, который может еще где-нибудь понадобиться???
 
 function makeId() {
   var currentCount = 1;

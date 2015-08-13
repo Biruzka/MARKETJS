@@ -1,6 +1,7 @@
 //Маркет делает вид, что работает
 
 describe("Market", function () {
+    "use strict";
 
     //Первый магазин
 

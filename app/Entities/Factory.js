@@ -55,7 +55,6 @@ EntityMaker.Shop = function (data) {
 
 };
 
-console.log("111: ", EntityMaker.Shop.prototype);
 
 EntityMaker.Product = function (data) {
     this._name = data.name;
