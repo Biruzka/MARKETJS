@@ -10,7 +10,7 @@ var Service = {
         return (product.get("count") -  order.get("count") >= 0);
     },
 
-    putProducttoShop: function (productEn,shopEn){
+    putProductToShop: function (productEn,shopEn){
         productEn.bindShop(shopEn);
         ProductRepository.update(productEn);
     },

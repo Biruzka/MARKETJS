@@ -1,14 +1,2 @@
-все нужные файлы в app и tests
 
-app:
-
-Factories/Factory - конструктор для сущностей.
-Repositories/Reposiitory - связь с бд, запросы будут здесь, для каждой сущности свой
-Events - процедуры, события
-StoragePrototype - key/value хранилище. создается свой для каждого репозитория
-app.js - запускалка
-
-tests:
-
-тесты на karma
 

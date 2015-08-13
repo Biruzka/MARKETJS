@@ -12,4 +12,8 @@ Order.prototype.payMaker () {
 
 OrderEntity.idAttribute = 'id';
 
+(function () {
+extendClass (OrderEntity, BaseEntity);
+})();
+
 //var order = new OrderEntity({productId:'', customerId:'',count:''});

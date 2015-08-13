@@ -65,21 +65,7 @@ Storage2.prototype.deleteDataFantomly = function(data) {//добавляем э�
   }
 }
 
-function makeId() {
-  var currentCount = 1;
 
-  // возвращаемся к функции
-  function counter() {
-    return currentCount++;
-  }
-
-
-  function counterReduce() { //??
-    currentCount--;
-  }
-
-  return counter;
-}
 
 
 

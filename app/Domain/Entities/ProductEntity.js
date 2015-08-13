@@ -13,6 +13,10 @@ ProductEntity.prototype.countReduce(count) {
 
 ProductEntity.idAttribute = 'id';
 
+(function () {
+extendClass (ProductEntity, BaseEntity);
+})();
+
 // ProductEntity.nameAttribute = 'name';
 
 // ProductEntity.prototype.getName = function () {

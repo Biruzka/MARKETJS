@@ -4,5 +4,7 @@ function ShopEntity(attrs) {
 
 ShopEntity.idAttribute = 'id';
 
-
+(function () {
+extendClass (ShopEntity, BaseEntity);
+})();
 // var shop = new ShopEntity({ name: '', owner:''});

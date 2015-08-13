@@ -1,8 +1,4 @@
 var BuyingService = function(orderId) {
-  this.orderId = orderId;
-  this.order = orderRep.getById(orderId);
-  this.idProduct = this.order.get("productId");
-  this.product = productRep.getById(this.idProduct);
 }
 
 BuyingService.prototype = {

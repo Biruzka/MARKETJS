@@ -1,28 +1,27 @@
 //Маркет делает вид, что работает
 
 function Market() {
-    var shop = EntityMaker.factory('Shop', {name: "MEGA"}); //создаем сущность
-    var shop1_id = shopRep.save(shop); //сохраняем в storage через репозиторий
+    var shop = new ShopEntity({name: "MEGA"}); //создаем сущность
+    shop = ShopRepository.save(shop);
 
-    var product = EntityMaker.factory('Product', {name: 'Teddy', owner: 1, count: '1'});
-    var prod1_id = productRep.save(product);
+    var product = new ProductEntity({name: 'Teddy', owner: 1, count: '1'});
+    product = ProductRepository.save(product);
 
-    productRep.putProductToShop(prod1_id, shop1_id); //связываем продукт с магазином владельцем
+    Service.putProductToShop(product, shop);
 
-    var arr = productRep.getAllProductsOfShop(shop1_id);
+    var arr = Service.getAllProductsOfShop(shop);
 
-    var customer = EntityMaker.factory('Customer', {name: 'Вагиф'});
-    var cust1_id = customerRep.save(customer);
+    var customer = new CustomerEntity({name: 'Вагиф'});
+    customer = CustomerRepository.save(customer);
 
-    var order = EntityMaker.factory('Order', {product:prod1_id, customer: cust1_id, count: 2});
-    var order1_id = orderRep.save(order);
+    var order = new OrderEntity({product:prod1_id, customer: cust1_id, count: 2});
+    order = OrderRepository.save(order);
 
-    //оплачиваем, радуемся, что купили или не купили
+    Service.buy(order);
 
-    console.log(customerRep.buy(ord1_id));
-
-
-    var arr = productRep.getAllProductsOfShop(shop1_id); //по идее, купили, и ничего не должно было остаться
+    if (order.get("paid")===true) {
+        console.log("товар" + order + "куплен");
+    }
 
 }();
 
