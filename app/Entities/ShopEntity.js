@@ -1,6 +1,5 @@
 function ShopEntity(attrs) {
     this.attrs = attrs;
-    this.attrs.idAttribute;
 }
 
 ShopEntity.idAttribute = 'id';
