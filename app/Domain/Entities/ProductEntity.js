@@ -1,21 +1,26 @@
-function ProductEntity(attrs) {
-    this.attrs = attrs;
-}
+var ProductEntity = (function () {
+    'use strict';
 
-ProductEntity.prototype.bindShop(shop) {
-    this.set("owner",shop.getId());
-}
+    extendClass(ProductEntity, BaseEntity);
 
-ProductEntity.prototype.countReduce(count) {
+    function ProductEntity() {
+        ProductEntity.__super__.apply(arguments);
+    }
+
+    ProductEntity.prototype.bindShop(shop) {
+        this.set("owner",shop.getId());
+    }
+
+    ProductEntity.prototype.countReduce(count) {
     //проверка, чтобы не ушло в минус
-   this.set("count",this.get("count")-count);
-}
+        this.set("count",this.get("count")-count);
+    }
 
-ProductEntity.idAttribute = 'id';
+    ProductEntity.idAttribute = 'id';
 
-(function () {
-extendClass (ProductEntity, BaseEntity);
-})();
+    return ProductEntity;
+}());
+
 
 // ProductEntity.nameAttribute = 'name';
 

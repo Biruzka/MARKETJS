@@ -1,19 +1,21 @@
-function OrderEntity(attrs) {
-    this.attrs = attrs;
-    this.attrs.paid = this.defolt[paid];
-}
+var OrderEntity = (function () {
+    'use strict';
 
-OrderEntity.defolt = {
-    paid: false;
-}
-Order.prototype.payMaker () {
-    order.set("paid", true);
-}
+    extendClass(OrderEntity, BaseEntity);
 
-OrderEntity.idAttribute = 'id';
+    function OrderEntity() {
+        OrderEntity.__super__.apply(arguments);
+    }
 
-(function () {
-extendClass (OrderEntity, BaseEntity);
-})();
+    OrderEntity.prototype.default = {
+        paid: false;
+    }
 
-//var order = new OrderEntity({productId:'', customerId:'',count:''});
+    Order.prototype.payMaker () {
+        this.set("paid", true);
+    }
+
+    OrderEntity.idAttribute = 'id';
+
+    return OrderEntity;
+}());

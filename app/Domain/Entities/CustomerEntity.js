@@ -1,11 +1,13 @@
-function CustomerEntity(attrs) {
-    this.attrs = attrs;
-}
+var CustomerEntity = (function () {
+  'use strict';
 
-CustomerEntity.idAttribute = 'id';
+  extendClass(CustomerEntity, BaseEntity);
 
-(function () {
-extendClass (CustomerEntity, BaseEntity);
-})();
+  function CustomerEntity() {
+     CustomerEntity.__super__.apply(arguments);
+  }
 
-//var customer = new CustomerEntity({name:""});
+  CustomerEntity.idAttribute = 'id';
+
+  return CustomerEntity;
+}());

@@ -1,10 +1,13 @@
-function ShopEntity(attrs) {
-    this.attrs = attrs;
-}
+var ShopEntity = (function () {
+  'use strict';
 
-ShopEntity.idAttribute = 'id';
+  extendClass(ShopEntity, BaseEntity);
 
-(function () {
-extendClass (ShopEntity, BaseEntity);
-})();
-// var shop = new ShopEntity({ name: '', owner:''});
+  function ShopEntity() {
+     ShopEntity.__super__.apply(arguments);
+  }
+
+  ShopEntity.idAttribute = 'id';
+
+  return ShopEntity;
+}());
