@@ -3,7 +3,7 @@ function BaseRepository() {
 };
 
 BaseRepository.prototype.save = function (entity){
-    var id = this.storage.addData(entity);
+    var id = this.storage.addData(entity["attrs"]);
     entity.giveId(id);
     return entity;
 }
@@ -13,15 +13,15 @@ BaseRepository.prototype.getById = function (id){ //смысл вытаскив�
 }
 
 BaseRepository.prototype.update = function (entity){
-    this.storage.updateData(entity);
+    this.storage.updateData(entity.getId(),entity["attrs"]);
 }
 
+// BaseRepository.prototype.delete = function (entity){
+//     return this.storage.deleteDataFantomly(entity);
+// }
+
 BaseRepository.prototype.delete = function (entity){
-    return this.storage.deleteDataFantomly(entity);
-}
-//прям конкретное удалить, таки безвозвратно
-BaseRepository.prototype.destroy = function (id){
-    return this.storage.deleteData(id);
+    this.storage.deleteData(entity.getId());
 }
 
 BaseRepository.prototype.search = function (key, value){

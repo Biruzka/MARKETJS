@@ -4,14 +4,14 @@ var ProductEntity = (function () {
     extendClass(ProductEntity, BaseEntity);
 
     function ProductEntity() {
-        ProductEntity.__super__.apply(arguments);
+        ProductEntity.superclass.apply(arguments);
     }
 
-    ProductEntity.prototype.bindShop(shop) {
+    ProductEntity.prototype.bindShop = function (shop) {
         this.set("owner",shop.getId());
     }
 
-    ProductEntity.prototype.countReduce(count) {
+    ProductEntity.prototype.countReduce = function (count) {
     //проверка, чтобы не ушло в минус
         this.set("count",this.get("count")-count);
     }

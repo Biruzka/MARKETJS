@@ -4,7 +4,7 @@ var CustomerEntity = (function () {
   extendClass(CustomerEntity, BaseEntity);
 
   function CustomerEntity() {
-     CustomerEntity.__super__.apply(arguments);
+     CustomerEntity.superclass.apply(arguments);
   }
 
   CustomerEntity.idAttribute = 'id';

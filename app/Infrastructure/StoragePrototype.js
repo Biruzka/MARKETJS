@@ -12,8 +12,7 @@ Storage2.prototype.addData = function(data) {
 }
 
 Storage2.prototype.getData = function(id) {
-  var deleted = this._ListOfData[id] && this._ListOfData[id].deleted;
-  if (deleted === undefined)
+  //var deleted = this._ListOfData[id] && this._ListOfData[id]["deleted"];
   return this._ListOfData[id];
 }
 
@@ -35,12 +34,15 @@ Storage2.prototype.search = function(key, value) {
   var item;
 
   for (item in this._ListOfData){
-   // if (this._ListOfData.hasOwnProperty)
 
-    if (this._ListOfData[item][key] === value) {
-      arr.push(this._ListOfData[item]);}                //возвращает массив с объектами
+    if (this._ListOfData.hasOwnProperty(item)){
 
+      if (this._ListOfData[item][key] === value) {
+        arr.push(this._ListOfData[item]);
+
+      }                //возвращает массив с объектами
     }
+  }
 
     // if (this._ListOfData[item][key] === value) {
     //   arr.push(item);}                                    //возвращает массив id-шников
@@ -49,21 +51,21 @@ Storage2.prototype.search = function(key, value) {
   return arr;
 }
 
-Storage2.prototype.updateData = function(data) {
-  this._ListOfData[data.getId()] = data;
+Storage2.prototype.updateData = function(id, data) {
+  this._ListOfData[id] = data;
 }
 
 Storage2.prototype.deleteData = function(id) {
   delete this._ListOfData[id];
 }
 
-Storage2.prototype.deleteDataFantomly = function(data) {//добавляем элементу свойство удалено, но не удаляем, лишь помечаем
-    //что делать если правда удаляем? отдельный метод для смены id у следующих и уменьшение счетчика id
-    //но пока просто помечаем
-  if ( data.getId() in this._ListOfData) {
-    this._ListOfData[data.getId()].set(deleted, true);
-  }
-}
+// Storage2.prototype.deleteDataFantomly = function(data) {//добавляем элементу свойство удалено, но не удаляем, лишь помечаем
+//     //что делать если правда удаляем? отдельный метод для смены id у следующих и уменьшение счетчика id
+//     //но пока просто помечаем
+//   if ( data.getId() in this._ListOfData) {
+//     this._ListOfData[data.getId()].set("deleted", true);
+//   }
+// }
 
 
 

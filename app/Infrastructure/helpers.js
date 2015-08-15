@@ -2,7 +2,7 @@ function extendClass (Child, Parent) {
 
     Child.prototype = Object.create(Parent.prototype);
     Child.prototype.constructor = Child;
-    Child.superclass = Parent.prototype;
+    Child.superclass = Parent;
 
 
     for (var item in Parent) {
@@ -10,7 +10,6 @@ function extendClass (Child, Parent) {
             Child[item] = Parent[item];
         }
     }
-
 }
 
 function makeId() {

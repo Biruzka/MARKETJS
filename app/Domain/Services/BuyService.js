@@ -3,16 +3,16 @@ var BuyingService = function(orderId) {
 
 BuyingService.prototype = {
 
-    var saveChanges = function (order,product) {
+    saveChanges: function (order,product) {
         orderRepository.update(order);
         productRepository.update(product);
     },
 
-    var transaction = function() {
+    transaction: function() {
         return true;
     },
 
-    var buy: function(order){
+    buy: function(order){
         var productId = order.get("productId")
         var product = ProductRepository.getById(productId);
 

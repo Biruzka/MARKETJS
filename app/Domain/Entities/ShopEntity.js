@@ -4,10 +4,11 @@ var ShopEntity = (function () {
   extendClass(ShopEntity, BaseEntity);
 
   function ShopEntity() {
-     ShopEntity.__super__.apply(arguments);
+     ShopEntity.superclass.apply(arguments);
   }
 
   ShopEntity.idAttribute = 'id';
 
   return ShopEntity;
 }());
+
