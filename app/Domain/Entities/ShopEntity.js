@@ -4,8 +4,14 @@ var ShopEntity = (function () {
   extendClass(ShopEntity, BaseEntity);
 
   function ShopEntity() {
-     ShopEntity.superclass.apply(arguments);
+     ShopEntity.superclass.apply(this, arguments);
   }
+
+  // ShopEntity.prototype.giveId = function() {
+  //    var id = ShopEntity.superclass.pototype.giveId.call(this);
+  //    console.log(id);
+  //    return id;
+  // };
 
   ShopEntity.idAttribute = 'id';
 

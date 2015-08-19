@@ -15,10 +15,10 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-
-
         "app/Infrastructure/*.js",
         "app/Domain/**/*.js",
+        "app/Domain/*/*.js",
+        "app/Domain/Repositories/*.js",
         "tests/new/*.js"
     ],
 

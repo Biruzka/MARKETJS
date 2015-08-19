@@ -1,6 +1,13 @@
-function CustomerRepository () {
-    this.storage = new Storage2();
-}
+var CustomerRepository = (function () {
+  'use strict';
+
+  extendClass(CustomerRepository, BaseRepository);
+
+  function CustomerRepository() {
+        CustomerRepository.superclass.apply(this, arguments);
+  }
+
+  return CustomerRepository;
+}());
 
 
-extendClass (CustomerRepository, BaseRepository);

@@ -1,6 +1,12 @@
-function ShopRepository () {
-    this.storage = new Storage2();
-}
+var ShopRepository = (function () {
+  'use strict';
 
+  extendClass(ShopRepository, BaseRepository);
 
-extendClass (ShopRepository, BaseRepository);
+  function ShopRepository() {
+        ShopRepository.superclass.apply(this, arguments);
+  }
+
+  return ShopRepository;
+}());
+

@@ -4,14 +4,14 @@ var OrderEntity = (function () {
     extendClass(OrderEntity, BaseEntity);
 
     function OrderEntity() {
-        OrderEntity.superclass.apply(arguments);
+        OrderEntity.superclass.apply(this, arguments);
     }
 
     OrderEntity.prototype.default = {
         paid: false
     }
 
-    OrderEntity.prototype.payMaker = function () {
+    OrderEntity.prototype.payMarker = function () {
         this.set("paid", true);
     }
 

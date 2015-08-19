@@ -1,4 +1,8 @@
 var BuyingService = new BuyingService();
+var repositoryShop = new ShopRepository();
+var repositoryProduct = new ProductRepository();
+var repositoryCustomer = new CustomerRepository();
+var repositoryOrder = new OrderRepository();
 
 var Service = {
 
@@ -12,12 +16,12 @@ var Service = {
 
     putProductToShop: function (productEn,shopEn){
         productEn.bindShop(shopEn);
-        ProductRepository.update(productEn);
+        repositoryProduct.update(productEn);
     },
 
     getAllProductsOfShop: function (shopEn) {
         var arr = [];
-        arr = productRepository.search(owner,shopEn.getId());
+        arr = repositoryProduct.search("owner",shopEn.getId());
         return arr;
     },
 

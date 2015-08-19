@@ -4,8 +4,8 @@ var BuyingService = function(orderId) {
 BuyingService.prototype = {
 
     saveChanges: function (order,product) {
-        orderRepository.update(order);
-        productRepository.update(product);
+        repositoryOrder.update(order);
+        repositoryProduct.update(product);
     },
 
     transaction: function() {
@@ -14,9 +14,11 @@ BuyingService.prototype = {
 
     buy: function(order){
         var productId = order.get("productId")
-        var product = ProductRepository.getById(productId);
+        var productData = repositoryProduct.getById(productId);
+        product = new ProductEntity(productData);
 
         if (Service.ProductstoOrderEnough(order, product)) {
+
 
             var transactionResult = this.transaction();
 

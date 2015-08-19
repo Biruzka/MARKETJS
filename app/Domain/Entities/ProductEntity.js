@@ -4,7 +4,7 @@ var ProductEntity = (function () {
     extendClass(ProductEntity, BaseEntity);
 
     function ProductEntity() {
-        ProductEntity.superclass.apply(arguments);
+        ProductEntity.superclass.apply(this, arguments);
     }
 
     ProductEntity.prototype.bindShop = function (shop) {

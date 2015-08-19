@@ -1,5 +1,0 @@
-function OrderRepository () {
-    this.storage = new Storage2();
-}
-
-extendClass (OrderRepository, BaseRepository);
