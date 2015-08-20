@@ -9,13 +9,10 @@
     });
 
     this.addPro = function (product) {
-      alert("добавил и увидел");
       this.products.push(product);
     }
 
   }]);
-
-
 
   app.controller("ReviewController", function() {
     this.review = {};
@@ -26,16 +23,16 @@
       this.review = {};
     };
 
-
   });
 
   app.controller("ProductController", function() {
     this.product = {};
     this.add = function() {
-      var prod = new ProductEntity({name: this.product.name, owner: 1, count: this.product.count, price: this.product.price, image: this.product.image, description: this.product.descroption});
-      alert("ld;,s");
+            alert("добавил и увидел");
+      var prod = new ProductEntity({review: [],name: this.product.name, owner: 1, count: this.product.count, price: this.product.price, image: this.product.image, description: this.product.descroption});
       prod = repositoryProduct.save(product);
-      // this.product = {};
+            alert("добавил и увидел2");
+      this.product = {};
     };
 
   });

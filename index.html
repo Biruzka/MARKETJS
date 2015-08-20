@@ -7,6 +7,7 @@
 <!--         // <script src="http://code.angularjs.org/1.1.4/angular.min.js"></script> -->
         <script type="text/javascript" src="script.js"></script>
         <script type="text/javascript" src="products.js"></script>
+
         <link href="style.css" rel="stylesheet">
         <meta charset="utf-8">
         <title>Template</title>
@@ -33,7 +34,7 @@
 
             <div class="product-form">
                 <form name="productForm" ng-controller="ProductController as productCtrl"
-                                                 ng-submit="productForm.$valid && productCtrl.add() && store.addPro(productCtrl.product)" novalidate>
+                    ng-submit="productForm.$valid && store.addPro(productCtrl.product)&& productCtrl.add() " novalidate>
                             <p>Добавить новый продукт: </p>
 
                             <blockquote>
