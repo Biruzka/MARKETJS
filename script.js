@@ -1,15 +1,19 @@
 (function(){
   var app = angular.module('store', [ 'store-products']);
 
-  app.controller("StoreController", function() {
-    this.products = gem;
+  app.controller("StoreController", ['$http',function($http) {
+    var store = this;
+    store.products=[];
+    $http.get('/products.json').success(function(data){
+      store.products = data;
+    });
 
     this.addPro = function (product) {
       alert("добавил и увидел");
       this.products.push(product);
     }
 
-  });
+  }]);
 
 
 
@@ -53,42 +57,42 @@
 
 
 
-  var gem = [
-    {
-      name: 'Ваза',
-      price: 4,
-      count: 5,
-      owner: "Galatey",
-      description:"Ваза, с дымчатым покрытием и странным цветком посередке, в приципе - красивая",
-      image: "images/img1.jpg",
-      canOrdered: true,
-      soldOut:false,
-      reviews: [
-        {
-          stars: 5,
-          body: "Не разбивается, проверял",
-          author: "lol@gmail.com"
-        },
-        {
-          stars: 3,
-          body: "Ничешная",
-          author: "param@gmail.com"
-        },
-      ],
-    },
+  // var gem = [
+  //   {
+  //     name: 'Ваза',
+  //     price: 4,
+  //     count: 5,
+  //     owner: "Galatey",
+  //     description:"Ваза, с дымчатым покрытием и странным цветком посередке, в приципе - красивая",
+  //     image: "images/img1.jpg",
+  //     canOrdered: true,
+  //     soldOut:false,
+  //     reviews: [
+  //       {
+  //         stars: 5,
+  //         body: "Не разбивается, проверял",
+  //         author: "lol@gmail.com"
+  //       },
+  //       {
+  //         stars: 3,
+  //         body: "Ничешная",
+  //         author: "param@gmail.com"
+  //       },
+  //     ],
+  //   },
 
-    {
-      name: 'Розы',
-      price: 4.9,
-      count: 2,
-      owner: "Galatey",
-      description:"Букет роз. Цвета яркие, сочные",
-      image:"images/img2.jpg",
-      canOrdered: true,
-      soldOut:false,
-      reviews: [],
-    }
-  ];
+  //   {
+  //     name: 'Розы',
+  //     price: 4.9,
+  //     count: 2,
+  //     owner: "Galatey",
+  //     description:"Букет роз. Цвета яркие, сочные",
+  //     image:"images/img2.jpg",
+  //     canOrdered: true,
+  //     soldOut:false,
+  //     reviews: [],
+  //   }
+  // ];
 
 return app;
 })();
