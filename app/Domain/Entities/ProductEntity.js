@@ -35,4 +35,4 @@ var ProductEntity = (function () {
 // ProductEntity.prototype.attachDocument = function () {
 // }
 
-// var product = new ProductEntity({ name: '', count: '',owner:''});
+// var product = new ProductEntity({ name: '', count: '',owner:'', description:'', price: ''});
