@@ -1,11 +1,15 @@
-function BaseRepository() {
-    this.storage = new Storage2();
+function BaseRepository(arg) {
+    this.storage = new Storage2(arguments[0]);
 };
 
 BaseRepository.prototype.save = function (entity){
     var id = this.storage.addData(entity["attrs"]);
     entity.giveId(id);
     return entity;
+}
+
+BaseRepository.prototype.getFile = function (){
+    return this.storage.getFile();
 }
 
 BaseRepository.prototype.getById = function (id){ //смысл вытаскивать сущность по сущности??? все же по id отдельно может понадобится
@@ -30,6 +34,7 @@ BaseRepository.prototype.search = function (key, value){
 }
 
 BaseRepository.prototype.showAll = function (){
+    //возвращает чисто данные, без методов. где создаются именно entity? в скрипте? выше?
     var arr = this.storage.getAll();
     return arr;
 }

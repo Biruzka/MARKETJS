@@ -4,13 +4,15 @@
   app.controller("StoreController", ['$http',function($http) {
     var store = this;
     store.products=[];
-    $http.get('/products.json').success(function(data){
+    alert(repositoryProduct.getFile());
+    $http.get(repositoryProduct.getFile()).success(function(data){
       store.products = data;
     });
 
     this.addPro = function (product) {
       this.products.push(product);
-    }
+
+    } //временно хранить и потом только скопом отправлять данные, когда-нибудь через ProductController Shop и т д
 
   }]);
 
@@ -18,7 +20,9 @@
     this.review = {};
 
     this.addReview = function(product) {
-      //проверяем существует ли свойство reviews - если не т добавляем
+      //проверяем существует ли свойство reviews - если нет добавляем
+      alert("HERE");
+          alert(repositoryProduct.getFile());
       product.reviews.push(this.review);
       this.review = {};
     };
@@ -27,11 +31,13 @@
 
   app.controller("ProductController", function() {
     this.product = {};
-    this.add = function() {
-            alert("добавил и увидел");
+
+    this.addProduct = function() {
+      alert("добавил и увидел");
       var prod = new ProductEntity({review: [],name: this.product.name, owner: 1, count: this.product.count, price: this.product.price, image: this.product.image, description: this.product.descroption});
       prod = repositoryProduct.save(product);
-            alert("добавил и увидел2");
+      //и где-то внутри преобразую в json
+      alert("добавил и увидел2");
       this.product = {};
     };
 

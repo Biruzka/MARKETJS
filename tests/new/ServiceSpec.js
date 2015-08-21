@@ -33,4 +33,6 @@ describe("BuyService", function () {
         expect(beforeCount>afterCount).toEqual(true);
     });
 
+    console.log(repositoryProduct.getFile());
+
 });

@@ -3,7 +3,7 @@ var ShopRepository = (function () {
 
   extendClass(ShopRepository, BaseRepository);
 
-  function ShopRepository() {
+  function ShopRepository(jsonFile) {
         ShopRepository.superclass.apply(this, arguments);
   }
 

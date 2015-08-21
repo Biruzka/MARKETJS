@@ -1,13 +1,25 @@
 
- function Storage2() {
+ function Storage2(jsonFile) {
   this._ListOfData = {}; //в нем таблицы сущностей // внутри свойства: имя - id, а под ними data
   this._idCounter = makeId();
+  this._file = jsonFile;
+  // var fso, f1;
+  // fso = new ActiveXObject("Scripting.FileSystemObject");
+  // this._file = fso.CreateTextFile("c:\\testfile.txt", true);
+  //но! как создавать автоматически этот файл, с названием нового объекта репозитория, отправляя в конструктор
 };
+
+Storage2.prototype.getFile = function() {
+  return this._file;
+}
 
 Storage2.prototype.addData = function(data) {
   var data = data;
   var id = this._idCounter();
   this._ListOfData[id] = data;
+  data['id'] = id;
+  //add to this._file
+  var json = JSON.stringify(data); //пока только вид какой надо
   return id;
 }
 

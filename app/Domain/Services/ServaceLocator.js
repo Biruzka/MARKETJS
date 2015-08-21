@@ -1,6 +1,6 @@
 var BuyingService = new BuyingService();
 var repositoryShop = new ShopRepository();
-var repositoryProduct = new ProductRepository();
+var repositoryProduct = new ProductRepository('/products.json');
 var repositoryCustomer = new CustomerRepository();
 var repositoryOrder = new OrderRepository();
 
