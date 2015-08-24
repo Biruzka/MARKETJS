@@ -1,28 +1,28 @@
 (function() {
-var app = angular.module('store-products',[]);
+var app = angular.module('products',[]);
 
- app.directive('productPanels', function(){
-    return{
-      restrict:'E',
-      templateUrl:'../presenters/product-panels.html',
-      controller: function () {
+ // app.directive('productPanels', function(){
+ //    return{
+ //      restrict:'E',
+ //      templateUrl:'../presenters/product-panels.html',
+ //      controller: function () {
 
-          this.tab=1;
+ //          this.tab=1;
 
-          this.selectTab = function(setTab) {
-          this.tab = setTab;
-          };
+ //          this.selectTab = function(setTab) {
+ //          this.tab = setTab;
+ //          };
 
-          this.isSelected = function (setTab) {
-          return setTab === this.tab;
-          }
+ //          this.isSelected = function (setTab) {
+ //          return setTab === this.tab;
+ //          }
 
-      },
-      controllerAs:'panel',
-    }
+ //      },
+ //      controllerAs:'panel',
+ //    }
 
 
-  });
+ //  });
 
   app.directive('productTitle', function() {
     return {

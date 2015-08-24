@@ -7,6 +7,8 @@ describe("BuyService", function () {
 
         shop = new ShopEntity({name: "MEGA"}); //создаем сущность
         shop = repositoryShop.save(shop);
+        console.log(shop);
+        console.log("here");
 
 
         product = new ProductEntity({name: 'Teddy', owner: 1, count: '1'});
@@ -32,7 +34,5 @@ describe("BuyService", function () {
     it ('should reduce count of product', function () {
         expect(beforeCount>afterCount).toEqual(true);
     });
-
-    console.log(repositoryProduct.getFile());
 
 });

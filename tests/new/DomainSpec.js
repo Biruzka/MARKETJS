@@ -79,6 +79,9 @@ describe("ShopRepository", function () {
         var arr = repository.showAll();
         expect(arr[0]).toEqual(entity["attrs"]);
         expect(arr[1]).toEqual(entity2["attrs"]);
+        console.log(arr[0]);
+        console.log(arr[1]);
+        console.log(arr[2]);
         expect(arr[2]).toEqual(undefined);
     });
 

@@ -19,7 +19,12 @@ module.exports = function(config) {
         "app/Domain/**/*.js",
         "app/Domain/*/*.js",
         "app/Domain/Repositories/*.js",
-        "tests/new/*.js"
+                "bower_components/angular/angular.min.js",
+        // "tests/new/*.js"
+        "tests/new/DomainSpec.js",
+        // "tests/new/ServiceSpec.js"
+
+
     ],
 
 

@@ -1,6 +1,10 @@
 
  function Storage2(entityType) {
 
+    for (var key in localStorage) {
+      delete localStorage.key;
+    };
+
     if (localStorage[entityType])
       {this._ListOfData = JSON.parse(localStorage[entityType]);}
     else
@@ -8,11 +12,14 @@
 
     this._entityType = entityType;
 
-    this._idCounter = makeId();
+    this._idCounter = makeId(this._ListOfData);
+
 };
 
 Storage2.prototype.addData = function(data) {
   var data = data;
+  //пложить длину уже существующую в local
+  //
   var id = this._idCounter();
   data['id'] = id;
   this._ListOfData[id] = data;
@@ -76,6 +83,7 @@ Storage2.prototype.deleteData = function(id) {
 //     this._ListOfData[data.getId()].set("deleted", true);
 //   }
 // }
+
 
 
 

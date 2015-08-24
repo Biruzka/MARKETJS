@@ -7,10 +7,6 @@ BaseRepository.prototype.save = function (entity){
     return entity;
 }
 
-BaseRepository.prototype.getFile = function (){
-    return this.storage.getFile();
-}
-
 BaseRepository.prototype.getById = function (id){ //смысл вытаскивать сущность по сущности??? все же по id отдельно может понадобится
     return this.storage.getData(id);
 }
