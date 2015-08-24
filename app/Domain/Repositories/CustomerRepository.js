@@ -3,8 +3,8 @@ var CustomerRepository = (function () {
 
   extendClass(CustomerRepository, BaseRepository);
 
-  function CustomerRepository(jsonFile) {
-        CustomerRepository.superclass.apply(this, arguments);
+  function CustomerRepository() {
+        this.storage = new Storage2("customer");
   }
 
   return CustomerRepository;

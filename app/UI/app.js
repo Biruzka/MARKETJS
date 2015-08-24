@@ -1,20 +1,60 @@
-(function(){
-  var app = angular.module('store', [ 'store-products']);
+  'use strict';
 
-  app.controller("StoreController", ['$http',function($http) {
-    var store = this;
-    store.products=[];
-    alert(repositoryProduct.getFile());
-    $http.get(repositoryProduct.getFile()).success(function(data){
-      store.products = data;
-    });
+var app = angular.module('app', [
+  'ngRoute',
+  'appControllers'
+]);
 
-    this.addPro = function (product) {
-      this.products.push(product);
-
-    } //временно хранить и потом только скопом отправлять данные, когда-нибудь через ProductController Shop и т д
-
+app.config(['$routeProvider',
+  function($routeProvider) {
+    $routeProvider.
+      when('/products', {
+        templateUrl: 'presenters/products-list.html',
+        controller: 'ProductController'
+      }).
+      when('/products/:phoneId', {
+        templateUrl: 'presenters/product-detail.html',
+        controller: 'ProductDetailController'
+      }).
+      otherwise({
+        redirectTo: '/products'
+      });
   }]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   app.controller("ReviewController", function() {
     this.review = {};
@@ -42,8 +82,6 @@
     };
 
   });
-
-
 
   // app.controller("PanelController", function() {
 

@@ -3,8 +3,8 @@ var OrderRepository = (function () {
 
   extendClass(OrderRepository, BaseRepository);
 
-  function OrderRepository(jsonFile) {
-        OrderRepository.superclass.apply(this, arguments);
+  function OrderRepository() {
+    this.storage = new Storage2("order");
   }
 
   return OrderRepository;

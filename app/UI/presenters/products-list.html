@@ -1,0 +1,15 @@
+<div class = "center">
+
+    <div class="list-group-item" ng-repeat="product in products | orderBy:'-price'"  >
+        <div ng-hide="product.soldOut">
+
+            <product-title>
+            </product-title>
+
+            <product-panels>
+            </product-panels>
+
+            <button ng-show = "product.canOrdered">Заказать</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<form name="productForm"
+
+    ng-submit="addProduct()" novalidate>
+       <!-- здесь не должно быть логики -->
+    <p>Добавить новый продукт: </p>
+
+    <blockquote>
+        <p>Название: {{productCtrl.product.name}}  </p>
+        <p>Цена: {{productCtrl.product.price}}<p>
+        <p>Картинка: {{productCtrl.product.image}}<p>
+        <p>Количество на складе: {{productCtrl.product.count}}<p>
+        <p>Описание: {{productCtrl.product.description}}<p>
+    </blockquote>
+    <br>
+    <label for="name">Название  </label><br>
+    <input name="name" ng-model="productCtrl.product.name" type="text" required/>
+    <br><br>
+    <label for="name">Цена  </label><br>
+    <input name="price" ng-model="productCtrl.product.price" type="number" required/>
+    <br><br>
+    <label for="name">Адрес изображения  </label><br>
+    <input name="image" ng-model="productCtrl.product.image" type="url" required/>
+    <br><br>
+    <label for="name">Количество на складе  </label><br>
+    <input name="count" ng-model="productCtrl.product.count" type="number" required/>
+    <br><br>
+    <label for="name">Описание  </label><br>
+    <textarea name="description" ng-model="productCtrl.product.description" required></textarea>
+    <div> productForm is {{productForm.$valid}}</div>
+    <input type="submit" value="Submit" />
+
+</form>

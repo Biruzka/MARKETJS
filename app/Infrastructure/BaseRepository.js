@@ -1,5 +1,4 @@
-function BaseRepository(arg) {
-    this.storage = new Storage2(arguments[0]);
+function BaseRepository() {
 };
 
 BaseRepository.prototype.save = function (entity){

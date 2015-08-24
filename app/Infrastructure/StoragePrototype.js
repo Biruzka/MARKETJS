@@ -1,25 +1,22 @@
 
- function Storage2(jsonFile) {
-  this._ListOfData = {}; //в нем таблицы сущностей // внутри свойства: имя - id, а под ними data
-  this._idCounter = makeId();
-  this._file = jsonFile;
-  // var fso, f1;
-  // fso = new ActiveXObject("Scripting.FileSystemObject");
-  // this._file = fso.CreateTextFile("c:\\testfile.txt", true);
-  //но! как создавать автоматически этот файл, с названием нового объекта репозитория, отправляя в конструктор
-};
+ function Storage2(entityType) {
 
-Storage2.prototype.getFile = function() {
-  return this._file;
-}
+    if (localStorage[entityType])
+      {this._ListOfData = JSON.parse(localStorage[entityType]);}
+    else
+      {this._ListOfData = {};}
+
+    this._entityType = entityType;
+
+    this._idCounter = makeId();
+};
 
 Storage2.prototype.addData = function(data) {
   var data = data;
   var id = this._idCounter();
-  this._ListOfData[id] = data;
   data['id'] = id;
-  //add to this._file
-  var json = JSON.stringify(data); //пока только вид какой надо
+  this._ListOfData[id] = data;
+  localStorage.setItem(this._entityType, angular.toJson(this._ListOfData));
   return id;
 }
 
@@ -65,6 +62,7 @@ Storage2.prototype.search = function(key, value) {
 
 Storage2.prototype.updateData = function(id, data) {
   this._ListOfData[id] = data;
+  localStorage.setItem(this._entityType, angular.toJson(this._ListOfData));
 }
 
 Storage2.prototype.deleteData = function(id) {
