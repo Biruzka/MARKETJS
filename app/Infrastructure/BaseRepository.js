@@ -20,6 +20,7 @@ BaseRepository.prototype.update = function (entity){
 // }
 
 BaseRepository.prototype.delete = function (entity){
+    alert(entity.getId());
     this.storage.deleteData(entity.getId());
 }
 

@@ -1,11 +1,15 @@
 <div>
-     <a href="#/products/add_product">Добавить продукт</a>
+    <br>
+    <div class="list">
+     <a href="#/products/add_product">  Добавить продукт</a>
+    </div>
      <br>
-    <div ng-repeat="product in products" >
+    <div class="list" ng-repeat="product in products" >
         <br>
         <product-title> </product-title>
 
-        <button>Заказать</button>
+
+        <button ng-click="deleteProduct(product)">Удалить</button>
     </div>
 
 </div>

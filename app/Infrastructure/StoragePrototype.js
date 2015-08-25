@@ -74,6 +74,7 @@ Storage2.prototype.updateData = function(id, data) {
 
 Storage2.prototype.deleteData = function(id) {
   delete this._ListOfData[id];
+  localStorage.setItem(this._entityType, angular.toJson(this._ListOfData));
 }
 
 // Storage2.prototype.deleteDataFantomly = function(data) {//добавляем элементу свойство удалено, но не удаляем, лишь помечаем
