@@ -1,6 +1,7 @@
 
 var app = angular.module('app', ['ngRoute', 'products']);
 
+
 app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
@@ -8,7 +9,7 @@ app.config(['$routeProvider',
         templateUrl: 'app/UI/directives/products/products-list.html',
         controller: 'ProductsList'
       }).
-      when('/products/addProduct', {
+      when('/products/add_product', {
         templateUrl: 'app/UI/directives/products/product-form.html',
         controller: 'ProductForm'
       }).

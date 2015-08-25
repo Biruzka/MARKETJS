@@ -1,6 +1,6 @@
 <form name="productForm"
 
-    ng-submit="addProduct()" novalidate>
+    ng-submit="addProduct(product)">
        <!-- здесь не должно быть логики -->
     <p>Добавить новый продукт: </p>
 
@@ -28,5 +28,7 @@
     <label for="name">Описание  </label><br>
     <textarea name="description" ng-model="product.description"></textarea>
     <input type="submit" value="Submit" />
+    <br>
+    <a href="#/products">Вернуться</a>
 
 </form>
