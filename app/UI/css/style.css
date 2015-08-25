@@ -2,6 +2,11 @@
 width:300px;
 }
 
+.list {
+    margin-left: 2pt;
+    margin-right: 30pt;
+}
+
 .name-product {
 font-size: 2em;
 }
