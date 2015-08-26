@@ -8,6 +8,12 @@ width:300px;
     width:300px;
 }
 
+.block-right {
+    left:300pt;
+    top:30pt;
+    position:absolute;
+}
+
 .name-product {
 font-size: 2em;
 }

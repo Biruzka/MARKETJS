@@ -2,6 +2,9 @@
 var productsApp = angular.module('products', []);
 
 
+//directives
+
+
 productsApp.directive('productTitle', function() {
     return {
       restrict: 'E',
@@ -9,7 +12,15 @@ productsApp.directive('productTitle', function() {
     };
   });
 
+productsApp.directive('titleMenu', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'app/UI/directives/products/title-menu.html'
+    };
+  });
 
+
+//controllers
 
 productsApp.controller("ProductsList", ['$scope', ProductsController]);
 
@@ -23,14 +34,46 @@ function ProductsController ($scope) {
    };
 };
 
+
 productsApp.controller("ProductForm", ['$scope', ProductForm]);
 
-function ProductForm ($scope) {
-    $scope.product = {};
+function ProductForm ($scope, $stateParams) {
+
+      $scope.product = {};
+
+      $scope.ValidationProductForm = function () {
+
+      var mess = '';
+
+      if ($scope.productForm.name === undefined) {
+        $scope.productForm.$valid=false;
+        mess+="name, ";
+      }
+      if ($scope.productForm.price === undefined) {
+        $scope.productForm.$valid=false;
+        mess+="price, ";
+      }
+      if ($scope.productForm.count === undefined) {
+        $scope.productForm.$valid=false;
+        mess+="count ";
+      }
+
+      if (!$scope.productForm.$valid) alert(mess+"обязательные поля для заполнения");
+
+      };
+
+
+     $scope.submitProductForm = function(product) {
+
+      ValidationProductForm();
+
+        if ($scope.productForm.$valid) {
+          $scope.addProduct(product);
+        }
+      };
+
+
     $scope.addProduct = function (product) {
-
-      if (ValidProduct(product)) {
-
         alert("hey, you add product!");
 
           var prod = new ProductEntity({name:product.name,
@@ -42,24 +85,8 @@ function ProductForm ($scope) {
           repositoryProduct.save(prod);
 
           $scope.product = {};
-      }
+
     };
-
-};
-
-function ValidProduct (product) {
-
-  try{
-        if(!product.name || !product.price || !product.count || !product.owner)
-          {throw new SyntaxError("Введите данные");
-          return false;}
-      }
-  catch(e){
-    if (e.message == "Введите данные")
-      {alert("Поля имя, цена и количество - обязательны");
-      return false;}
-  }
-  return true;
 
 };
 
