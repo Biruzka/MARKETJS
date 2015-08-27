@@ -18,19 +18,21 @@
     <input name="name" ng-model="product.name" type="text"/>
     <br><br>
     <label for="name">Цена  </label><br>
-    <input name="price" ng-model="product.price" type="number"/>
+    <input name="price" ng-model="product.price" />
+    <label ng-show ="!priceIsNum" class="error-mess"> в поле должно быть введено числовое значение</label>
     <br><br>
     <label for="name">Адрес изображения  </label><br>
     <input name="image" ng-model="product.image" type="url"/>
     <br><br>
     <label for="name">Количество на складе  </label><br>
-    <input name="count" ng-model="product.count" type="number"/>
+    <input name="count" ng-model="product.count" />
+    <label ng-show ="!countIsNum" class="error-mess"> в поле должно быть введено числовое значение</label>
     <br><br>
     <label for="name">Описание  </label><br>
     <textarea name="description" ng-model="product.description"></textarea>
     <input type="submit" value="Submit" />
     <br>
-    <a href="#/products">Вернуться</a>
+    <a href="#/products">Скрыть</a>
 
 </form>
 
