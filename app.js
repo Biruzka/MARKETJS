@@ -5,8 +5,17 @@ app.config(function($stateProvider, $urlRouterProvider){
   $stateProvider
     .state('products', {
       url:'/products',
-      templateUrl: 'app/UI/directives/products/templates/products-list.html',
-      controller: 'ProductsList'
+      controller: function ($scope, products) {
+        $scope.products = products;
+      },
+      template: '<products-list products="products" />',
+      resolve: {
+
+        products: function (Product) {
+          return Product.load();
+
+        }
+      }
     })
     .state('products.form', {
       url:'/form',
@@ -15,7 +24,6 @@ app.config(function($stateProvider, $urlRouterProvider){
     })
   ;
 })
-
 
 
 

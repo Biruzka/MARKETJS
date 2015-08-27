@@ -19,6 +19,10 @@ productsApp.directive('titleMenu', function () {
   };
 });
 
+//директива для list
+//папки с директива+контроллер+шаблон
+scope: {products: '=list'}
+ctrl     $scope.products
 
 //controllers
 
@@ -33,7 +37,7 @@ function ProductsController ($scope) {
     $scope.products = repositoryProduct.showAll();
     alert("here");
   }
-  $scope.products = repositoryProduct.showAll();
+  $scope.products = repositoryProduct.All();
 
   $scope.deleteProduct = function (product) {
     var entityProduct = repositoryProduct.getById(product.id);
@@ -50,60 +54,40 @@ productsApp.controller("ProductsList", ['$scope', ProductsController]);
 
 //контроллер для создания товара, формы товара
 
-function ProductForm ($scope, $stateParams, $route) {
+function ProductForm ($scope) {
 
-  $scope.product = {};
-  $scope.priceIsNum = true;
-  $scope.countIsNum = true;
+  var setupValidators = function (form) {
 
-  $scope.isNumeric = function (n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
-  }
+    form.price.$validators.number = function (value) {
+      return /^\d+$/.test(value);
+    };
 
-  $scope.ValidationProductForm = function () {
+    form.price.$validators.required = function (value) {
+      return value !== '' && value != null;
+    };
 
-  var mess = '';
-  $scope.productForm.$valid=true;
+    form.name.$validators.required = function (value) {
+      return value !== '' && value != null;
+    };
 
-  if ($scope.product.name === undefined) {
-    $scope.productForm.$valid=false;
-    mess+="name, ";
-  }
-  if ($scope.product.price === undefined) {
-    $scope.productForm.$valid=false;
-    mess+="price, ";
-  }
-  else {
-    if (!$scope.isNumeric($scope.product.price)) {
-      $scope.priceIsNum = false;
-      $scope.productForm.$valid=false;
-    }
-    else $scope.priceIsNum = true;
-  }
-
-  if ($scope.product.count === undefined) {
-    $scope.productForm.$valid=false;
-    mess+="count ";
-  }
-  else {
-    if (!$scope.isNumeric($scope.product.count)) {
-      $scope.countIsNum = false;
-      $scope.productForm.$valid=false;
-    }
-    else $scope.countIsNum = true;
-  }
-
-  if (!$scope.productForm.$valid) alert(mess+"обязательные поля для заполнения");
+    form.name.$validators.length = function (value) {
+      return value.length > 3;
+    };
 
   };
 
+  $scope.$watch('productForm', setupValidators);
 
-  $scope.submitProductForm = function (product) {
+  $scope.product = {};
 
-    $scope.ValidationProductForm();
+  $scope.submit = function (event) {
+    event.preventDefault();
 
     if ($scope.productForm.$valid) {
-      $scope.addProduct(product);
+      $scope.addProduct($scope.product);
+    }
+    else {
+      console.error('Form invalid');
     }
   };
 
@@ -118,19 +102,9 @@ function ProductForm ($scope, $stateParams, $route) {
                           image:product.image,
                           owner:0});
     repositoryProduct.save(prod);
-
-    $scope.product = {};
-    $route.reload();
   };
 
 };
 
 productsApp.controller("ProductForm", ['$scope', ProductForm]);
-
-
-
-
-
-
-
 
