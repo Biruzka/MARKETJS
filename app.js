@@ -1,3 +1,11 @@
+var angular = require('angular');
+var marketApp = require('./app/UI/market/index.js');
+
+var app = angular.module('app', [
+    marketApp.name
+]);
+
+
 
 var app = angular.module('app', ['products', 'ui.router']);
 
