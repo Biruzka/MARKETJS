@@ -21,6 +21,7 @@ productsApp.directive('titleMenu', function () {
 
 //директива для list
 //папки с директива+контроллер+шаблон
+//директива - компонент, замыкающий функциональность
 scope: {products: '=list'}
 ctrl     $scope.products
 
