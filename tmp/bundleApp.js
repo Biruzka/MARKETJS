@@ -31,6 +31,10 @@ var CustomerEntity = (function () {
 
   return CustomerEntity;
 }());
+
+module.exports = function(app) {
+   app.CustomerEntity;
+};
 },{}],3:[function(require,module,exports){
 var ProductEntity = (function () {
     'use strict';
@@ -54,7 +58,9 @@ var ProductEntity = (function () {
 
     return ProductEntity;
 }());
-
+module.exports = function(app) {
+   app.ProductEntity;
+};
 
 // ProductEntity.nameAttribute = 'name';
 
@@ -91,6 +97,10 @@ var ShopEntity = (function () {
   return ShopEntity;
 }());
 
+module.exports = function(app) {
+   app.ShopEntity;
+};
+
 
 },{}],5:[function(require,module,exports){
 var CustomerRepository = (function () {
@@ -105,6 +115,9 @@ var CustomerRepository = (function () {
   return CustomerRepository;
 }());
 
+module.exports = function(app) {
+   app.CustomerRepository;
+};
 
 
 },{}],6:[function(require,module,exports){
@@ -121,7 +134,9 @@ var OrderRepository = (function () {
 }());
 
 
-
+module.exports = function(app) {
+   app.OrderRepository;
+};
 },{}],7:[function(require,module,exports){
 var ProductRepository = (function () {
   'use strict';
@@ -135,7 +150,9 @@ var ProductRepository = (function () {
   return ProductRepository;
 }());
 
-
+module.exports = function(app) {
+   app.ProductRepository;
+};
 
 },{}],8:[function(require,module,exports){
 var ShopRepository = (function () {
@@ -150,7 +167,9 @@ var ShopRepository = (function () {
   return ShopRepository;
 }());
 
-
+module.exports = function(app) {
+   app.ShopRepository;
+};
 },{}],9:[function(require,module,exports){
 var BuyingService = function(orderId) {
 }
@@ -195,6 +214,10 @@ BuyingService.prototype = {
 
     }
 }
+
+module.exports = function(app) {
+   app.BuyingService;
+};
 
 
 
@@ -243,6 +266,10 @@ BaseEntity.prototype.get = function (key) {
 BaseEntity.prototype.set = function (key, value) {
     return this.attrs[key] = value;
 };
+
+module.exports = function(app) {
+   app.BaseEntity;
+};
 },{}],12:[function(require,module,exports){
 function BaseRepository() {
 };
@@ -280,6 +307,10 @@ BaseRepository.prototype.loadAllData = function (){
     var arr = this.storage.getAll();
     return arr;
 }
+
+module.exports = function(app) {
+   app.BaseRepository;
+};
 
 
 
@@ -371,6 +402,10 @@ Storage2.prototype.deleteData = function(id) {
 //   }
 // }
 
+module.exports = function(app) {
+   app.Storage2;
+};
+
 
 
 
@@ -381,6 +416,13 @@ Storage2.prototype.deleteData = function(id) {
 
 
 },{}],14:[function(require,module,exports){
+module.exports = function(app) {
+   app.extendClass;
+   app.makeId;
+   app.BuyingService;
+   app.Service;
+};
+
 function extendClass (Child, Parent) {
 
     Child.prototype = Object.create(Parent.prototype);
@@ -452,6 +494,7 @@ var Service = {
     }
 
 }
+
 
 
 

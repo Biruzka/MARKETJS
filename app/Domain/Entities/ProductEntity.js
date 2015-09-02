@@ -20,7 +20,9 @@ var ProductEntity = (function () {
 
     return ProductEntity;
 }());
-
+module.exports = function(app) {
+   app.ProductEntity;
+};
 
 // ProductEntity.nameAttribute = 'name';
 

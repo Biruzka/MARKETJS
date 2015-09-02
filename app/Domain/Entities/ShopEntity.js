@@ -18,3 +18,7 @@ var ShopEntity = (function () {
   return ShopEntity;
 }());
 
+module.exports = function(app) {
+   app.ShopEntity;
+};
+

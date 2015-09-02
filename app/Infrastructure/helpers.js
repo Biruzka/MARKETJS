@@ -1,3 +1,10 @@
+module.exports = function(app) {
+   app.extendClass;
+   app.makeId;
+   app.BuyingService;
+   app.Service;
+};
+
 function extendClass (Child, Parent) {
 
     Child.prototype = Object.create(Parent.prototype);
@@ -69,5 +76,6 @@ var Service = {
     }
 
 }
+
 
 

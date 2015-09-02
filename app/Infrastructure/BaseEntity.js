@@ -21,3 +21,7 @@ BaseEntity.prototype.get = function (key) {
 BaseEntity.prototype.set = function (key, value) {
     return this.attrs[key] = value;
 };
+
+module.exports = function(app) {
+   app.BaseEntity;
+};

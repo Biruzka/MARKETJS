@@ -11,3 +11,7 @@ var CustomerEntity = (function () {
 
   return CustomerEntity;
 }());
+
+module.exports = function(app) {
+   app.CustomerEntity;
+};

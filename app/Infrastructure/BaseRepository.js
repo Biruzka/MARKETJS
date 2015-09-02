@@ -35,4 +35,8 @@ BaseRepository.prototype.loadAllData = function (){
     return arr;
 }
 
+module.exports = function(app) {
+   app.BaseRepository;
+};
+
 

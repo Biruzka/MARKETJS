@@ -85,6 +85,10 @@ Storage2.prototype.deleteData = function(id) {
 //   }
 // }
 
+module.exports = function(app) {
+   app.Storage2;
+};
+
 
 
 
