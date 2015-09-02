@@ -7,11 +7,12 @@
     "test": "tests"
   },
   "dependencies": {
-    "karma": "^0.13.3",
+    "angular-ui-router": "^0.2.15",
     "jasmine-core": "^2.3.4",
+    "karma": "^0.13.3",
     "karma-jasmine": "^0.3.6",
-    "phantomjs": "^1.9.17",
-    "karma-phantomjs-launcher": "^0.2.0"
+    "karma-phantomjs-launcher": "^0.2.0",
+    "phantomjs": "^1.9.17"
   },
   "devDependencies": {},
   "scripts": {

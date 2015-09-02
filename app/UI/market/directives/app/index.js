@@ -3,9 +3,8 @@ module.exports = function(app) {
         return {
             restrict: 'E',
             scope: {
-            	products:"="
+                products:"="
             },
-            controller: require('./controller.js'),
             template: require('./view.html')
         };
     });
