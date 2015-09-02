@@ -7,7 +7,7 @@ require('angular-ui-router');
 
 var app = angular.module('app', [
     'ui.router',
-    marketApp.name, infrastructure.name, domain.name
+    marketApp.name
 ]);
 
 
@@ -32,9 +32,8 @@ var CustomerEntity = (function () {
   return CustomerEntity;
 }());
 
-module.exports = function(app) {
-   app.CustomerEntity;
-};
+module.exports = CustomerEntity;
+
 },{}],3:[function(require,module,exports){
 var ProductEntity = (function () {
     'use strict';
@@ -58,9 +57,8 @@ var ProductEntity = (function () {
 
     return ProductEntity;
 }());
-module.exports = function(app) {
-   app.ProductEntity;
-};
+module.exports = ProductEntity;
+
 
 // ProductEntity.nameAttribute = 'name';
 
@@ -97,9 +95,8 @@ var ShopEntity = (function () {
   return ShopEntity;
 }());
 
-module.exports = function(app) {
-   app.ShopEntity;
-};
+module.exports = ShopEntity;
+
 
 
 },{}],5:[function(require,module,exports){
@@ -115,9 +112,8 @@ var CustomerRepository = (function () {
   return CustomerRepository;
 }());
 
-module.exports = function(app) {
-   app.CustomerRepository;
-};
+module.exports = CustomerRepository;
+
 
 
 },{}],6:[function(require,module,exports){
@@ -134,9 +130,8 @@ var OrderRepository = (function () {
 }());
 
 
-module.exports = function(app) {
-   app.OrderRepository;
-};
+module.exports = OrderRepository;
+
 },{}],7:[function(require,module,exports){
 var ProductRepository = (function () {
   'use strict';
@@ -150,9 +145,8 @@ var ProductRepository = (function () {
   return ProductRepository;
 }());
 
-module.exports = function(app) {
-   app.ProductRepository;
-};
+module.exports = ProductRepository;
+
 
 },{}],8:[function(require,module,exports){
 var ShopRepository = (function () {
@@ -167,9 +161,8 @@ var ShopRepository = (function () {
   return ShopRepository;
 }());
 
-module.exports = function(app) {
-   app.ShopRepository;
-};
+module.exports = ShopRepository;
+
 },{}],9:[function(require,module,exports){
 var BuyingService = function(orderId) {
 }
@@ -215,9 +208,8 @@ BuyingService.prototype = {
     }
 }
 
-module.exports = function(app) {
-   app.BuyingService;
-};
+module.exports = BuyingService;
+
 
 
 
@@ -267,9 +259,8 @@ BaseEntity.prototype.set = function (key, value) {
     return this.attrs[key] = value;
 };
 
-module.exports = function(app) {
-   app.BaseEntity;
-};
+module.exports = BaseEntity;
+
 },{}],12:[function(require,module,exports){
 function BaseRepository() {
 };
@@ -308,9 +299,8 @@ BaseRepository.prototype.loadAllData = function (){
     return arr;
 }
 
-module.exports = function(app) {
-   app.BaseRepository;
-};
+module.exports = BaseRepository;
+
 
 
 
@@ -402,9 +392,8 @@ Storage2.prototype.deleteData = function(id) {
 //   }
 // }
 
-module.exports = function(app) {
-   app.Storage2;
-};
+module.exports = Storage2;
+
 
 
 
@@ -416,12 +405,7 @@ module.exports = function(app) {
 
 
 },{}],14:[function(require,module,exports){
-module.exports = function(app) {
-   app.extendClass;
-   app.makeId;
-   app.BuyingService;
-   app.Service;
-};
+module.exports = extendClass, makeId;
 
 function extendClass (Child, Parent) {
 
@@ -464,36 +448,36 @@ function makeId(ListOfData) {
 }
 
 
-var BuyingService = new BuyingService();
+// var BuyingService = new BuyingService();
 
-var Service = {
+// var Service = {
 
-    ProductstoOrderEnough: function (order, product) {
-        return (product.get("count") -  order.get("count") >= 0);
-    },
+//     ProductstoOrderEnough: function (order, product) {
+//         return (product.get("count") -  order.get("count") >= 0);
+//     },
 
-    putProducttoShop: function (productEn,shopEn){
-        productEn.bindShop(shopEn);
-        ProductRepository.update(productEn);
-    },
+//     putProducttoShop: function (productEn,shopEn){
+//         productEn.bindShop(shopEn);
+//         ProductRepository.update(productEn);
+//     },
 
-    getAllProductsOfShop: function (shopEn) {
-        var arr = [];
-        arr = productRepository.search(owner,shopEn.getId());
-        return arr;
-    },
+//     getAllProductsOfShop: function (shopEn) {
+//         var arr = [];
+//         arr = productRepository.search(owner,shopEn.getId());
+//         return arr;
+//     },
 
-    buy: function (order) {
-        try {
-            BuyingService.buy(order); //сущность
-        }
-        catch (e) {
-            console.log(e);
-        }
+//     buy: function (order) {
+//         try {
+//             BuyingService.buy(order); //сущность
+//         }
+//         catch (e) {
+//             console.log(e);
+//         }
 
-    }
+//     }
 
-}
+// }
 
 
 
@@ -507,12 +491,9 @@ module.exports = function(app) {
 };
 },{"./BaseEntity.js":11,"./BaseRepository.js":12,"./StoragePrototype.js":13,"./helpers.js":14}],16:[function(require,module,exports){
 module.exports = function(app) {
-    app.directive('productList', function() {
+    app.directive('app', function() {
         return {
             restrict: 'E',
-            scope: {
-                products:"="
-            },
             template: require('./view.html')
         };
     });
@@ -645,6 +626,8 @@ module.exports = function (app) {
 
     app.config(function($stateProvider, $urlRouterProvider){
       $stateProvider
+
+
         .state('products', {
           url:'/products',
           controller: function ($scope, products) {

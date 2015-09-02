@@ -11,6 +11,4 @@ var OrderRepository = (function () {
 }());
 
 
-module.exports = function(app) {
-   app.OrderRepository;
-};
+module.exports = OrderRepository;

@@ -1,10 +1,7 @@
 module.exports = function(app) {
-    app.directive('productList', function() {
+    app.directive('app', function() {
         return {
             restrict: 'E',
-            scope: {
-                products:"="
-            },
             template: require('./view.html')
         };
     });

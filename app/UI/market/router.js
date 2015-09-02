@@ -2,6 +2,8 @@ module.exports = function (app) {
 
     app.config(function($stateProvider, $urlRouterProvider){
       $stateProvider
+
+
         .state('products', {
           url:'/products',
           controller: function ($scope, products) {

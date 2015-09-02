@@ -1,9 +1,4 @@
-module.exports = function(app) {
-   app.extendClass;
-   app.makeId;
-   app.BuyingService;
-   app.Service;
-};
+module.exports = extendClass, makeId;
 
 function extendClass (Child, Parent) {
 
@@ -46,36 +41,36 @@ function makeId(ListOfData) {
 }
 
 
-var BuyingService = new BuyingService();
+// var BuyingService = new BuyingService();
 
-var Service = {
+// var Service = {
 
-    ProductstoOrderEnough: function (order, product) {
-        return (product.get("count") -  order.get("count") >= 0);
-    },
+//     ProductstoOrderEnough: function (order, product) {
+//         return (product.get("count") -  order.get("count") >= 0);
+//     },
 
-    putProducttoShop: function (productEn,shopEn){
-        productEn.bindShop(shopEn);
-        ProductRepository.update(productEn);
-    },
+//     putProducttoShop: function (productEn,shopEn){
+//         productEn.bindShop(shopEn);
+//         ProductRepository.update(productEn);
+//     },
 
-    getAllProductsOfShop: function (shopEn) {
-        var arr = [];
-        arr = productRepository.search(owner,shopEn.getId());
-        return arr;
-    },
+//     getAllProductsOfShop: function (shopEn) {
+//         var arr = [];
+//         arr = productRepository.search(owner,shopEn.getId());
+//         return arr;
+//     },
 
-    buy: function (order) {
-        try {
-            BuyingService.buy(order); //сущность
-        }
-        catch (e) {
-            console.log(e);
-        }
+//     buy: function (order) {
+//         try {
+//             BuyingService.buy(order); //сущность
+//         }
+//         catch (e) {
+//             console.log(e);
+//         }
 
-    }
+//     }
 
-}
+// }
 
 
 

@@ -10,6 +10,5 @@ var ProductRepository = (function () {
   return ProductRepository;
 }());
 
-module.exports = function(app) {
-   app.ProductRepository;
-};
+module.exports = ProductRepository;
+

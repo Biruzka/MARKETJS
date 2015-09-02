@@ -42,9 +42,8 @@ BuyingService.prototype = {
     }
 }
 
-module.exports = function(app) {
-   app.BuyingService;
-};
+module.exports = BuyingService;
+
 
 
 

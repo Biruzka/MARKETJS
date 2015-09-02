@@ -10,6 +10,4 @@ var ShopRepository = (function () {
   return ShopRepository;
 }());
 
-module.exports = function(app) {
-   app.ShopRepository;
-};
+module.exports = ShopRepository;

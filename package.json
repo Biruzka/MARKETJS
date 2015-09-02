@@ -18,7 +18,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "http-server -a 0.0.0.0 -p 8000",
-    "build-js": "browserify index.js > tmp/bundleApp.js"
+    "build-js": "browserify index.js > tmp/bundleApp.js",
+    "watch": "watchifx.js -o tmp/bundleApp.js --verbose"
+
   },
   "browserify": {
     "transform": [

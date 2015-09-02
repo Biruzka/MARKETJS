@@ -20,6 +20,4 @@ var OrderEntity = (function () {
     return OrderEntity;
 }());
 
-module.exports = function(app) {
-   app.OrderEntity;
-};
+module.exports = OrderEntity;

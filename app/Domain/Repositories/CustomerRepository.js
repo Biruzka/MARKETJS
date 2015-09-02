@@ -10,7 +10,6 @@ var CustomerRepository = (function () {
   return CustomerRepository;
 }());
 
-module.exports = function(app) {
-   app.CustomerRepository;
-};
+module.exports = CustomerRepository;
+
 

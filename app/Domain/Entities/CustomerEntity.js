@@ -12,6 +12,4 @@ var CustomerEntity = (function () {
   return CustomerEntity;
 }());
 
-module.exports = function(app) {
-   app.CustomerEntity;
-};
+module.exports = CustomerEntity;
