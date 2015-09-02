@@ -1,19 +1,31 @@
 <div>
+
     <br>
+    
     <div class="list">
+     <a href="#/products/form">  Добавить продукт</a>
+    </div>
+    <br>
 
-        <a href="#/products/form"> Добавить продукт</a>
-        </div>
+    <div class="list" ng-repeat="product in products" >
+
         <br>
-        <div class="list" ng-repeat="product in products" >
-            <br>
+        
+        <div >
+		    <h1>{{product.name}}</h1>
+		    <br>
+		    <img width="300pt" ng-src="{{product.image}}">
+		    <div style="color:#ff0000" align="right">цена:  {{product.price | currency}} </div>
+		    <div style="color:#ff0000" align="right">количество:  {{product.count}}</div>
+		    <div style="color:#ff0000" align="right">id:  {{product.id}}</div>
+		    <div>{{product.description}}</div>
+		</div>
 
-            <product-title> </product-title>
-
-            <button ng-click="deleteProduct(product)">Удалить</button>
-        </div>
-
-    <!--     форма -->
-    <div class ="block-right" ui-view></div>
+        <button ng-click="deleteProduct(product)">Удалить</button>
+    </div>
+    
+<!--     форма -->
+<!--     <div class ="block-right" ui-view></div> -->
 
 </div>
+

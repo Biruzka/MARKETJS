@@ -29,7 +29,7 @@ BaseRepository.prototype.search = function (key, value){
     return arr;
 }
 
-BaseRepository.prototype.showAll = function (){
+BaseRepository.prototype.loadAllData = function (){
     //возвращает чисто данные, без методов. где создаются именно entity? в скрипте? выше?
     var arr = this.storage.getAll();
     return arr;

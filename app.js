@@ -1,37 +1,12 @@
-var angular = require('angular');
+var angular = require('./bower_components/angular');
 var marketApp = require('./app/UI/market/index.js');
+var infrastructure = require('./app/Infrastructure/index.js');
+var domain = require('./app/Domain/index.js');
 
 var app = angular.module('app', [
-    marketApp.name
+    marketApp.name, angular.name, infrastructure.name, domain.name
 ]);
 
-
-
-var app = angular.module('app', ['products', 'ui.router']);
-
-app.config(function($stateProvider, $urlRouterProvider){
-  $stateProvider
-    .state('products', {
-      url:'/products',
-      controller: function ($scope, products) {
-        $scope.products = products;
-      },
-      template: '<products-list products="products" />',
-      resolve: {
-
-        products: function (Product) {
-          return Product.load();
-
-        }
-      }
-    })
-    .state('products.form', {
-      url:'/form',
-      templateUrl: 'app/UI/directives/products/templates/product-form.html',
-      controller: 'ProductForm'
-    })
-  ;
-})
 
 
 

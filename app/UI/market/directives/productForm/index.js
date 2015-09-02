@@ -1,5 +1,5 @@
 module.exports = function(app) {
-    app.directive('productList', function() {
+    app.directive('producForm', function() {
         return {
             restrict: 'E',
             scope: {
@@ -7,6 +7,7 @@ module.exports = function(app) {
             },
             controller: require('./controller.js'),
             template: require('./view.html')
+
         };
     });
 };
