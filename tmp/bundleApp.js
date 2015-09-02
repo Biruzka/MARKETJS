@@ -586,7 +586,7 @@ module.exports = function(app) {
 
 
 },{"./controller.js":22,"./view.html":24}],24:[function(require,module,exports){
-module.exports = "<div>\n\n    <br>\n    \n    <div class=\"list\">\n     <a href=\"#/products/form\">  Добавить продукт</a>\n    </div>\n    <br>\n\n    <div class=\"list\" ng-repeat=\"product in products\" >\n\n        <br>\n        \n        <div >\n\t\t    <h1>{{product.name}}</h1>\n\t\t    <br>\n\t\t    <img width=\"300pt\" ng-src=\"{{product.image}}\">\n\t\t    <div style=\"color:#ff0000\" align=\"right\">цена:  {{product.price | currency}} </div>\n\t\t    <div style=\"color:#ff0000\" align=\"right\">количество:  {{product.count}}</div>\n\t\t    <div style=\"color:#ff0000\" align=\"right\">id:  {{product.id}}</div>\n\t\t    <div>{{product.description}}</div>\n\t\t</div>\n\n        <button ng-click=\"deleteProduct(product)\">Удалить</button>\n    </div>\n    \n<!--     форма -->\n<!--     <div class =\"block-right\" ui-view></div> -->\n\n</div>\n\n";
+module.exports = "<div>\n\n    <br>\n\n    <div class=\"list\">\n     <a href=\"#/products/form\">  Добавить продукт</a>\n    </div>\n    <br>\n\n    <div class=\"list\" ng-repeat=\"product in products\" >\n\n        <br>\n\n        <div >\n\t\t    <h1>{{product.name}}</h1>\n\t\t    <br>\n\t\t    <img width=\"300pt\" ng-src=\"{{product.image}}\">\n\t\t    <div style=\"color:#ff0000\" align=\"right\">цена:  {{product.price | currency}} </div>\n\t\t    <div style=\"color:#ff0000\" align=\"right\">количество:  {{product.count}}</div>\n\t\t    <div style=\"color:#ff0000\" align=\"right\">id:  {{product.id}}</div>\n\t\t    <div>{{product.description}}</div>\n\t\t</div>\n\n        <button ng-click=\"deleteProduct(product)\">Удалить</button>\n    </div>\n\n</div>\n\n";
 
 },{}],25:[function(require,module,exports){
 var angular = require('angular');
@@ -598,7 +598,7 @@ require('./directives/index.js')(app);
 module.exports = app;
 
 },{"./directives/index.js":18,"./router.js":26,"angular":30,"angular-ui-router":28}],26:[function(require,module,exports){
-gmodule.exports = function (app) {
+module.exports = function (app) {
 
     app.config(function($stateProvider, $urlRouterProvider){
       $stateProvider

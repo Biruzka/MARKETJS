@@ -1,4 +1,4 @@
-gmodule.exports = function (app) {
+module.exports = function (app) {
 
     app.config(function($stateProvider, $urlRouterProvider){
       $stateProvider
