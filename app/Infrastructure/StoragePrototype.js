@@ -1,4 +1,3 @@
-
  function Storage2(entityType) {
 
     for (var key in localStorage) {

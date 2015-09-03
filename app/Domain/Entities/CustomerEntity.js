@@ -1,7 +1,8 @@
+
 var CustomerEntity = (function () {
   'use strict';
 
-  extendClass(CustomerEntity, BaseEntity);
+    extendClass(CustomerEntity, BaseEntity);
 
   function CustomerEntity() {
      CustomerEntity.superclass.apply(this, arguments);
@@ -10,6 +11,9 @@ var CustomerEntity = (function () {
   CustomerEntity.idAttribute = 'id';
 
   return CustomerEntity;
+
+
 }());
+
 
 module.exports = CustomerEntity;

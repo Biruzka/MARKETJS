@@ -1,6 +1,5 @@
 var ProductEntity = (function () {
     'use strict';
-
     extendClass(ProductEntity, BaseEntity);
 
     function ProductEntity() {
