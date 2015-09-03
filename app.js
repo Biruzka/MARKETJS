@@ -10,6 +10,47 @@ var app = angular.module('app', [
 ]);
 
 
+// app.config(function($stateProvider, $urlRouterProvider){
+//   $stateProvider
+
+//     .state('app',{
+//       url:'/some',
+//       templateUrl:'index.html'
+//     })
+
+//       .state('ap',{
+//       url:'/app',
+//       templateUrl:'i.html'
+//     })
+
+//     .state('products', {
+//       url:'/products',
+//       controller: function ($scope, products) {
+//         $scope.products = products;
+//       },
+//       template: '<products-list products="products"></products-list>',
+//       resolve: {
+//         products: function () {
+//           return $scope.loadProductData();
+//         }
+//       }
+//     })
+
+//     .state('products.form', {
+//       url:'/form',
+//       template: '<product-form></product-form>',
+//     })
+// ;
+// })
+
+
+
+
+
+
+
+
+
 
 
 

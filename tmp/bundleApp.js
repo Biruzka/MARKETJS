@@ -11,13 +11,54 @@ var app = angular.module('app', [
 ]);
 
 
+// app.config(function($stateProvider, $urlRouterProvider){
+//   $stateProvider
+
+//     .state('app',{
+//       url:'/some',
+//       templateUrl:'index.html'
+//     })
+
+//       .state('ap',{
+//       url:'/app',
+//       templateUrl:'i.html'
+//     })
+
+//     .state('products', {
+//       url:'/products',
+//       controller: function ($scope, products) {
+//         $scope.products = products;
+//       },
+//       template: '<products-list products="products"></products-list>',
+//       resolve: {
+//         products: function () {
+//           return $scope.loadProductData();
+//         }
+//       }
+//     })
+
+//     .state('products.form', {
+//       url:'/form',
+//       template: '<product-form></product-form>',
+//     })
+// ;
+// })
 
 
 
 
 
 
-},{"./app/Domain/index.js":10,"./app/Infrastructure/index.js":15,"./app/UI/market/index.js":25,"angular":30,"angular-ui-router":28}],2:[function(require,module,exports){
+
+
+
+
+
+
+
+
+
+},{"./app/Domain/index.js":10,"./app/Infrastructure/index.js":15,"./app/UI/market/index.js":26,"angular":30,"angular-ui-router":28}],2:[function(require,module,exports){
 var CustomerEntity = (function () {
   'use strict';
 
@@ -490,6 +531,10 @@ module.exports = function(app) {
     require('./helpers.js')(app);
 };
 },{"./BaseEntity.js":11,"./BaseRepository.js":12,"./StoragePrototype.js":13,"./helpers.js":14}],16:[function(require,module,exports){
+
+var angular = require('angular');
+require('angular-ui-router');
+
 module.exports = function(app) {
     app.directive('app', function() {
         return {
@@ -497,20 +542,57 @@ module.exports = function(app) {
             template: require('./view.html')
         };
     });
+
+    require('./router.js')(app);
 };
 
 
-},{"./view.html":17}],17:[function(require,module,exports){
-module.exports = "\n<p>I'm market</p>\n<div ui-view></div>";
+
+
+
+
+
+},{"./router.js":17,"./view.html":18,"angular":30,"angular-ui-router":28}],17:[function(require,module,exports){
+
+ module.exports = function(app) {
+ app.config(function($stateProvider, $urlRouterProvider){
+      $stateProvider
+
+        .state('products', {
+          url:'/products',
+          // template:'джь',
+          templateUrl:'app/UI/market/directives/productList/view.html',
+          // controller: function ($scope, products) {
+          //   $scope.products = products;
+          // },
+          // template: '<products-list products="products"></products-list>some text',
+          // resolve: {
+          //   products: function () {
+          //     return $scope.loadProductData();
+          //   }
+          // }
+        })
+
+        .state('form', {
+          url:'/form',
+          // template: '<product-form></product-form>hey!',
+          template:'jfklemk',
+        })
+    ;
+    })
+};
+
 
 },{}],18:[function(require,module,exports){
+module.exports = "<p>I'm market</p>\n<a ui-sref=\"products\">Товары</a> | <a ui-sref=\"form\">Добавить товар</a>\n<div ui-view></div>\n\n";
+
+},{}],19:[function(require,module,exports){
 module.exports = function(app) {
+    require('./app/index.js')(app);
     require('./productList/index.js')(app);
     require('./productForm/index.js')(app);
-    require('./app/index.js')(app);
-
 };
-},{"./app/index.js":16,"./productForm/index.js":20,"./productList/index.js":23}],19:[function(require,module,exports){
+},{"./app/index.js":16,"./productForm/index.js":21,"./productList/index.js":24}],20:[function(require,module,exports){
 var Controller = function ($scope) {
 
   var setupValidators = function (form) {
@@ -562,13 +644,13 @@ var Controller = function ($scope) {
 
 module.exports = Controller;
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 module.exports = function(app) {
-    app.directive('producForm', function() {
+    app.directive('productForm', function() {
         return {
             restrict: 'E',
             scope: {
-            	products:"="
+            	product:"="
             },
             controller: require('./controller.js'),
             template: require('./view.html')
@@ -576,10 +658,10 @@ module.exports = function(app) {
         };
     });
 };
-},{"./controller.js":19,"./view.html":21}],21:[function(require,module,exports){
+},{"./controller.js":20,"./view.html":22}],22:[function(require,module,exports){
 module.exports = "<form name=\"productForm\" ng-submit=\"submit($event)\" novalidate class=\"list\">\n    <br>\n    <p>Добавить новый продукт: </p>\n     <p>{{hey}}</p>\n\n    <blockquote>\n        <p>Название: {{product.name}}  </p>\n        <p>Цена: {{product.price}}<p>\n        <p>Картинка: {{product.image}}<p>\n        <p>Количество на складе: {{product.count}}<p>\n        <p>Описание: {{product.description}}<p>\n    </blockquote>\n\n    <br>\n    <label for=\"name\">Название  </label><br>\n    <input name=\"name\" ng-model=\"product.name\" type=\"text\"/>\n    <br><br>\n    <label for=\"name\">Цена  </label><br>\n    <input name=\"price\" ng-model=\"product.price\" />\n    <!-- <label ng-show =\"!priceIsNum\" class=\"error-mess\"> в поле должно быть введено числовое значение</label> -->\n    <br><br>\n    <label for=\"name\">Адрес изображения  </label><br>\n    <input name=\"image\" ng-model=\"product.image\" type=\"url\"/>\n    <br><br>\n    <label for=\"name\">Количество на складе  </label><br>\n    <input name=\"count\" ng-model=\"product.count\" />\n    <br><br>\n    <label for=\"name\">Описание  </label><br>\n    <textarea name=\"description\" ng-model=\"product.description\"></textarea>\n    <input type=\"submit\" value=\"Submit\" />\n    <br>\n    <a href=\"#/products\">Скрыть</a>\n\n</form>\n\n\n\n";
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 var Controller = function ($scope) {
 
     $scope.deleteProduct = function (product) {
@@ -594,9 +676,9 @@ var Controller = function ($scope) {
 };
 
 module.exports = Controller;
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 module.exports = function(app) {
-    app.directive('productList', function() {
+    app.directive('productsList', function() {
         return {
             restrict: 'E',
             scope: {
@@ -609,52 +691,19 @@ module.exports = function(app) {
 };
 
 
-},{"./controller.js":22,"./view.html":24}],24:[function(require,module,exports){
+},{"./controller.js":23,"./view.html":25}],25:[function(require,module,exports){
 module.exports = "<div>\n\n    <br>\n\n    <div class=\"list\">\n     <a href=\"#/products/form\">  Добавить продукт</a>\n    </div>\n    <br>\n\n    <div class=\"list\" ng-repeat=\"product in products\" >\n\n        <br>\n\n        <div >\n\t\t    <h1>{{product.name}}</h1>\n\t\t    <br>\n\t\t    <img width=\"300pt\" ng-src=\"{{product.image}}\">\n\t\t    <div style=\"color:#ff0000\" align=\"right\">цена:  {{product.price | currency}} </div>\n\t\t    <div style=\"color:#ff0000\" align=\"right\">количество:  {{product.count}}</div>\n\t\t    <div style=\"color:#ff0000\" align=\"right\">id:  {{product.id}}</div>\n\t\t    <div>{{product.description}}</div>\n\t\t</div>\n\n        <button ng-click=\"deleteProduct(product)\">Удалить</button>\n    </div>\n\n</div>\n\n";
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 var angular = require('angular');
 require('angular-ui-router');
 
 var app = angular.module('app.market', ['ui.router']);
-require('./router.js')(app);
+// require('./router.js')(app);
 require('./directives/index.js')(app);
 module.exports = app;
 
-},{"./directives/index.js":18,"./router.js":26,"angular":30,"angular-ui-router":28}],26:[function(require,module,exports){
-module.exports = function (app) {
-
-    app.config(function($stateProvider, $urlRouterProvider){
-      $stateProvider
-
-
-        .state('products', {
-          url:'/products',
-          controller: function ($scope, products) {
-            $scope.products = products;
-          },
-          template: '<products-list products="products"></products-list>',
-          resolve: {
-            products: function () {
-              return $scope.loadProductData();
-            }
-          }
-        })
-
-        .state('products.form', {
-          url:'/form',
-          template: '<product-form></product-form>',
-        })
-  ;
-})
-
-};
-
-
-
-
-
-},{}],27:[function(require,module,exports){
+},{"./directives/index.js":19,"angular":30,"angular-ui-router":28}],27:[function(require,module,exports){
 require('./app.js');
 },{"./app.js":1}],28:[function(require,module,exports){
 /**

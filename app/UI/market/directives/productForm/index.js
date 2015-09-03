@@ -1,9 +1,9 @@
 module.exports = function(app) {
-    app.directive('producForm', function() {
+    app.directive('productForm', function() {
         return {
             restrict: 'E',
             scope: {
-            	products:"="
+            	product:"="
             },
             controller: require('./controller.js'),
             template: require('./view.html')

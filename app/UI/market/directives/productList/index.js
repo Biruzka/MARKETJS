@@ -1,5 +1,5 @@
 module.exports = function(app) {
-    app.directive('productList', function() {
+    app.directive('productsList', function() {
         return {
             restrict: 'E',
             scope: {

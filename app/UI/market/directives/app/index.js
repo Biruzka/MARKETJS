@@ -1,3 +1,7 @@
+
+var angular = require('angular');
+require('angular-ui-router');
+
 module.exports = function(app) {
     app.directive('app', function() {
         return {
@@ -5,5 +9,12 @@ module.exports = function(app) {
             template: require('./view.html')
         };
     });
+
+    require('./router.js')(app);
 };
+
+
+
+
+
 
