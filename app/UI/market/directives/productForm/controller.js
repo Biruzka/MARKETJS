@@ -14,9 +14,9 @@ var Controller = function ($scope) {
       return value !== '' && value != null;
     };
 
-    form.name.$validators.length = function (value) {
-      return value.length > 3;
-    };
+    // form.name.$validators.length = function (value) {
+    //   return value.length > 3;
+    // };
 
   };
 
@@ -32,7 +32,7 @@ var Controller = function ($scope) {
       console.error('Form invalid');
     }
   };
-  
+
   $scope.addProduct = function (product) {
     alert("hey, you add product!");
 

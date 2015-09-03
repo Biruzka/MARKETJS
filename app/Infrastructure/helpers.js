@@ -1,7 +1,7 @@
-module.exports = extendClass, makeId;
+module.exports = extendClass;
+module.exports = makeId;
 
 function extendClass (Child, Parent) {
-
     Child.prototype = Object.create(Parent.prototype);
     Child.prototype.constructor = Child;
     Child.superclass = Parent;
@@ -13,8 +13,6 @@ function extendClass (Child, Parent) {
         }
     }
 }
-
-
 function makeId(ListOfData) {
 
 
@@ -39,7 +37,6 @@ function makeId(ListOfData) {
 
     return counter;
 }
-
 
 // var BuyingService = new BuyingService();
 

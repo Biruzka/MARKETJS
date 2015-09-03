@@ -9,8 +9,6 @@ module.exports = function(app) {
             template: require('./view.html')
         };
     });
-
-    require('./router.js')(app);
 };
 
 
