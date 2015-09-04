@@ -1,4 +1,4 @@
-var ProductRepository = (function () {
+var ProductRepository = (function (extendClass,BaseRepository,Storage2) {
   'use strict';
 
   extendClass(ProductRepository, BaseRepository);
@@ -8,7 +8,7 @@ var ProductRepository = (function () {
   }
 
   return ProductRepository;
-}());
+}(require('../../Infrastructure/extend.js'),require('../../Infrastructure/BaseRepository.js'), require('../../Infrastructure/StoragePrototype.js')));
 
 module.exports = ProductRepository;
 

@@ -7,7 +7,6 @@ module.exports = function(app) {
             },
             controller: require('./controller.js'),
             template: require('./view.html')
-
         };
     });
 };

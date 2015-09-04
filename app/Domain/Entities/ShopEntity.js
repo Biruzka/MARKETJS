@@ -1,4 +1,4 @@
-var ShopEntity = (function () {
+var ShopEntity = (function (extendClass,BaseEntity) {
   'use strict';
 
   extendClass(ShopEntity, BaseEntity);
@@ -16,7 +16,7 @@ var ShopEntity = (function () {
   ShopEntity.idAttribute = 'id';
 
   return ShopEntity;
-}());
+}(require('../../Infrastructure/extend.js'),require('../../Infrastructure/BaseEntity.js')));
 
 module.exports = ShopEntity;
 

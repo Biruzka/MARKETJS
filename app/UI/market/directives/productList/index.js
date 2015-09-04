@@ -9,5 +9,6 @@ module.exports = function(app) {
             template: require('./view.html')
         };
     });
-};
 
+    //здесь доступно что в app а занчит можно закинуть через линк что-то
+};

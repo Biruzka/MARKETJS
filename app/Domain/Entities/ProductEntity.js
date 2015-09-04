@@ -1,4 +1,4 @@
-var ProductEntity = (function () {
+var ProductEntity = (function (extendClass,BaseEntity) {
     'use strict';
     extendClass(ProductEntity, BaseEntity);
 
@@ -18,7 +18,8 @@ var ProductEntity = (function () {
     ProductEntity.idAttribute = 'id';
 
     return ProductEntity;
-}());
+}(require('../../Infrastructure/extend.js'),require('../../Infrastructure/BaseEntity.js')));
+
 module.exports = ProductEntity;
 
 

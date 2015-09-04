@@ -1,14 +1,16 @@
-var Controller = function ($scope) {
+var Controller = function ($rootScope, $scope, ProductEntity, ProductRepository) {
 
     $scope.deleteProduct = function (product) {
-	    var entityProduct = repositoryProduct.getById(product.id);
+	    var entityProduct = $rootScope.repositoryProduct.getById(product.id);
 	    entityProduct = new ProductEntity(entityProduct);
-	    repositoryProduct.delete(entityProduct);
+	    $rootScope.repositoryProduct.delete(entityProduct);
   	};
 
     $scope.loadProductData = function () {
-        return repositoryProduct.loadAllData();
+        return $rootScope.repositoryProduct.loadAllData();
     }
 };
+
+Controller.$inject = ['$rootScope','$scope', 'ProductEntity', 'ProductRepository'];
 
 module.exports = Controller;

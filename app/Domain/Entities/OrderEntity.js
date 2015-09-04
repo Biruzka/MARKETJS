@@ -1,4 +1,4 @@
-var OrderEntity = (function () {
+var OrderEntity = (function (extendClass,BaseEntity) {
     'use strict';
 
     extendClass(OrderEntity, BaseEntity);
@@ -18,6 +18,6 @@ var OrderEntity = (function () {
     OrderEntity.idAttribute = 'id';
 
     return OrderEntity;
-}());
+}(require('../../Infrastructure/extend.js'),require('../../Infrastructure/BaseEntity.js')));
 
 module.exports = OrderEntity;

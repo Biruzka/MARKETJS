@@ -3,16 +3,6 @@ var angular = require('angular');
 var marketApp = require('./app/UI/market/index.js');
 require('angular-ui-router');
 
-
-require('./app/Infrastructure/extend.js');
-require('./app/Infrastructure/makeId.js');
-require('./app/Infrastructure/BaseEntity.js');
-require('./app/Infrastructure/BaseRepository.js');
-require('./app/Infrastructure/StoragePrototype.js');
-//domain
-require('./app/Domain/Entities/ProductEntity.js');
-require('./app/Domain/Repositories/ProductRepository.js');
-
 var app = angular.module('app', [
     'ui.router',
     marketApp.name
@@ -33,8 +23,55 @@ var app = angular.module('app', [
 
 
 
-},{"./app/Domain/Entities/ProductEntity.js":2,"./app/Domain/Repositories/ProductRepository.js":3,"./app/Infrastructure/BaseEntity.js":5,"./app/Infrastructure/BaseRepository.js":6,"./app/Infrastructure/StoragePrototype.js":7,"./app/Infrastructure/extend.js":8,"./app/Infrastructure/makeId.js":9,"./app/UI/market/index.js":19,"angular":24,"angular-ui-router":22}],2:[function(require,module,exports){
-var ProductEntity = (function () {
+},{"./app/UI/market/index.js":30,"angular":35,"angular-ui-router":33}],2:[function(require,module,exports){
+
+var CustomerEntity = (function (extendClass,BaseEntity) {
+  'use strict';
+//либо прямо здесь
+
+    extendClass(CustomerEntity, BaseEntity);
+
+  function CustomerEntity() {
+     CustomerEntity.superclass.apply(this, arguments);
+  }
+
+  CustomerEntity.idAttribute = 'id';
+
+  return CustomerEntity;
+
+
+}(require('../../Infrastructure/extend.js'),require('../../Infrastructure/BaseEntity.js')));
+
+
+module.exports = CustomerEntity;
+
+},{"../../Infrastructure/BaseEntity.js":8,"../../Infrastructure/extend.js":11}],3:[function(require,module,exports){
+var OrderEntity = (function (extendClass,BaseEntity) {
+    'use strict';
+
+    extendClass(OrderEntity, BaseEntity);
+
+    function OrderEntity() {
+        OrderEntity.superclass.apply(this, arguments);
+    }
+
+    OrderEntity.prototype.default = {
+        paid: false
+    }
+
+    OrderEntity.prototype.payMarker = function () {
+        this.set("paid", true);
+    }
+
+    OrderEntity.idAttribute = 'id';
+
+    return OrderEntity;
+}(require('../../Infrastructure/extend.js'),require('../../Infrastructure/BaseEntity.js')));
+
+module.exports = OrderEntity;
+
+},{"../../Infrastructure/BaseEntity.js":8,"../../Infrastructure/extend.js":11}],4:[function(require,module,exports){
+var ProductEntity = (function (extendClass,BaseEntity) {
     'use strict';
     extendClass(ProductEntity, BaseEntity);
 
@@ -54,7 +91,8 @@ var ProductEntity = (function () {
     ProductEntity.idAttribute = 'id';
 
     return ProductEntity;
-}());
+}(require('../../Infrastructure/extend.js'),require('../../Infrastructure/BaseEntity.js')));
+
 module.exports = ProductEntity;
 
 
@@ -72,8 +110,33 @@ module.exports = ProductEntity;
 // }
 
 // var product = new ProductEntity({ name: '', count: '',owner:'', description:'', price: ''});
-},{}],3:[function(require,module,exports){
-var ProductRepository = (function () {
+},{"../../Infrastructure/BaseEntity.js":8,"../../Infrastructure/extend.js":11}],5:[function(require,module,exports){
+var ShopEntity = (function (extendClass,BaseEntity) {
+  'use strict';
+
+  extendClass(ShopEntity, BaseEntity);
+
+  function ShopEntity() {
+     ShopEntity.superclass.apply(this, arguments);
+  }
+
+  // ShopEntity.prototype.giveId = function() {
+  //    var id = ShopEntity.superclass.pototype.giveId.call(this);
+  //    console.log(id);
+  //    return id;
+  // };
+
+  ShopEntity.idAttribute = 'id';
+
+  return ShopEntity;
+}(require('../../Infrastructure/extend.js'),require('../../Infrastructure/BaseEntity.js')));
+
+module.exports = ShopEntity;
+
+
+
+},{"../../Infrastructure/BaseEntity.js":8,"../../Infrastructure/extend.js":11}],6:[function(require,module,exports){
+var ProductRepository = (function (extendClass,BaseRepository,Storage2) {
   'use strict';
 
   extendClass(ProductRepository, BaseRepository);
@@ -83,71 +146,27 @@ var ProductRepository = (function () {
   }
 
   return ProductRepository;
-}());
+}(require('../../Infrastructure/extend.js'),require('../../Infrastructure/BaseRepository.js'), require('../../Infrastructure/StoragePrototype.js')));
 
 module.exports = ProductRepository;
 
 
-},{}],4:[function(require,module,exports){
-var BuyingService = function(orderId) {
-}
+},{"../../Infrastructure/BaseRepository.js":9,"../../Infrastructure/StoragePrototype.js":10,"../../Infrastructure/extend.js":11}],7:[function(require,module,exports){
+var ShopRepository = (function (extendClass,BaseRepository,Storage2) {
+  'use strict';
 
-BuyingService.prototype = {
+  extendClass(ShopRepository, BaseRepository);
 
-    saveChanges: function (order,product) {
-        repositoryOrder.update(order);
-        repositoryProduct.update(product);
-    },
+  function ShopRepository() {
+    this.storage = new Storage2("shop");
+  }
 
-    transaction: function() {
-        return true;
-    },
+  return ShopRepository;
+}(require('../../Infrastructure/extend.js'),require('../../Infrastructure/BaseRepository.js'), require('../../Infrastructure/StoragePrototype.js')));
 
-    buy: function(order){
-        var productId = order.get("productId")
-        var productData = repositoryProduct.getById(productId);
-        product = new ProductEntity(productData);
+module.exports = ShopRepository;
 
-        if (Service.ProductstoOrderEnough(order, product)) {
-
-
-            var transactionResult = this.transaction();
-
-            if (transactionResult === true){
-                //уменьшаяем количество экземпляров товара на складе
-                product.countReduce(order.get("count"));
-                //отметили, что куплен в order
-                order.payMarker();
-                //return ("Вы успешно оформили заказ");
-                this.saveChanges(order, product);
-            }
-            else {
-                throw new Error(transactionResult);
-            }
-        }
-
-        else {
-            throw new Error('product not avalable');
-        }
-
-    }
-}
-
-module.exports = BuyingService;
-
-
-
-
-
-
-
-
-
-
-
-
-
-},{}],5:[function(require,module,exports){
+},{"../../Infrastructure/BaseRepository.js":9,"../../Infrastructure/StoragePrototype.js":10,"../../Infrastructure/extend.js":11}],8:[function(require,module,exports){
 var BaseEntity = function (attrs) {
     this.attrs = attrs;
 };
@@ -174,7 +193,7 @@ BaseEntity.prototype.set = function (key, value) {
 
 module.exports = BaseEntity;
 
-},{}],6:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 function BaseRepository() {
 };
 
@@ -217,8 +236,10 @@ module.exports = BaseRepository;
 
 
 
-},{}],7:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
  function Storage2(entityType) {
+
+    var makeId = require('./makeId');
 
     for (var key in localStorage) {
       delete localStorage.key;
@@ -316,7 +337,7 @@ module.exports = Storage2;
 
 
 
-},{}],8:[function(require,module,exports){
+},{"./makeId":12}],11:[function(require,module,exports){
 function extendClass (Child, Parent) {
     Child.prototype = Object.create(Parent.prototype);
     Child.prototype.constructor = Child;
@@ -331,7 +352,7 @@ function extendClass (Child, Parent) {
 }
 
 module.exports = extendClass;
-},{}],9:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 
 function makeId(ListOfData) {
 
@@ -364,7 +385,61 @@ module.exports = makeId;
 
 
 
-},{}],10:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
+ module.exports = function (ng) {
+    ng.value('CustomerEntity', require('../../../Domain/Entities/CustomerEntity'));
+};
+
+
+},{"../../../Domain/Entities/CustomerEntity":2}],14:[function(require,module,exports){
+ module.exports = function (ng) {
+    ng.value('OrderEntity', require('../../../Domain/Entities/OrderEntity'));
+};
+
+
+},{"../../../Domain/Entities/OrderEntity":3}],15:[function(require,module,exports){
+module.exports = function (ng) {
+    ng.value('ProductEntity', require('../../../Domain/Entities/ProductEntity'));
+
+};
+},{"../../../Domain/Entities/ProductEntity":4}],16:[function(require,module,exports){
+ module.exports = function (ng) {
+    ng.value('ShopEntity', require('../../../Domain/Entities/ShopEntity'));
+};
+
+
+},{"../../../Domain/Entities/ShopEntity":5}],17:[function(require,module,exports){
+module.exports = function (ng) {
+    require('./ProductEntity')(ng);
+    require('./ShopEntity')(ng);
+    require('./CustomerEntity')(ng);
+    require('./OrderEntity')(ng);
+};
+},{"./CustomerEntity":13,"./OrderEntity":14,"./ProductEntity":15,"./ShopEntity":16}],18:[function(require,module,exports){
+//  module.exports = function (ng) {
+//     var ProductRepository =
+//     productRepository = new
+//     ng.value('ProductRepository', require('../../../Domain/Repositories/ProductRepository'));
+// };
+
+ module.exports = function (ng) {
+    ng.value('ProductRepository', require('../../../Domain/Repositories/ProductRepository'));
+
+};
+
+
+},{"../../../Domain/Repositories/ProductRepository":6}],19:[function(require,module,exports){
+ module.exports = function (ng) {
+    ng.value('ShopRepository', require('../../../Domain/Repositories/ShopRepository'));
+};
+
+
+},{"../../../Domain/Repositories/ShopRepository":7}],20:[function(require,module,exports){
+module.exports = function (ng) {
+    require('./ProductRepository')(ng);
+    require('./ShopRepository')(ng);
+};
+},{"./ProductRepository":18,"./ShopRepository":19}],21:[function(require,module,exports){
 
 var angular = require('angular');
 require('angular-ui-router');
@@ -373,54 +448,46 @@ module.exports = function(app) {
     app.directive('app', function() {
         return {
             restrict: 'E',
-            template: require('./view.html')
+            template: require('./view.html'),
         };
     });
+
+
+    app.run(['$rootScope','ProductRepository', function($rootScope,ProductRepository) {
+        $rootScope.repositoryProduct = new ProductRepository();
+        console.log($rootScope);
+    }]);
+
 };
 
 
 
+},{"./view.html":22,"angular":35,"angular-ui-router":33}],22:[function(require,module,exports){
+module.exports = "<p>I'm market</p>\n<a ui-sref=\"products\">Товары</a> | <a ui-sref=\"form\">Добавить товар</a>\n<div ui-view></div>\n";
 
-
-
-
-},{"./view.html":11,"angular":24,"angular-ui-router":22}],11:[function(require,module,exports){
-module.exports = "<p>I'm market</p>\n<a ui-sref=\"products\">Товары</a> | <a ui-sref=\"form\">Добавить товар</a>\n<div ui-view></div>\n\n";
-
-},{}],12:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 module.exports = function(app) {
     require('./app/index.js')(app);
     require('./productList/index.js')(app);
     require('./productForm/index.js')(app);
 };
-},{"./app/index.js":10,"./productForm/index.js":14,"./productList/index.js":17}],13:[function(require,module,exports){
-var Controller = function ($scope) {
-
+},{"./app/index.js":21,"./productForm/index.js":25,"./productList/index.js":28}],24:[function(require,module,exports){
+var Controller = function ($rootScope, $scope, ProductEntity) {
   var setupValidators = function (form) {
 
-    form.price.$validators.number = function (value) {
-      return /^\d+$/.test(value);
-    };
-
-    form.price.$validators.required = function (value) {
-      return value !== '' && value != null;
-    };
-
-    form.name.$validators.required = function (value) {
-      return value !== '' && value != null;
-    };
-
-    // form.name.$validators.length = function (value) {
-    //   return value.length > 3;
-    // };
+        form.price.$validators.number = function (value) {
+        return /^\d+$/.test(value); };
+        form.price.$validators.required = function (value) {
+        return value !== '' && value != null; };
+        form.name.$validators.required = function (value) {
+        return value !== '' && value != null; };
 
   };
-
   $scope.$watch('productForm', setupValidators);
+
 
   $scope.submit = function (event) {
     event.preventDefault();
-
     if ($scope.productForm.$valid) {
       $scope.addProduct($scope.product);
     }
@@ -431,21 +498,16 @@ var Controller = function ($scope) {
 
   $scope.addProduct = function (product) {
     alert("hey, you add product!");
-
-    var prod = new ProductEntity({name:product.name,
-                          price:product.price,
-                          description:product.description,
-                          count:product.count,
-                          image:product.image,
-                          owner:0});
-    repositoryProduct.save(prod);
+    var prod = new ProductEntity({name:product.name, price:product.price, description:product.description, count:product.count, image:product.image, owner:0});
+    $rootScope.repositoryProduct.save(prod);
   };
-
 };
 
-module.exports = Controller;
 
-},{}],14:[function(require,module,exports){
+Controller.$inject = ['$rootScope','$scope', 'ProductEntity'];
+
+module.exports = Controller;
+},{}],25:[function(require,module,exports){
 module.exports = function(app) {
     app.directive('productForm', function() {
         return {
@@ -455,29 +517,31 @@ module.exports = function(app) {
             },
             controller: require('./controller.js'),
             template: require('./view.html')
-
         };
     });
 };
-},{"./controller.js":13,"./view.html":15}],15:[function(require,module,exports){
+},{"./controller.js":24,"./view.html":26}],26:[function(require,module,exports){
 module.exports = "<form name=\"productForm\" ng-submit=\"submit($event)\" novalidate class=\"list\">\n    <br>\n    <p>Добавить новый продукт: </p>\n     <p>{{hey}}</p>\n\n    <blockquote>\n        <p>Название: {{product.name}}  </p>\n        <p>Цена: {{product.price}}<p>\n        <p>Картинка: {{product.image}}<p>\n        <p>Количество на складе: {{product.count}}<p>\n        <p>Описание: {{product.description}}<p>\n    </blockquote>\n\n    <br>\n    <label for=\"name\">Название  </label><br>\n    <input name=\"name\" ng-model=\"product.name\" type=\"text\"/>\n    <br><br>\n    <label for=\"name\">Цена  </label><br>\n    <input name=\"price\" ng-model=\"product.price\" />\n    <!-- <label ng-show =\"!priceIsNum\" class=\"error-mess\"> в поле должно быть введено числовое значение</label> -->\n    <br><br>\n    <label for=\"name\">Адрес изображения  </label><br>\n    <input name=\"image\" ng-model=\"product.image\" type=\"url\"/>\n    <br><br>\n    <label for=\"name\">Количество на складе  </label><br>\n    <input name=\"count\" ng-model=\"product.count\" />\n    <br><br>\n    <label for=\"name\">Описание  </label><br>\n    <textarea name=\"description\" ng-model=\"product.description\"></textarea>\n    <input type=\"submit\" value=\"Submit\" />\n    <br>\n    <a href=\"#/products\">Скрыть</a>\n\n</form>\n\n\n\n";
 
-},{}],16:[function(require,module,exports){
-var Controller = function ($scope) {
+},{}],27:[function(require,module,exports){
+var Controller = function ($rootScope, $scope, ProductEntity, ProductRepository) {
 
     $scope.deleteProduct = function (product) {
-	    var entityProduct = repositoryProduct.getById(product.id);
+	    var entityProduct = $rootScope.repositoryProduct.getById(product.id);
 	    entityProduct = new ProductEntity(entityProduct);
-	    repositoryProduct.delete(entityProduct);
+	    $rootScope.repositoryProduct.delete(entityProduct);
   	};
 
     $scope.loadProductData = function () {
-        return repositoryProduct.loadAllData();
+        return $rootScope.repositoryProduct.loadAllData();
     }
 };
 
+Controller.$inject = ['$rootScope','$scope', 'ProductEntity', 'ProductRepository'];
+
 module.exports = Controller;
-},{}],17:[function(require,module,exports){
+
+},{}],28:[function(require,module,exports){
 module.exports = function(app) {
     app.directive('productsList', function() {
         return {
@@ -489,42 +553,38 @@ module.exports = function(app) {
             template: require('./view.html')
         };
     });
+
+    //здесь доступно что в app а занчит можно закинуть через линк что-то
 };
 
-
-},{"./controller.js":16,"./view.html":18}],18:[function(require,module,exports){
+},{"./controller.js":27,"./view.html":29}],29:[function(require,module,exports){
 module.exports = "<div>\n\n    <br>\n\n    <div class=\"list\" ng-repeat=\"product in products\" >\n\n        <br>\n\n        <div >\n\t\t    <h1>{{product.name}}</h1>\n\t\t    <br>\n\t\t    <img width=\"300pt\" ng-src=\"{{product.image}}\">\n\t\t    <div style=\"color:#ff0000\" align=\"right\">цена:  {{product.price | currency}} </div>\n\t\t    <div style=\"color:#ff0000\" align=\"right\">количество:  {{product.count}}</div>\n\t\t    <div style=\"color:#ff0000\" align=\"right\">id:  {{product.id}}</div>\n\t\t    <div>{{product.description}}</div>\n\t\t</div>\n\n        <button ng-click=\"deleteProduct(product)\">Удалить</button>\n    </div>\n\n</div>\n\n";
 
-},{}],19:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 var angular = require('angular');
 require('angular-ui-router');
 
 var app = angular.module('app.market', ['ui.router']);
 
+// require('../../Domain/Entities/index.js')(app);
+// require('../../Domain/Repositories/index.js')(app);
 
+require('./directives')(app);
 
-//infrastructure
-app.extendClass = require('../../Infrastructure/extend.js');
+require('./Domain')(app);
+require('./Infrastructure')(app);
 
-
-app.makeId = require('../../Infrastructure/makeId.js');
-app.BaseEntity = require('../../Infrastructure/BaseEntity.js');
-app.BaseRepository = require('../../Infrastructure/BaseRepository.js');
-app.Storage2 = require('../../Infrastructure/StoragePrototype.js');
-//domain
-app.ProductEntity = require('../../Domain/Entities/ProductEntity.js');
-
-app.ProductRepository = require('../../Domain/Repositories/ProductRepository.js');
-app.BuyService = require('../../Domain/Services/BuyService');
-app.service = ("BuyService", BuyService);
-
-
-require('./directives/index.js')(app);
 require('./router.js')(app);
 
 module.exports = app;
 
-},{"../../Domain/Entities/ProductEntity.js":2,"../../Domain/Repositories/ProductRepository.js":3,"../../Domain/Services/BuyService":4,"../../Infrastructure/BaseEntity.js":5,"../../Infrastructure/BaseRepository.js":6,"../../Infrastructure/StoragePrototype.js":7,"../../Infrastructure/extend.js":8,"../../Infrastructure/makeId.js":9,"./directives/index.js":12,"./router.js":20,"angular":24,"angular-ui-router":22}],20:[function(require,module,exports){
+
+
+// var BuyService = require('../../Domain/Services/BuyService');
+// console.log(BuyService);
+// app.service = ("BuyService", BuyService);
+
+},{"./Domain":17,"./Infrastructure":20,"./directives":23,"./router.js":31,"angular":35,"angular-ui-router":33}],31:[function(require,module,exports){
 
  module.exports = function(app) {
  app.config(function($stateProvider, $urlRouterProvider){
@@ -552,22 +612,13 @@ module.exports = app;
 };
 
 
-},{}],21:[function(require,module,exports){
-//infrastructure
+},{}],32:[function(require,module,exports){
 require('./app.js');
 
-// extendClass = require('./app/Infrastructure/extend.js');
-// makeId = require('./app/Infrastructure/makeId.js');
-// BaseEntity = require('./app/Infrastructure/BaseEntity.js');
-// BaseRepository = require('./app/Infrastructure/BaseRepository.js');
-// Storage2 = require('./app/Infrastructure/StoragePrototype.js');
-// //domain
-// ProductEntity = require('./app/Domain/Entities/ProductEntity.js');
-// ProductRepository = require('./app/Domain/Repositories/ProductRepository.js');
 
 
 
-},{"./app.js":1}],22:[function(require,module,exports){
+},{"./app.js":1}],33:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -4938,7 +4989,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],23:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.5
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -33627,8 +33678,8 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],24:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":23}]},{},[21]);
+},{"./angular":34}]},{},[32]);

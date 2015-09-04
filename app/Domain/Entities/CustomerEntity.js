@@ -1,6 +1,7 @@
 
-var CustomerEntity = (function () {
+var CustomerEntity = (function (extendClass,BaseEntity) {
   'use strict';
+//либо прямо здесь
 
     extendClass(CustomerEntity, BaseEntity);
 
@@ -13,7 +14,7 @@ var CustomerEntity = (function () {
   return CustomerEntity;
 
 
-}());
+}(require('../../Infrastructure/extend.js'),require('../../Infrastructure/BaseEntity.js')));
 
 
 module.exports = CustomerEntity;

@@ -1,5 +1,7 @@
  function Storage2(entityType) {
 
+    var makeId = require('./makeId');
+
     for (var key in localStorage) {
       delete localStorage.key;
     };
