@@ -145,6 +145,16 @@ var ProductRepository = (function (extendClass,BaseRepository,Storage2) {
     this.storage = new Storage2("product");
   }
 
+  ProductRepository.loadAllData = function (){
+    var arr = this.storage.getAll();
+
+    arr.forEach(function(item, i, arr) {
+        arr[i] = new ProductEntity(item);
+    });
+
+    return arr;
+}
+
   return ProductRepository;
 }(require('../../Infrastructure/extend.js'),require('../../Infrastructure/BaseRepository.js'), require('../../Infrastructure/StoragePrototype.js')));
 
@@ -160,6 +170,16 @@ var ShopRepository = (function (extendClass,BaseRepository,Storage2) {
   function ShopRepository() {
     this.storage = new Storage2("shop");
   }
+
+  ShopRepository.loadAllData = function (){
+    var arr = this.storage.getAll();
+
+    arr.forEach(function(item, i, arr) {
+        arr[i] = new ShopEntity(item);
+    });
+
+    return arr;
+}
 
   return ShopRepository;
 }(require('../../Infrastructure/extend.js'),require('../../Infrastructure/BaseRepository.js'), require('../../Infrastructure/StoragePrototype.js')));
@@ -203,6 +223,7 @@ BaseRepository.prototype.save = function (entity){
     return entity;
 }
 
+//тоже перенести в каждый!
 BaseRepository.prototype.getById = function (id){ //смысл вытаскивать сущность по сущности??? все же по id отдельно может понадобится
     return this.storage.getData(id);
 }
@@ -210,10 +231,6 @@ BaseRepository.prototype.getById = function (id){ //смысл вытаскив�
 BaseRepository.prototype.update = function (entity){
     this.storage.updateData(entity.getId(),entity["attrs"]);
 }
-
-// BaseRepository.prototype.delete = function (entity){
-//     return this.storage.deleteDataFantomly(entity);
-// }
 
 BaseRepository.prototype.delete = function (entity){
     alert(entity.getId());
@@ -225,11 +242,11 @@ BaseRepository.prototype.search = function (key, value){
     return arr;
 }
 
-BaseRepository.prototype.loadAllData = function (){
-    //возвращает чисто данные, без методов. где создаются именно entity? в скрипте? выше?
-    var arr = this.storage.getAll();
-    return arr;
-}
+// BaseRepository.prototype.loadAllData = function (){
+//     //возвращает чисто данные, без методов. где создаются именно entity? в скрипте? выше?
+//     var arr = this.storage.getAll();
+//     return arr;
+// }
 
 module.exports = BaseRepository;
 
@@ -536,9 +553,12 @@ var Controller = function ($scope, $rootScope, ProductEntity, ProductRepository)
     };
 
     var deleteProduct = function (product) {
-	    var entityProduct = $rootScope.repositoryProduct.getById(product.id);
-	    entityProduct = new ProductEntity(entityProduct);
-	    $rootScope.repositoryProduct.delete(entityProduct);
+
+        $rootScope.repositoryProduct.delete(product); //и все! и убрать rootScope
+
+	    // var entityProduct = $rootScope.repositoryProduct.getById(product.id);
+	    // entityProduct = new ProductEntity(entityProduct);
+	    // $rootScope.repositoryProduct.delete(product);
   	};
 
     var loadProductData = function () {

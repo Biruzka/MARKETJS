@@ -6,9 +6,12 @@ var Controller = function ($scope, $rootScope, ProductEntity, ProductRepository)
     };
 
     var deleteProduct = function (product) {
-	    var entityProduct = $rootScope.repositoryProduct.getById(product.id);
-	    entityProduct = new ProductEntity(entityProduct);
-	    $rootScope.repositoryProduct.delete(entityProduct);
+
+        $rootScope.repositoryProduct.delete(product); //и все! и убрать rootScope
+
+	    // var entityProduct = $rootScope.repositoryProduct.getById(product.id);
+	    // entityProduct = new ProductEntity(entityProduct);
+	    // $rootScope.repositoryProduct.delete(product);
   	};
 
     var loadProductData = function () {
