@@ -5,10 +5,13 @@ module.exports = function(app) {
             scope: {
             	products:"="
             },
-            controller: require('./controller.js'),
-            template: require('./view.html')
+            controller: require('./controller'),
+            template: require('./view.html'),
+
         };
     });
-
-    //здесь доступно что в app а занчит можно закинуть через линк что-то
 };
+
+
+
+

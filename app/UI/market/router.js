@@ -4,16 +4,8 @@
       $stateProvider
 
         .state('products', {
-          url:'/products',
-          controller: function ($scope, products) {
-            $scope.products = products;
-          },
-          template: 'Витрина: <products-list products="products"></products-list>',
-          resolve: {
-            products: function () {
-              return $scope.loadProductData();
-            }
-          }
+            url:'/products',
+            template: '<products-list products="products"></products-list>',
         })
 
         .state('form', {
@@ -23,4 +15,5 @@
     ;
     })
 };
+
 

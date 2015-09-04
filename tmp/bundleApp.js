@@ -507,40 +507,55 @@ var Controller = function ($rootScope, $scope, ProductEntity) {
 Controller.$inject = ['$rootScope','$scope', 'ProductEntity'];
 
 module.exports = Controller;
+
 },{}],25:[function(require,module,exports){
 module.exports = function(app) {
     app.directive('productForm', function() {
-        return {
-            restrict: 'E',
-            scope: {
-            	product:"="
-            },
-            controller: require('./controller.js'),
-            template: require('./view.html')
-        };
+            return {
+                restrict: 'E',
+                scope: {
+                	product:"="
+                },
+                controller: require('./controller.js'),
+                template: require('./view.html')
+            }
+
     });
 };
+
+
 },{"./controller.js":24,"./view.html":26}],26:[function(require,module,exports){
 module.exports = "<form name=\"productForm\" ng-submit=\"submit($event)\" novalidate class=\"list\">\n    <br>\n    <p>Добавить новый продукт: </p>\n     <p>{{hey}}</p>\n\n    <blockquote>\n        <p>Название: {{product.name}}  </p>\n        <p>Цена: {{product.price}}<p>\n        <p>Картинка: {{product.image}}<p>\n        <p>Количество на складе: {{product.count}}<p>\n        <p>Описание: {{product.description}}<p>\n    </blockquote>\n\n    <br>\n    <label for=\"name\">Название  </label><br>\n    <input name=\"name\" ng-model=\"product.name\" type=\"text\"/>\n    <br><br>\n    <label for=\"name\">Цена  </label><br>\n    <input name=\"price\" ng-model=\"product.price\" />\n    <!-- <label ng-show =\"!priceIsNum\" class=\"error-mess\"> в поле должно быть введено числовое значение</label> -->\n    <br><br>\n    <label for=\"name\">Адрес изображения  </label><br>\n    <input name=\"image\" ng-model=\"product.image\" type=\"url\"/>\n    <br><br>\n    <label for=\"name\">Количество на складе  </label><br>\n    <input name=\"count\" ng-model=\"product.count\" />\n    <br><br>\n    <label for=\"name\">Описание  </label><br>\n    <textarea name=\"description\" ng-model=\"product.description\"></textarea>\n    <input type=\"submit\" value=\"Submit\" />\n    <br>\n    <a href=\"#/products\">Скрыть</a>\n\n</form>\n\n\n\n";
 
 },{}],27:[function(require,module,exports){
-var Controller = function ($rootScope, $scope, ProductEntity, ProductRepository) {
+var Controller = function ($scope, $rootScope, ProductEntity, ProductRepository) {
 
-    $scope.deleteProduct = function (product) {
+    $scope.deleteClicked = function (event, product) {
+        event.preventDefault();
+        deleteProduct(product);
+    };
+
+    var deleteProduct = function (product) {
 	    var entityProduct = $rootScope.repositoryProduct.getById(product.id);
 	    entityProduct = new ProductEntity(entityProduct);
 	    $rootScope.repositoryProduct.delete(entityProduct);
   	};
 
-    $scope.loadProductData = function () {
+    var loadProductData = function () {
         return $rootScope.repositoryProduct.loadAllData();
     }
+
+    $scope.products = loadProductData();
+
 };
 
-Controller.$inject = ['$rootScope','$scope', 'ProductEntity', 'ProductRepository'];
+console.log(Controller.products);
+
+
+
+Controller.$inject = ['$scope', '$rootScope', 'ProductEntity', 'ProductRepository'];
 
 module.exports = Controller;
-
 },{}],28:[function(require,module,exports){
 module.exports = function(app) {
     app.directive('productsList', function() {
@@ -549,16 +564,19 @@ module.exports = function(app) {
             scope: {
             	products:"="
             },
-            controller: require('./controller.js'),
-            template: require('./view.html')
+            controller: require('./controller'),
+            template: require('./view.html'),
+
         };
     });
-
-    //здесь доступно что в app а занчит можно закинуть через линк что-то
 };
 
-},{"./controller.js":27,"./view.html":29}],29:[function(require,module,exports){
-module.exports = "<div>\n\n    <br>\n\n    <div class=\"list\" ng-repeat=\"product in products\" >\n\n        <br>\n\n        <div >\n\t\t    <h1>{{product.name}}</h1>\n\t\t    <br>\n\t\t    <img width=\"300pt\" ng-src=\"{{product.image}}\">\n\t\t    <div style=\"color:#ff0000\" align=\"right\">цена:  {{product.price | currency}} </div>\n\t\t    <div style=\"color:#ff0000\" align=\"right\">количество:  {{product.count}}</div>\n\t\t    <div style=\"color:#ff0000\" align=\"right\">id:  {{product.id}}</div>\n\t\t    <div>{{product.description}}</div>\n\t\t</div>\n\n        <button ng-click=\"deleteProduct(product)\">Удалить</button>\n    </div>\n\n</div>\n\n";
+
+
+
+
+},{"./controller":27,"./view.html":29}],29:[function(require,module,exports){
+module.exports = "<div>\n\n    <br>\n    Витрина:\n    <div class=\"list\" ng-repeat=\"product in products\" >\n    <br>\n\n        <div >\n\n\t\t    <h1>{{product.name}}</h1>\n\t\t    <br>\n\t\t    <img width=\"300pt\" ng-src=\"{{product.image}}\">\n\t\t    <div style=\"color:#ff0000\" align=\"right\">цена:  {{product.price | currency}} </div>\n\t\t    <div style=\"color:#ff0000\" align=\"right\">количество:  {{product.count}}</div>\n\t\t    <div style=\"color:#ff0000\" align=\"right\">id:  {{product.id}}</div>\n\t\t    <div>{{product.description}}</div>\n\t\t</div>\n\n        <button ng-click=\"deleteClicked($event, product)\">Удалить</button>\n    </div>\n\n</div>\n\n";
 
 },{}],30:[function(require,module,exports){
 var angular = require('angular');
@@ -568,12 +586,9 @@ var app = angular.module('app.market', ['ui.router']);
 
 // require('../../Domain/Entities/index.js')(app);
 // require('../../Domain/Repositories/index.js')(app);
-
 require('./directives')(app);
-
 require('./Domain')(app);
 require('./Infrastructure')(app);
-
 require('./router.js')(app);
 
 module.exports = app;
@@ -591,16 +606,8 @@ module.exports = app;
       $stateProvider
 
         .state('products', {
-          url:'/products',
-          controller: function ($scope, products) {
-            $scope.products = products;
-          },
-          template: 'Витрина: <products-list products="products"></products-list>',
-          resolve: {
-            products: function () {
-              return $scope.loadProductData();
-            }
-          }
+            url:'/products',
+            template: '<products-list products="products"></products-list>',
         })
 
         .state('form', {
@@ -610,6 +617,7 @@ module.exports = app;
     ;
     })
 };
+
 
 
 },{}],32:[function(require,module,exports){
