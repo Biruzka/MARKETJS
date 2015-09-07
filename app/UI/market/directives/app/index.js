@@ -12,8 +12,8 @@ module.exports = function(app) {
 
 
     app.run(['$rootScope','ProductRepository', function($rootScope,ProductRepository) {
-        $rootScope.repositoryProduct = new ProductRepository();
-        console.log($rootScope);
+        console.log(ProductRepository);
+        console.log("HEY");
     }]);
 
 };

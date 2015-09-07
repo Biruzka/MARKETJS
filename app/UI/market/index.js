@@ -3,8 +3,6 @@ require('angular-ui-router');
 
 var app = angular.module('app.market', ['ui.router']);
 
-// require('../../Domain/Entities/index.js')(app);
-// require('../../Domain/Repositories/index.js')(app);
 require('./directives')(app);
 require('./Domain')(app);
 require('./Infrastructure')(app);

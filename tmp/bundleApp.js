@@ -136,32 +136,50 @@ module.exports = ShopEntity;
 
 
 },{"../../Infrastructure/BaseEntity.js":8,"../../Infrastructure/extend.js":11}],6:[function(require,module,exports){
-var ProductRepository = (function (extendClass,BaseRepository,Storage2) {
+var ProductRepository = (function (ProductEntity, extendClass, BaseRepository, Storage2) {
   'use strict';
 
   extendClass(ProductRepository, BaseRepository);
 
   function ProductRepository() {
     this.storage = new Storage2("product");
-  }
 
-  ProductRepository.loadAllData = function (){
-    var arr = this.storage.getAll();
+    this.loadAllData = function () {
+       var arr = this.storage.getAll();
 
-    arr.forEach(function(item, i, arr) {
-        arr[i] = new ProductEntity(item);
-    });
+        arr.forEach(function(item, i, arr) {
+          arr[i] = new ProductEntity(item);
+        });
 
     return arr;
-}
+    }
+
+  }
 
   return ProductRepository;
-}(require('../../Infrastructure/extend.js'),require('../../Infrastructure/BaseRepository.js'), require('../../Infrastructure/StoragePrototype.js')));
 
-module.exports = ProductRepository;
+}(require('../Entities/ProductEntity.js'),require('../../Infrastructure/extend.js'),require('../../Infrastructure/BaseRepository.js'), require('../../Infrastructure/StoragePrototype.js')));
+
+var repositoryProduct = new ProductRepository();
+
+module.exports = repositoryProduct;
 
 
-},{"../../Infrastructure/BaseRepository.js":9,"../../Infrastructure/StoragePrototype.js":10,"../../Infrastructure/extend.js":11}],7:[function(require,module,exports){
+
+// var ProductRepository = (function () {
+//   'use strict';
+
+//   function ProductRepository() {
+//     this.storage = "product";
+
+//   }
+
+//   return new ProductRepository();
+// }();
+
+
+
+},{"../../Infrastructure/BaseRepository.js":9,"../../Infrastructure/StoragePrototype.js":10,"../../Infrastructure/extend.js":11,"../Entities/ProductEntity.js":4}],7:[function(require,module,exports){
 var ShopRepository = (function (extendClass,BaseRepository,Storage2) {
   'use strict';
 
@@ -433,15 +451,10 @@ module.exports = function (ng) {
     require('./OrderEntity')(ng);
 };
 },{"./CustomerEntity":13,"./OrderEntity":14,"./ProductEntity":15,"./ShopEntity":16}],18:[function(require,module,exports){
-//  module.exports = function (ng) {
-//     var ProductRepository =
-//     productRepository = new
-//     ng.value('ProductRepository', require('../../../Domain/Repositories/ProductRepository'));
-// };
-
- module.exports = function (ng) {
-    ng.value('ProductRepository', require('../../../Domain/Repositories/ProductRepository'));
-
+module.exports = function (ng) {
+ 	var ProductRepository = require('../../../Domain/Repositories/ProductRepository');
+ 	console.log( ProductRepository);
+    ng.value('ProductRepository', ProductRepository);
 };
 
 
@@ -471,8 +484,8 @@ module.exports = function(app) {
 
 
     app.run(['$rootScope','ProductRepository', function($rootScope,ProductRepository) {
-        $rootScope.repositoryProduct = new ProductRepository();
-        console.log($rootScope);
+        console.log(ProductRepository);
+        console.log("HEY");
     }]);
 
 };
@@ -489,7 +502,7 @@ module.exports = function(app) {
     require('./productForm/index.js')(app);
 };
 },{"./app/index.js":21,"./productForm/index.js":25,"./productList/index.js":28}],24:[function(require,module,exports){
-var Controller = function ($rootScope, $scope, ProductEntity) {
+var Controller = function (ProductRepository, $scope, ProductEntity) {
   var setupValidators = function (form) {
 
         form.price.$validators.number = function (value) {
@@ -516,12 +529,12 @@ var Controller = function ($rootScope, $scope, ProductEntity) {
   $scope.addProduct = function (product) {
     alert("hey, you add product!");
     var prod = new ProductEntity({name:product.name, price:product.price, description:product.description, count:product.count, image:product.image, owner:0});
-    $rootScope.repositoryProduct.save(prod);
+    ProductRepository.save(prod);
   };
 };
 
 
-Controller.$inject = ['$rootScope','$scope', 'ProductEntity'];
+Controller.$inject = ['ProductRepository','$scope', 'ProductEntity'];
 
 module.exports = Controller;
 
@@ -545,7 +558,7 @@ module.exports = function(app) {
 module.exports = "<form name=\"productForm\" ng-submit=\"submit($event)\" novalidate class=\"list\">\n    <br>\n    <p>Добавить новый продукт: </p>\n     <p>{{hey}}</p>\n\n    <blockquote>\n        <p>Название: {{product.name}}  </p>\n        <p>Цена: {{product.price}}<p>\n        <p>Картинка: {{product.image}}<p>\n        <p>Количество на складе: {{product.count}}<p>\n        <p>Описание: {{product.description}}<p>\n    </blockquote>\n\n    <br>\n    <label for=\"name\">Название  </label><br>\n    <input name=\"name\" ng-model=\"product.name\" type=\"text\"/>\n    <br><br>\n    <label for=\"name\">Цена  </label><br>\n    <input name=\"price\" ng-model=\"product.price\" />\n    <!-- <label ng-show =\"!priceIsNum\" class=\"error-mess\"> в поле должно быть введено числовое значение</label> -->\n    <br><br>\n    <label for=\"name\">Адрес изображения  </label><br>\n    <input name=\"image\" ng-model=\"product.image\" type=\"url\"/>\n    <br><br>\n    <label for=\"name\">Количество на складе  </label><br>\n    <input name=\"count\" ng-model=\"product.count\" />\n    <br><br>\n    <label for=\"name\">Описание  </label><br>\n    <textarea name=\"description\" ng-model=\"product.description\"></textarea>\n    <input type=\"submit\" value=\"Submit\" />\n    <br>\n    <a href=\"#/products\">Скрыть</a>\n\n</form>\n\n\n\n";
 
 },{}],27:[function(require,module,exports){
-var Controller = function ($scope, $rootScope, ProductEntity, ProductRepository) {
+var Controller = function ($scope, ProductRepository, ProductEntity) {
 
     $scope.deleteClicked = function (event, product) {
         event.preventDefault();
@@ -553,16 +566,12 @@ var Controller = function ($scope, $rootScope, ProductEntity, ProductRepository)
     };
 
     var deleteProduct = function (product) {
-
-        $rootScope.repositoryProduct.delete(product); //и все! и убрать rootScope
-
-	    // var entityProduct = $rootScope.repositoryProduct.getById(product.id);
-	    // entityProduct = new ProductEntity(entityProduct);
-	    // $rootScope.repositoryProduct.delete(product);
+        ProductRepository.delete(product); 
   	};
 
     var loadProductData = function () {
-        return $rootScope.repositoryProduct.loadAllData();
+        console.log(ProductRepository.loadAllData);
+        return ProductRepository.loadAllData();
     }
 
     $scope.products = loadProductData();
@@ -573,7 +582,7 @@ console.log(Controller.products);
 
 
 
-Controller.$inject = ['$scope', '$rootScope', 'ProductEntity', 'ProductRepository'];
+Controller.$inject = ['$scope', 'ProductRepository', 'ProductEntity'];
 
 module.exports = Controller;
 },{}],28:[function(require,module,exports){
@@ -596,7 +605,7 @@ module.exports = function(app) {
 
 
 },{"./controller":27,"./view.html":29}],29:[function(require,module,exports){
-module.exports = "<div>\n\n    <br>\n    Витрина:\n    <div class=\"list\" ng-repeat=\"product in products\" >\n    <br>\n\n        <div >\n\n\t\t    <h1>{{product.name}}</h1>\n\t\t    <br>\n\t\t    <img width=\"300pt\" ng-src=\"{{product.image}}\">\n\t\t    <div style=\"color:#ff0000\" align=\"right\">цена:  {{product.price | currency}} </div>\n\t\t    <div style=\"color:#ff0000\" align=\"right\">количество:  {{product.count}}</div>\n\t\t    <div style=\"color:#ff0000\" align=\"right\">id:  {{product.id}}</div>\n\t\t    <div>{{product.description}}</div>\n\t\t</div>\n\n        <button ng-click=\"deleteClicked($event, product)\">Удалить</button>\n    </div>\n\n</div>\n\n";
+module.exports = "<div>\n\n    <br>\n    Витрина:\n    <div class=\"list\" ng-repeat=\"product in products\" >\n    <br>\n\n        <div >\n\n\t\t    <h1>{{product.attrs.name}}</h1>\n\t\t    <br>\n\t\t    <img width=\"300pt\" ng-src=\"{{product.image}}\">\n\t\t    <div style=\"color:#ff0000\" align=\"right\">цена:  {{product.attrs.price | currency}} </div>\n\t\t    <div style=\"color:#ff0000\" align=\"right\">количество:  {{product.attrs.count}}</div>\n\t\t    <div style=\"color:#ff0000\" align=\"right\">id:  {{product.attrs.id}}</div>\n\t\t    <div>{{product.attrs.description}}</div>\n\t\t</div>\n\n        <button ng-click=\"deleteClicked($event, product)\">Удалить</button>\n    </div>\n\n</div>\n\n";
 
 },{}],30:[function(require,module,exports){
 var angular = require('angular');
@@ -604,8 +613,6 @@ require('angular-ui-router');
 
 var app = angular.module('app.market', ['ui.router']);
 
-// require('../../Domain/Entities/index.js')(app);
-// require('../../Domain/Repositories/index.js')(app);
 require('./directives')(app);
 require('./Domain')(app);
 require('./Infrastructure')(app);

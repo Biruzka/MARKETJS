@@ -1,4 +1,4 @@
-var Controller = function ($rootScope, $scope, ProductEntity) {
+var Controller = function (ProductRepository, $scope, ProductEntity) {
   var setupValidators = function (form) {
 
         form.price.$validators.number = function (value) {
@@ -25,11 +25,11 @@ var Controller = function ($rootScope, $scope, ProductEntity) {
   $scope.addProduct = function (product) {
     alert("hey, you add product!");
     var prod = new ProductEntity({name:product.name, price:product.price, description:product.description, count:product.count, image:product.image, owner:0});
-    $rootScope.repositoryProduct.save(prod);
+    ProductRepository.save(prod);
   };
 };
 
 
-Controller.$inject = ['$rootScope','$scope', 'ProductEntity'];
+Controller.$inject = ['ProductRepository','$scope', 'ProductEntity'];
 
 module.exports = Controller;
