@@ -1,10 +1,11 @@
-var Repositories = {
-    ProductRepository: require('./ProductRepository.js'),
-    ShopRepository: require('./ShopRepository.js'),
-    CustomerRepository: require('./CustomerRepository.js'),
-    OrderRepository: require('./OrderRepository.js')
-}
+var angular = require('angular');
+var helper = require('../../Infrastructure/helper.js');
 
-module.exports = function(app) {
-    app.Repositories = Repositories;
-};
+
+var repositories = angular.module('repositories', [helper.name]);
+
+
+repositories.value('ProductEntity', require('../Entities/ProductEntity.js'));
+require('./ProductRepository')(repositories);
+module.exports = repositories;
+

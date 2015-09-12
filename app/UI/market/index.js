@@ -1,12 +1,15 @@
 var angular = require('angular');
 require('angular-ui-router');
 
-var app = angular.module('app.market', ['ui.router']);
+var repositories = require('../../Domain/Repositories/index.js');
+
+var app = angular.module('app.market', ['ui.router', repositories.name]);
+
 
 require('./directives')(app);
 require('./Domain')(app);
-require('./Infrastructure')(app);
 require('./router.js')(app);
+// require('./Infrastructure')(app);
 
 module.exports = app;
 

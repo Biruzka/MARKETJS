@@ -1,23 +1,23 @@
-var OrderEntity = (function (extendClass,BaseEntity) {
-    'use strict';
+// var OrderEntity = (function (extendClass,BaseEntity) {
+//     'use strict';
 
-    extendClass(OrderEntity, BaseEntity);
+//     extendClass(OrderEntity, BaseEntity);
 
-    function OrderEntity() {
-        OrderEntity.superclass.apply(this, arguments);
-    }
+//     function OrderEntity() {
+//         OrderEntity.superclass.apply(this, arguments);
+//     }
 
-    OrderEntity.prototype.default = {
-        paid: false
-    }
+//     OrderEntity.prototype.default = {
+//         paid: false
+//     }
 
-    OrderEntity.prototype.payMarker = function () {
-        this.set("paid", true);
-    }
+//     OrderEntity.prototype.payMarker = function () {
+//         this.set("paid", true);
+//     }
 
-    OrderEntity.idAttribute = 'id';
+//     OrderEntity.idAttribute = 'id';
 
-    return OrderEntity;
-}(require('../../Infrastructure/extend.js'),require('../../Infrastructure/BaseEntity.js')));
+//     return OrderEntity;
+// }(require('../../Infrastructure/extend.js'),require('../../Infrastructure/BaseEntity.js')));
 
-module.exports = OrderEntity;
+// module.exports = OrderEntity;

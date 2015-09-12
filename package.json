@@ -1,39 +1,39 @@
 {
-  "name": "ProjectMarket",
-  "version": "0.0.0",
-  "description": "все нужные файлы в app и tests",
-  "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
-  "dependencies": {
-    "angular-ui-router": "^0.2.15",
-    "jasmine-core": "^2.3.4",
-    "karma": "^0.13.3",
-    "karma-jasmine": "^0.3.6",
-    "karma-phantomjs-launcher": "^0.2.0",
-    "phantomjs": "^1.9.17"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "http-server -a 0.0.0.0 -p 8000",
-    "build-js": "browserify index.js > tmp/bundleApp.js",
-    "watch": "watchify index.js -o tmp/bundleApp.js --verbose"
+    "name": "ProjectMarket",
+    "version": "0.0.0",
+    "description": "все нужные файлы в app и tests",
+    "main": "index.js",
+    "directories": {
+        "test": "tests"
+    },
+    "dependencies": {
+        "angular-ui-router": "^0.2.15",
+        "jasmine-core": "^2.3.4",
+        "karma": "^0.13.3",
+        "karma-jasmine": "^0.3.6",
+        "karma-phantomjs-launcher": "^0.2.0",
+        "phantomjs": "^1.9.17"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "http-server -a 0.0.0.0 -p 8000",
+        "build-js": "browserify index.js > tmp/bundleApp.js",
+        "watch": "watchify index.js -o tmp/bundleApp.js --verbose --debug"
 
-  },
-  "browserify": {
-    "transform": [
-      "stringify"
-    ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Biruzka/MARKETJS.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Biruzka/MARKETJS/issues"
-  }
+    },
+    "browserify": {
+        "transform": [
+            "stringify"
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Biruzka/MARKETJS.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Biruzka/MARKETJS/issues"
+    }
 }

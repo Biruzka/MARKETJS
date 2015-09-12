@@ -1,42 +1,29 @@
-var ProductRepository = (function (ProductEntity, extendClass, BaseRepository, Storage2) {
   'use strict';
 
-  extendClass(ProductRepository, BaseRepository);
+var factory = function (extendClass, ProductEntity) {
+
+  extendClass(ProductRepository, helper.BaseRepository);
 
   function ProductRepository() {
-    this.storage = new Storage2("product");
+    this.type = 'products';
+    this.storage = new helper.Storage2("product");
+  }
 
-    this.loadAllData = function () {
-       var arr = this.storage.getAll();
+  ProductRepository.loadAllProductData = function () {
+       var arr = this.loadAllData(); //здесь мы и вызываем так-то
 
         arr.forEach(function(item, i, arr) {
           arr[i] = new ProductEntity(item);
         });
 
     return arr;
-    }
-
   }
-
   return ProductRepository;
 
-}(require('../Entities/ProductEntity.js'),require('../../Infrastructure/extend.js'),require('../../Infrastructure/BaseRepository.js'), require('../../Infrastructure/StoragePrototype.js')));
+};
 
-var repositoryProduct = new ProductRepository();
+factory.$inject = ['extendClass', 'ProductEntity'];
 
-module.exports = repositoryProduct;
-
-
-
-// var ProductRepository = (function () {
-//   'use strict';
-
-//   function ProductRepository() {
-//     this.storage = "product";
-
-//   }
-
-//   return new ProductRepository();
-// }();
-
-
+module.exports = function(ng) {
+  ng.factory('ProductRepository', factory);
+};

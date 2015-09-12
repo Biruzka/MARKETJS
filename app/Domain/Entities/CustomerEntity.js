@@ -1,20 +1,20 @@
 
-var CustomerEntity = (function (extendClass,BaseEntity) {
-  'use strict';
-//либо прямо здесь
+// var CustomerEntity = (function (helper) {
+//   'use strict';
+// //либо прямо здесь
 
-    extendClass(CustomerEntity, BaseEntity);
+//     helper.extendClass(CustomerEntity, helper.BaseEntity);
 
-  function CustomerEntity() {
-     CustomerEntity.superclass.apply(this, arguments);
-  }
+//   function CustomerEntity() {
+//      CustomerEntity.superclass.apply(this, arguments);
+//   }
 
-  CustomerEntity.idAttribute = 'id';
+//   CustomerEntity.idAttribute = 'id';
 
-  return CustomerEntity;
-
-
-}(require('../../Infrastructure/extend.js'),require('../../Infrastructure/BaseEntity.js')));
+//   return CustomerEntity;
 
 
-module.exports = CustomerEntity;
+// }());
+
+
+// module.exports = CustomerEntity;
