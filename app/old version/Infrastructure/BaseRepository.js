@@ -1,46 +1,46 @@
-function BaseRepository() {
-};
+// function BaseRepository() {
+// };
 
-BaseRepository.prototype.dbUrl = 'http://localhost:5984/';
+// BaseRepository.prototype.dbUrl = 'http://localhost:5984/';
 
-BaseRepository.prototype.save = function (entity){
-    var id = this.storage.addData(entity["attrs"]);
-    entity.giveId(id);
-    return entity;
-}
+// BaseRepository.prototype.save = function (entity){
+//     var id = this.storage.addData(entity["attrs"]);
+//     entity.giveId(id);
+//     return entity;
+// }
 
-//тоже перенести в каждый!
-BaseRepository.prototype.getById = function (id){ //смысл вытаскивать сущность по сущности??? все же по id отдельно может понадобится
-    return this.storage.getData(id);
-}
+// //тоже перенести в каждый!
+// BaseRepository.prototype.getById = function (id){ //смысл вытаскивать сущность по сущности??? все же по id отдельно может понадобится
+//     return this.storage.getData(id);
+// }
 
-BaseRepository.prototype.update = function (entity){
-    this.storage.updateData(entity.getId(),entity["attrs"]);
-}
+// BaseRepository.prototype.update = function (entity){
+//     this.storage.updateData(entity.getId(),entity["attrs"]);
+// }
 
-BaseRepository.prototype.delete = function (entity){
-    alert(entity.getId());
-    this.storage.deleteData(entity.getId());
-}
+// BaseRepository.prototype.delete = function (entity){
+//     alert(entity.getId());
+//     this.storage.deleteData(entity.getId());
+// }
 
-BaseRepository.prototype.search = function (key, value){
-    var arr = this.storage.search(key, value);
-    return arr;
-}
+// BaseRepository.prototype.search = function (key, value){
+//     var arr = this.storage.search(key, value);
+//     return arr;
+// }
 
-BaseRepository.prototype.loadAllData = function (){
-    // promice('GET', this.dbUrl+this.type)
-    // .then(function(data){
-    //     data =
-    // })
+// BaseRepository.prototype.loadAllData = function (){
+//     // promice('GET', this.dbUrl+this.type)
+//     // .then(function(data){
+//     //     data =
+//     // })
 
 
 
-    var arr = this.storage.getAll();
-    return arr;
-}
+//     var arr = this.storage.getAll();
+//     return arr;
+// }
 
-module.exports = BaseRepository;
+// module.exports = BaseRepository;
 
 
 // function promiceXHR(method,url,data) {
@@ -155,6 +155,3 @@ module.exports = BaseRepository;
 
 //   return new ProductRepository();
 // }();
-
-
-

@@ -1,0 +1,62 @@
+.center {
+width:300px;
+}
+
+.list {
+    margin-left: 20pt;
+    margin-right: 30pt;
+    width:300px;
+}
+
+.error-mess {
+    font-size: 1em;
+    color:#FA787E;
+}
+
+.block-right {
+    left:300pt;
+    top:30pt;
+    position:absolute;
+}
+
+.name-product {
+font-size: 2em;
+}
+.panel {
+ font-size:1em;
+}
+
+img {
+    margin-bottom: 20pt;
+}
+
+.ng-invalid.ng-dirty {
+    border-color:#FA787E;
+
+}
+.ng-valid.ng-dirty {
+    border-color: #78FA89;
+}
+
+.ng-pristine {
+    border-color: #78FA89;
+}
+
+.has-error {
+ border-width: thick;
+}
+
+.product-form {
+    position: absolute;
+    left:350pt;
+    top:10pt;
+}
+
+
+blockquote p {
+    font-size: 0.5em;
+}
+
+p {
+    font-size: 1.5em;
+}

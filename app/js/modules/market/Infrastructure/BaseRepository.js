@@ -13,13 +13,13 @@ var BaseRepository = function($http) {
      */
     BaseRepository.prototype.load = function() {
         // invoke request
-        return $http.get(this.url + '/_all_docs').then(function(response) {
-
+        return $http.get(this.url + '/_all_docs?include_docs=true').then(function(response) {
             // process response
             var data = this.extractData(response);
 
             // create entity
-            return this.produceEntity(data);
+            return data;
+
         }.bind(this));
     };
 
@@ -33,11 +33,11 @@ var BaseRepository = function($http) {
 
         return $http.post(this.url, data).then(function(response) {
 
-            // process response
+
             var data = this.extractData(response);
 
-            // create entity
-            return this.produceEntity(data);
+            // not entity yet
+            return data; //тоже с продьюс
         }.bind(this))
     };
 
@@ -76,8 +76,11 @@ var BaseRepository = function($http) {
      * @return {Object}
      */
     BaseRepository.prototype.extractData = function(response) {
-        var data = {};
-        // response [], {}
+        var rows = response.data.rows;
+        var data = [];
+        rows.forEach(function(item, i, rows) {
+            data[i] = item.doc;
+        });
         return data;
     };
 
@@ -85,7 +88,9 @@ var BaseRepository = function($http) {
      * @param  {(Array.<Object>|Object)}
      * @return {(Array.<Entity>|Entity)}
      */
-    BaseRepository.prototype.produceEntity = function(data) {};
+    // BaseRepository.prototype.produceEntity = function(data) {
+
+    // };
 
     return BaseRepository;
 };

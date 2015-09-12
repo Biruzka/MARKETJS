@@ -1,4 +1,4 @@
 module.exports = function(ng) {
     require('./entityFactories')(ng);
-    // require('./repositoryFactories')(ng);
+    require('./repositoryFactories')(ng);
 };

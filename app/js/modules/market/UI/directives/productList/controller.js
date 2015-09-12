@@ -1,4 +1,4 @@
-var Controller = function(repositories, ProductEntity) {
+var Controller = function(ProductEntity, ProductRepository) {
 
     this.deleteClicked = function(event, product) {
         event.preventDefault();
@@ -17,7 +17,7 @@ var Controller = function(repositories, ProductEntity) {
 
 };
 
-Controller.$inject = ['repositories', 'ProductEntity'];
+Controller.$inject = ['ProductEntity', ProductRepository];
 
 module.exports = Controller;
 
