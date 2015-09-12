@@ -8,7 +8,8 @@ var app = angular.module('app.market', ['ui.router']);
 require('./router.js')(app);
 
 require('./Infrastructure/')(app); //загрузила базу для сущностей
-require('./Domain/entities')(app); //загрузила все сущности
+// require('./Domain/entities')(app); //загрузила все сущности
+require('./Domain/factories')(app); //загрузила все сущности
 
 require('./UI/directives')(app);
 

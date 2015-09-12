@@ -1,29 +1,51 @@
-module.exports = function(ng) {
-    ng.factory('ProductEntity', ['extend', 'BaseEntity',
-        function(extend, BaseEntity) {
+module.exports = function(extend, BaseEntity) {
 
-            extend.extendClass(ProductEntity, BaseEntity);
+    extend.extendClass(ProductEntity, BaseEntity);
 
-            function ProductEntity() {
-                ProductEntity.superclass.apply(this, arguments);
-            }
+    function ProductEntity() {
+        ProductEntity.superclass.apply(this, arguments);
+    }
 
-            ProductEntity.prototype.bindShop = function(shop) {
-                this.set("owner", shop.getId());
-            }
+    ProductEntity.prototype.bindShop = function(shop) {
+        this.set("owner", shop.getId());
+    }
 
-            ProductEntity.prototype.countReduce = function(count) {
-                //проверка, чтобы не ушло в минус
-                this.set("count", this.get("count") - count);
-            }
+    ProductEntity.prototype.countReduce = function(count) {
+        //проверка, чтобы не ушло в минус
+        this.set("count", this.get("count") - count);
+    }
 
-            ProductEntity.idAttribute = 'id';
+    ProductEntity.idAttribute = 'id';
 
-            return ProductEntity;
-        }
-    ]);
-};
+    return ProductEntity;
+}
 
+
+// module.exports = function(ng) {
+//     ng.factory('ProductEntity', ['extend', 'BaseEntity',
+//         function(extend, BaseEntity) {
+
+//             extend.extendClass(ProductEntity, BaseEntity);
+
+//             function ProductEntity() {
+//                 ProductEntity.superclass.apply(this, arguments);
+//             }
+
+//             ProductEntity.prototype.bindShop = function(shop) {
+//                 this.set("owner", shop.getId());
+//             }
+
+//             ProductEntity.prototype.countReduce = function(count) {
+//                 //проверка, чтобы не ушло в минус
+//                 this.set("count", this.get("count") - count);
+//             }
+
+//             ProductEntity.idAttribute = 'id';
+
+//             return ProductEntity;
+//         }
+//     ]);
+// };
 // module.exports = function(ng) {
 //     ng.factory('factoryEntity', ['extend', 'BaseEntity',
 //         function(extend, BaseEntity) {
