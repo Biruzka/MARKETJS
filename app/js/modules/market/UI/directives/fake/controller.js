@@ -1,10 +1,6 @@
-var Controller = function(ProductEntity, Prov) {
-    console.log('controller and Product');
-    console.log(ProductEntity);
-    console.log(Prov);
-    Prov();
+var Controller = function(ProductEntity) {
+
 };
 
-Controller.$inject = ['ProductEntity', 'Prov'];
-
+Controller.$inject = ['ProductEntity'];
 module.exports = Controller;
