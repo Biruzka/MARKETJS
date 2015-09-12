@@ -1,4 +1,4 @@
-var Controller = function(ProductEntity, ProductRepository) {
+var Controller = function(ProductRepository) {
 
     this.deleteClicked = function(event, product) {
         event.preventDefault();
@@ -6,21 +6,18 @@ var Controller = function(ProductEntity, ProductRepository) {
     };
 
     var deleteProduct = function(product) {
-        repositories.ProductRepository.delete(product);
+        ProductRepository.delete(product);
     };
 
-    var loadProductData = function() {
-        return repositories.ProductRepository.loadAllData();
+    this.loadProductData = function() {
+        return ProductRepository.loadAllProductData();
     }
 
-    this.products = loadProductData();
+    // this.products = loadProductData();
+    // console.log(this.products);
 
 };
 
-Controller.$inject = ['ProductEntity', ProductRepository];
+Controller.$inject = ['ProductRepository'];
 
 module.exports = Controller;
-
-
-
-//контроллеры должны работать асинхронно
