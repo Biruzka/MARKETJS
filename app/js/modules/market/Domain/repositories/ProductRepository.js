@@ -6,13 +6,22 @@ module.exports = function($http, extend, BaseRepository, ProductEntity) {
         this.url = 'http://localhost:5984/products';
     }
 
-
     ProductRepository.prototype.loadAllProductData = function() {
         //получаем экстракт
         return this.load().then(function(response) {
             //создаем из данных сущности
             var arr = this.produceEntity(response);
             return arr;
+        }.bind(this));
+    }
+
+
+    ProductRepository.prototype.saveProduct = function(product) {
+        //получаем экстракт
+        return this.save(product).then(function(response) {
+            return entity = new ProductEntity(response);
+            console.log("ProductRepository");
+            console.log(entity);
         }.bind(this));
     }
 

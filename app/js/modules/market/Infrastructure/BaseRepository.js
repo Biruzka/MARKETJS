@@ -27,54 +27,19 @@ var BaseRepository = function($http) {
      * @param  {Enitity} entity
      * @return {Promise}
      */
-    BaseRepository.prototype.create = function(entity) {
-        // extract attributes from entity
-        var data = JSON.stringify(entity); //какие-то преобразования toJson
+    BaseRepository.prototype.save = function(entity) {
+
+        var data = angular.toJson(entity.attrs);
 
         return $http.post(this.url, data).then(function(response) {
-
-
-            var data = this.extractData(response);
-
+            console.log(response);
+            var data = this.extractCreateData(response);
             // not entity yet
             return data; //тоже с продьюс
         }.bind(this))
     };
 
-    // *
-    //     * @param {
-    //         (string | number)
-    // }
-    // id * @
-    // return {
-    //     Promise
-    // }
 
-    BaseRepository.prototype.loadById = function(id) {
-        return $http.get(this.url + '/' + id).then(function(response) {
-
-            // process response
-            var data = this.extractData(response);
-
-            // create entity
-            return this.produceEntity(data);
-        }.bind(this))
-    };
-
-    BaseRepository.prototype.syncEntity = function(entity) {
-        return this.loadById(entity.id).then(function(updatedEntity) {
-
-            var data = updatedEntity.toJSON();
-            entity.set(data);
-
-            return entity;
-        }.bind(this));
-    };
-
-    /**
-     * @param  {Object} response - ответ с коллекцией, либо ответ с единичным элементом
-     * @return {Object}
-     */
     BaseRepository.prototype.extractData = function(response) {
         var rows = response.data.rows;
         var data = [];
@@ -83,6 +48,35 @@ var BaseRepository = function($http) {
         });
         return data;
     };
+
+    BaseRepository.prototype.extractCreateData = function(response) {
+        var data = JSON.parse(response['config']['data']);
+        //и добавляем id
+        data['id'] = response['data']['id'];
+        data['rev'] = response['data']['rev'];
+        console.log('extract');
+        console.log(data);
+        return data;
+    }
+
+
+    BaseRepository.prototype.loadById = function(id) {
+        return $http.get(this.url + '/' + id).then(function(response) {
+            // process response
+            var data = this.extractData(response);
+            // create entity
+            return this.produceEntity(data);
+        }.bind(this))
+    };
+
+    BaseRepository.prototype.syncEntity = function(entity) {
+        return this.loadById(entity.id).then(function(updatedEntity) {
+            var data = updatedEntity.toJSON();
+            entity.set(data);
+            return entity;
+        }.bind(this));
+    };
+
 
     return BaseRepository;
 };
