@@ -4,7 +4,15 @@ module.exports = function(app) {
 
         .state('products', {
             url: '/products',
-            template: '<products-list products="products"></products-list>',
+            template: '<products-list products=products.products></products-list>',
+            resolve: {
+                products: Loader
+            },
+            controller: function(products) {
+                this.products = products;
+            },
+            controllerAs: 'products'
+
         })
 
         .state('form', {
@@ -12,4 +20,9 @@ module.exports = function(app) {
             template: '<product-form></product-form>',
         });
     })
+
+    var Loader = function(ProductRepository) {
+        return ProductRepository.loadAllProductData();
+    }
+    Loader.$inject = ['ProductRepository'];
 };

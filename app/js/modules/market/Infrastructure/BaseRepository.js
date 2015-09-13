@@ -84,14 +84,6 @@ var BaseRepository = function($http) {
         return data;
     };
 
-    /**
-     * @param  {(Array.<Object>|Object)}
-     * @return {(Array.<Entity>|Entity)}
-     */
-    // BaseRepository.prototype.produceEntity = function(data) {
-
-    // };
-
     return BaseRepository;
 };
 

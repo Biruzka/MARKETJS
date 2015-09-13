@@ -5,16 +5,16 @@ var Controller = function(ProductRepository) {
         deleteProduct(product);
     };
 
-    var deleteProduct = function(product) {
+    this.deleteProduct = function(product) {
         ProductRepository.delete(product);
     };
 
     this.loadProductData = function() {
-        return ProductRepository.loadAllProductData();
+        var promice = ProductRepository.loadAllProductData();
+        promice.then(function(response) {
+            return response;
+        });
     }
-
-    // this.products = loadProductData();
-    // console.log(this.products);
 
 };
 
