@@ -32,12 +32,13 @@ var BaseRepository = function($http) {
         var data = angular.toJson(entity.attrs);
 
         return $http.post(this.url, data).then(function(response) {
-            console.log(response);
             var data = this.extractCreateData(response);
             // not entity yet
             return data; //тоже с продьюс
         }.bind(this))
     };
+
+
 
 
     BaseRepository.prototype.extractData = function(response) {
@@ -52,30 +53,47 @@ var BaseRepository = function($http) {
     BaseRepository.prototype.extractCreateData = function(response) {
         var data = JSON.parse(response['config']['data']);
         //и добавляем id
-        data['id'] = response['data']['id'];
-        data['rev'] = response['data']['rev'];
+        data['_rev'] = response['data']['rev'];
+        data['_id'] = response['data']['id'];
         console.log('extract');
         console.log(data);
         return data;
     }
 
+    BaseRepository.prototype.delete = function(product) {
+        product.set("deleted", true);
+        var prov = this.update(product);
+    }
 
+    BaseRepository.prototype.update = function(product) {
+
+        var data = angular.toJson(product['attrs']);
+        return $http.put(this.url + '/' + product.attrs['_id'], data).then(function(response) {
+            //response - измененный rev уже без _ и id там есть
+            return response;
+        }.bind(this))
+
+    }
+
+    BaseRepository.prototype.extractDataAfterLoadById = function(response) {
+        return response.data;
+    }
+
+    //возвращает экстракт данные для создания сущности
     BaseRepository.prototype.loadById = function(id) {
         return $http.get(this.url + '/' + id).then(function(response) {
-            // process response
-            var data = this.extractData(response);
-            // create entity
-            return this.produceEntity(data);
+            var data = this.extractDataAfterLoadById(response);
+            return data;
         }.bind(this))
     };
 
-    BaseRepository.prototype.syncEntity = function(entity) {
-        return this.loadById(entity.id).then(function(updatedEntity) {
-            var data = updatedEntity.toJSON();
-            entity.set(data);
-            return entity;
-        }.bind(this));
-    };
+    // BaseRepository.prototype.syncEntity = function(entity) {
+    //     return this.loadById(entity.id).then(function(updatedEntity) {
+    //         var data = updatedEntity.toJSON();
+    //         entity.set(data); //update
+    //         return entity;
+    //     }.bind(this));
+    // };
 
 
     return BaseRepository;

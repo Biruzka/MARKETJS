@@ -2,21 +2,25 @@
 
     <br>
     Витрина:
-    {{CtrlList.products}}
     <div class="list" ng-repeat="product in CtrlList.products" >
-    <br>
-        <div>
+        <div ng-show = "CtrlList.productExist(product)">
 
-		    <h1>{{product.attrs.name}}</h1>
-		    <br>
-		    <img width="300pt" ng-src="{{product.attrs.image}}">
-		    <div style="color:#ff0000" align="right">цена:  {{product.attrs.price | currency}} </div>
-		    <div style="color:#ff0000" align="right">количество:  {{product.attrs.count}}</div>
-		    <div style="color:#ff0000" align="right">id:  {{product.attrs.id}}</div>
-		    <div>{{product.attrs.description}}</div>
-		</div>
+        <br>
+            <div>
 
-        <button ng-click="CtrlList.deleteClicked($event, product)">Удалить</button>
+    		    <h1>{{product.attrs.name}}</h1>
+    		    <br>
+    		    <img width="300pt" ng-src="{{product.attrs.image}}">
+    		    <div style="color:#ff0000" align="right">цена:  {{product.attrs.price | currency}} </div>
+    		    <div style="color:#ff0000" align="right">количество:  {{product.attrs.count}}</div>
+    		    <div style="color:#ff0000" align="right">id:  {{product.attrs.id}}</div>
+    		    <div>{{product.attrs.description}}</div>
+    		</div>
+
+            <button ng-click="CtrlList.deleteClicked($event, product)">Удалить</button>
+        <!--     <button ng-click="product = CtrlList.deleteClicked($event, product)">Удалить</button> отмтили удаленным, в аттр есть свойство делетед-->
+
+        </div>
     </div>
 
 </div>

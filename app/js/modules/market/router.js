@@ -4,16 +4,29 @@ module.exports = function(app) {
 
         .state('products', {
             url: '/products',
-            template: '<products-list products=products.products></products-list>',
+            template: '<products-list products=ctrl.products></products-list>',
             resolve: {
                 products: Loader
             },
             controller: function(products) {
                 this.products = products;
             },
-            controllerAs: 'products'
+            controllerAs: 'ctrl'
 
         })
+
+        // .state('products.update', {
+        //     url: '/update',
+        //     template: '<product-update products=products.products></product-update>',
+        //     resolve: {
+        //         products: Loader
+        //     },
+        //     controller: function(products) {
+        //         this.products = products;
+        //     },
+        //     controllerAs: 'products'
+
+        // })
 
         .state('form', {
             url: '/form',
