@@ -11,22 +11,16 @@ module.exports = function(app) {
             controller: function(products) {
                 this.products = products;
             },
-            controllerAs: 'ctrl'
+            controllerAs: 'ctrl',
+
+            views: {
+                'update': {
+                    // template: '<update></update>'
+                    template: 'jfds,'
+                }
+            }
 
         })
-
-        // .state('products.update', {
-        //     url: '/update',
-        //     template: '<product-update products=products.products></product-update>',
-        //     resolve: {
-        //         products: Loader
-        //     },
-        //     controller: function(products) {
-        //         this.products = products;
-        //     },
-        //     controllerAs: 'products'
-
-        // })
 
         .state('form', {
             url: '/form',

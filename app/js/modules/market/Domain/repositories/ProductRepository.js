@@ -50,11 +50,5 @@ module.exports = function($http, extend, BaseRepository, ProductEntity) {
 
     };
 
-    ProductRepository.prototype.produceOneEntity = function(data) {
-
-        return new ProductEntity(data);
-
-    };
-
     return new ProductRepository;
 }

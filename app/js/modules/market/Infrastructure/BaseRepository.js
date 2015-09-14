@@ -15,7 +15,7 @@ var BaseRepository = function($http) {
         // invoke request
         return $http.get(this.url + '/_all_docs?include_docs=true').then(function(response) {
             // process response
-            var data = this.extractData(response);
+            var data = this.extract.allGotData(response);
 
             // create entity
             return data;
@@ -27,47 +27,25 @@ var BaseRepository = function($http) {
      * @param  {Enitity} entity
      * @return {Promise}
      */
-    BaseRepository.prototype.save = function(entity) {
+    BaseRepository.prototype.save = function(product) {
 
-        var data = angular.toJson(entity.attrs);
+        var data = this.extract.entityToJson(product);
 
         return $http.post(this.url, data).then(function(response) {
-            var data = this.extractCreateData(response);
-            // not entity yet
-            return data; //тоже с продьюс
+            var data = this.extract.postCreatedData(response);
+            return data;
         }.bind(this))
     };
 
 
-
-
-    BaseRepository.prototype.extractData = function(response) {
-        var rows = response.data.rows;
-        var data = [];
-        rows.forEach(function(item, i, rows) {
-            data[i] = item.doc;
-        });
-        return data;
-    };
-
-    BaseRepository.prototype.extractCreateData = function(response) {
-        var data = JSON.parse(response['config']['data']);
-        //и добавляем id
-        data['_rev'] = response['data']['rev'];
-        data['_id'] = response['data']['id'];
-        console.log('extract');
-        console.log(data);
-        return data;
-    }
-
     BaseRepository.prototype.delete = function(product) {
         product.set("deleted", true);
-        var prov = this.update(product);
+        this.update(product);
     }
 
     BaseRepository.prototype.update = function(product) {
 
-        var data = angular.toJson(product['attrs']);
+        var data = this.extract.entityToJson(product);
         return $http.put(this.url + '/' + product.attrs['_id'], data).then(function(response) {
             //response - измененный rev уже без _ и id там есть
             return response;
@@ -75,25 +53,43 @@ var BaseRepository = function($http) {
 
     }
 
-    BaseRepository.prototype.extractDataAfterLoadById = function(response) {
-        return response.data;
-    }
-
     //возвращает экстракт данные для создания сущности
     BaseRepository.prototype.loadById = function(id) {
         return $http.get(this.url + '/' + id).then(function(response) {
-            var data = this.extractDataAfterLoadById(response);
+            var data = this.extract.loadedByIdData(response);
             return data;
         }.bind(this))
     };
 
-    // BaseRepository.prototype.syncEntity = function(entity) {
-    //     return this.loadById(entity.id).then(function(updatedEntity) {
-    //         var data = updatedEntity.toJSON();
-    //         entity.set(data); //update
-    //         return entity;
-    //     }.bind(this));
-    // };
+    BaseRepository.prototype.extract = {
+        //after get all from db
+        allGotData: function(response) {
+            var rows = response.data.rows;
+            var data = [];
+            rows.forEach(function(item, i, rows) {
+                data[i] = item.doc;
+            });
+            return data;
+        },
+        //after post data and save
+        postCreatedData: function(response) {
+            var data = JSON.parse(response['config']['data']);
+            //и добавляем id
+            data['_rev'] = response['data']['rev'];
+            data['_id'] = response['data']['id'];
+            console.log('extract');
+            console.log(data);
+            return data;
+        },
+
+        loadedByIdData: function(response) {
+            return response.data;
+        },
+
+        entityToJson: function(entity) {
+            return angular.toJson(entity['attrs']);
+        }
+    }
 
 
     return BaseRepository;

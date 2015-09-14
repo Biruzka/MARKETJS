@@ -12,6 +12,11 @@ var Controller = function(ProductRepository) {
         //this.products[] проверить изменится ли по ссылке, если нет, то через this.products
     };
 
+    this.describe = function(event, product, describe) {
+        product.attrs.description = describe;
+        ProductRepository.update(product);
+    }
+
     // возвращает продукт со свойством удален!
     this.deleteProduct = function(product) {
         ProductRepository.delete(product); //в базе записываем свойство делитед дальше апдейт вызываем внутри
